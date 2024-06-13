@@ -98,7 +98,7 @@ public class UASServerReservationTaliscocaB implements Runnable{
                         msgToClient.writeBytes("FALSE" + "\n");
                     }
                 } else if(commands[0].equals("EVENT")) {
-                    System.out.println("halo");
+                    System.out.println("");
                 }
             }
         } catch (Exception ex) {
