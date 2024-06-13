@@ -214,4 +214,53 @@ public class reservationServices {
         pr = new Parking_reservations();
         return pr.viewListData();
     }
+    
+    @WebMethod(operationName = "insertDataEventReservation")
+    public void insertDataEventReservation(
+        @WebParam(name = "account_id") int account_id,
+        @WebParam(name = "event_id") int event_id,
+        @WebParam(name = "quantity") int quantity,
+        @WebParam(name = "amount") double amount,
+        @WebParam(name = "status") String status,
+        @WebParam(name = "claim_date") LocalDate claim_date,
+        @WebParam(name = "claimed_date") LocalDate claimed_date,
+        @WebParam(name = "updated_at") LocalDate updated_at,
+        @WebParam(name = "created_at") LocalDate created_at
+    ) {
+        er = new Event_reservations(account_id, event_id, quantity, amount, status, claim_date, claimed_date, updated_at, created_at);
+        er.insertData();
+    }
+
+    @WebMethod(operationName = "updateDataEventReservation")
+    public void updateDataEventReservation(
+        @WebParam(name = "account_id") int account_id,
+        @WebParam(name = "event_id") int event_id,
+        @WebParam(name = "quantity") int quantity,
+        @WebParam(name = "amount") double amount,
+        @WebParam(name = "status") String status,
+        @WebParam(name = "claim_date") LocalDate claim_date,
+        @WebParam(name = "claimed_date") LocalDate claimed_date,
+        @WebParam(name = "updated_at") LocalDate updated_at,
+        @WebParam(name = "created_at") LocalDate created_at
+    ) {
+        er = new Event_reservations(account_id, event_id, quantity, amount, status, claim_date, claimed_date, updated_at, created_at);
+        er.updateData();
+    }
+
+    @WebMethod(operationName = "deleteDataEventReservation")
+    public void deleteDataEventReservation(
+        @WebParam(name = "account_id") int account_id,
+        @WebParam(name = "event_id") int event_id
+    ) {
+        er = new Event_reservations();
+        er.setAccount_id(account_id);
+        er.setEvent_id(event_id);
+        er.deleteData();
+    }
+
+    @WebMethod(operationName = "viewListDataEventReservation")
+    public ArrayList<String> viewListDataEventReservation() {
+        er = new Event_reservations();
+        return er.viewListData();
+    }
 }
