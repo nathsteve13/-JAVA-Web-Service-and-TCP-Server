@@ -165,4 +165,53 @@ public class reservationServices {
         p = new Parkings();
         return p.viewListData();
     }
+    
+    @WebMethod(operationName = "insertDataParkingReservation")
+    public void insertDataParkingReservation(
+        @WebParam(name = "accounts_id") int accounts_id,
+        @WebParam(name = "parkings_id") int parkings_id,
+        @WebParam(name = "quantity") int quantity,
+        @WebParam(name = "amount") double amount,
+        @WebParam(name = "status") String status,
+        @WebParam(name = "claim_date") LocalDate claim_date,
+        @WebParam(name = "claimed_date") LocalDate claimed_date,
+        @WebParam(name = "updated_at") LocalDate updated_at,
+        @WebParam(name = "created_at") LocalDate created_at
+    ) {
+        pr = new Parking_reservations(accounts_id, parkings_id, quantity, amount, status, claim_date, claimed_date, updated_at, created_at);
+        pr.insertData();
+    }
+
+    @WebMethod(operationName = "updateDataParkingReservation")
+    public void updateDataParkingReservation(
+        @WebParam(name = "accounts_id") int accounts_id,
+        @WebParam(name = "parkings_id") int parkings_id,
+        @WebParam(name = "quantity") int quantity,
+        @WebParam(name = "amount") double amount,
+        @WebParam(name = "status") String status,
+        @WebParam(name = "claim_date") LocalDate claim_date,
+        @WebParam(name = "claimed_date") LocalDate claimed_date,
+        @WebParam(name = "updated_at") LocalDate updated_at,
+        @WebParam(name = "created_at") LocalDate created_at
+    ) {
+        pr = new Parking_reservations(accounts_id, parkings_id, quantity, amount, status, claim_date, claimed_date, updated_at, created_at);
+        pr.updateData();
+    }
+
+    @WebMethod(operationName = "deleteDataParkingReservation")
+    public void deleteDataParkingReservation(
+        @WebParam(name = "accounts_id") int accounts_id,
+        @WebParam(name = "parkings_id") int parkings_id
+    ) {
+        pr = new Parking_reservations();
+        pr.setAccount_id(accounts_id);
+        pr.setParking_id(parkings_id);
+        pr.deleteData();
+    }
+
+    @WebMethod(operationName = "viewListDataParkingReservation")
+    public ArrayList<String> viewListDataParkingReservation() {
+        pr = new Parking_reservations();
+        return pr.viewListData();
+    }
 }
