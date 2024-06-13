@@ -5,7 +5,10 @@
 package com.uasreservation.services;
 
 import com.uasreservation.model.Account;
+import com.uasreservation.model.Event_reservations;
 import com.uasreservation.model.Events;
+import com.uasreservation.model.Parking_reservations;
+import com.uasreservation.model.Parkings;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.jws.WebService;
@@ -21,6 +24,9 @@ public class reservationServices {
 
     Account a;
     Events e;
+    Parkings p;
+    Parking_reservations pr;
+    Event_reservations er;
     
     /**
      * Web service operation
@@ -115,5 +121,48 @@ public class reservationServices {
     public ArrayList<String> viewListDataEvent() {
         e = new Events();
         return e.viewListData();
+    }
+    
+    @WebMethod(operationName = "insertDataParking")
+    public void insertDataParking(
+        @WebParam(name = "parking_area") String parking_area,
+        @WebParam(name = "status") String status,
+        @WebParam(name = "available_date") LocalDate available_date,
+        @WebParam(name = "locations_id") int locations_id,
+        @WebParam(name = "price") double price,
+        @WebParam(name = "updated_at") LocalDate updated_at,
+        @WebParam(name = "created_at") LocalDate created_at
+    ) {
+        p = new Parkings(parking_area, status, available_date, locations_id, price, updated_at, created_at);
+        p.insertData();
+    }
+
+    @WebMethod(operationName = "updateDataParking")
+    public void updateDataParking(
+        @WebParam(name = "id") int id,
+        @WebParam(name = "parking_area") String parking_area,
+        @WebParam(name = "status") String status,
+        @WebParam(name = "available_date") LocalDate available_date,
+        @WebParam(name = "locations_id") int locations_id,
+        @WebParam(name = "price") double price,
+        @WebParam(name = "updated_at") LocalDate updated_at,
+        @WebParam(name = "created_at") LocalDate created_at
+    ) {
+        p = new Parkings(parking_area, status, available_date, locations_id, price, updated_at, created_at);
+        p.setId(id);
+        p.updateData();
+    }
+
+    @WebMethod(operationName = "deleteDataParking")
+    public void deleteDataParking(@WebParam(name = "id") int id) {
+        p = new Parkings();
+        p.setId(id);
+        p.deleteData();
+    }
+
+    @WebMethod(operationName = "viewListDataParking")
+    public ArrayList<String> viewListDataParking() {
+        p = new Parkings();
+        return p.viewListData();
     }
 }
