@@ -2,7 +2,7 @@
 <jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
   <services>
     <service name="reservationServices">
-      <implementation-class>com.uasreservation.model.reservationServices</implementation-class>
+      <implementation-class>com.uasreservation.services.reservationServices</implementation-class>
     </service>
   </services>
   <clients/>
