@@ -24,7 +24,7 @@ public class Events extends MyModel{
     private int number_of_participant;
     private LocalDate open_reservation_date;
     private LocalDate close_reservation_date;
-    private int locations_id;
+    private Locations locations_id;
     private double price;
     private String description;
     
@@ -37,7 +37,7 @@ public class Events extends MyModel{
         this.number_of_participant = number_of_participant;
         this.open_reservation_date = open_reservation_date;
         this.close_reservation_date = close_reservation_date;
-        this.locations_id = locations_id;
+        this.locations_id.setId(locations_id); 
         this.price = price;
         this.description = description;
     }
@@ -46,15 +46,15 @@ public class Events extends MyModel{
         this.id = 0;
         this.event_name = "";
         this.event_date = LocalDate.now();
-        this.category = category;
-        this.status = status;
-        this.participant_slot = participant_slot;
-        this.number_of_participant = number_of_participant;
-        this.open_reservation_date = open_reservation_date;
-        this.close_reservation_date = close_reservation_date;
-        this.locations_id = locations_id;
-        this.price = price;
-        this.description = description;
+        this.category = "";
+        this.status = "";
+        this.participant_slot = 0;
+        this.number_of_participant = 0;
+        this.open_reservation_date = LocalDate.now();
+        this.close_reservation_date = LocalDate.now();
+        this.locations_id.setId(0);
+        this.price = 0f;
+        this.description = "";
     }
     
     public int getId() {
@@ -130,11 +130,11 @@ public class Events extends MyModel{
     }
 
     public int getLocations_id() {
-        return locations_id;
+        return locations_id.getId();
     }
 
     public void setLocations_id(int locations_id) {
-        this.locations_id = locations_id;
+        this.locations_id.setId(locations_id);
     }
 
     public double getPrice() {
@@ -167,7 +167,7 @@ public class Events extends MyModel{
                 sql.setInt(6, this.number_of_participant);
                 sql.setDate(7, java.sql.Date.valueOf(this.open_reservation_date));
                 sql.setDate(8, java.sql.Date.valueOf(this.close_reservation_date));
-                sql.setInt(9, this.locations_id);
+                sql.setInt(9, this.locations_id.getId());
                 sql.setDouble(10, this.price);
                 sql.setString(11, this.description);
                 sql.executeUpdate();
@@ -192,7 +192,7 @@ public class Events extends MyModel{
                 sql.setInt(6, this.number_of_participant);
                 sql.setDate(7, java.sql.Date.valueOf(this.open_reservation_date));
                 sql.setDate(8, java.sql.Date.valueOf(this.close_reservation_date));
-                sql.setInt(9, this.locations_id);
+                sql.setInt(9, this.locations_id.getId());
                 sql.setDouble(10, this.price);
                 sql.setString(11, this.description);
                 sql.setInt(12, this.id);

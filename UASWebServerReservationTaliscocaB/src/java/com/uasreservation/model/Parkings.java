@@ -18,7 +18,7 @@ public class Parkings extends MyModel{
     private String parking_area;
     private String status;
     private LocalDate available_date;
-    private int locations_id;
+    private Locations locations_id;
     private double price;
     private LocalDate updated_at;
     private LocalDate created_at;
@@ -28,7 +28,7 @@ public class Parkings extends MyModel{
         this.parking_area = "";
         this.status = "";
         this.available_date = LocalDate.now();
-        this.locations_id = 0;
+        this.locations_id.setId(0);
         this.price = 0.0;
         this.updated_at = LocalDate.now();
         this.created_at = LocalDate.now();
@@ -38,7 +38,7 @@ public class Parkings extends MyModel{
         this.parking_area = parking_area;
         this.status = status;
         this.available_date = available_date;
-        this.locations_id = locations_id;
+        this.locations_id.setId(locations_id);
         this.price = price;
         this.updated_at = updated_at;
         this.created_at = created_at;
@@ -77,11 +77,11 @@ public class Parkings extends MyModel{
     }
 
     public int getLocations_id() {
-        return locations_id;
+        return locations_id.getId();
     }
 
     public void setLocations_id(int locations_id) {
-        this.locations_id = locations_id;
+        this.locations_id.setId(locations_id);
     }
 
     public double getPrice() {
@@ -117,7 +117,7 @@ public class Parkings extends MyModel{
                 sql.setString(1, this.parking_area);
                 sql.setString(2, this.status);
                 sql.setDate(3, java.sql.Date.valueOf(this.available_date));
-                sql.setInt(4, this.locations_id);
+                sql.setInt(4, this.locations_id.getId());
                 sql.setDouble(5, this.price);
                 sql.setDate(6, java.sql.Date.valueOf(this.updated_at));
                 sql.setDate(7, java.sql.Date.valueOf(this.created_at));
@@ -138,7 +138,7 @@ public class Parkings extends MyModel{
                 sql.setString(1, this.parking_area);
                 sql.setString(2, this.status);
                 sql.setDate(3, java.sql.Date.valueOf(this.available_date));
-                sql.setInt(4, this.locations_id);
+                sql.setInt(4, this.locations_id.getId());
                 sql.setDouble(5, this.price);
                 sql.setDate(6, java.sql.Date.valueOf(this.updated_at));
                 sql.setDate(7, java.sql.Date.valueOf(this.created_at));
