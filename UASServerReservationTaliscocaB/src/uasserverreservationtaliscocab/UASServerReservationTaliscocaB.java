@@ -4,7 +4,10 @@
  */
 package uasserverreservationtaliscocab;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -40,7 +43,38 @@ public class UASServerReservationTaliscocaB implements Runnable{
         broadCast(tmp);
     }
     public static void main(String[] args) {
-        // TODO code application logic here
+        try {
+            Socket incoming;
+            String message;
+            ServerSocket s = new ServerSocket(6666);
+            while (true) {
+                incoming = s.accept();
+
+                BufferedReader msgFClient = new BufferedReader(
+                        new InputStreamReader(incoming.getInputStream()));
+                message = msgFClient.readLine();
+                String command = message;
+                String[] commands = command.split("~");
+                System.out.println(command);
+                
+                DataOutputStream msgToClient = new DataOutputStream(incoming.getOutputStream());
+                if (commands[0].equals("LOGIN")) {
+                    Account a = new Account();
+                    a.setEmail(commands[1]);
+                    a.setPassword(commands[2]);
+
+                    boolean tmp = a.checkLogin();
+                    if (tmp) {
+                        String namePengguna = a.getName();
+                        msgToClient.writeBytes("TRUE~" + namePengguna + "\n");
+                    } else {
+                        msgToClient.writeBytes("FALSE\n");
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println("Error di server : " + ex);
+        }
     }
 
     @Override

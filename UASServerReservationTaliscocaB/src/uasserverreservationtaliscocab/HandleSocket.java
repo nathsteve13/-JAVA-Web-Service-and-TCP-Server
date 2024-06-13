@@ -24,10 +24,9 @@ public class HandleSocket extends Thread {
     BufferedReader in;
     
     public HandleSocket(UASServerReservationTaliscocaB _parent, Socket _client) {
-        this.parent = _parent;
-        this.client = _client;
-        
         try {
+            this.parent = _parent;
+            this.client = _client;
             out = new DataOutputStream(client.getOutputStream());
             in = new BufferedReader(new InputStreamReader(client.getInputStream()));
         } catch(Exception e) {
@@ -45,10 +44,13 @@ public class HandleSocket extends Thread {
     
     public void run() {
         try {
-            String tmp = in.readLine();
-            parent.showChat(tmp);
-        } catch(Exception e) {
-            System.out.println(e);
+            while(true){
+                String msg = in.readLine();//untuk membaca pesan dari client
+                parent.showChat(msg);
+            }
+            
+        } catch (Exception e) {
+            System.out.println("Error run HS "+e);
         }
     }
 
