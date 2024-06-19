@@ -62,7 +62,7 @@ public class FormLogin extends javax.swing.JFrame {
         jLabel1.setText("LOGIN");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
-        jLabel2.setText("Email");
+        jLabel2.setText("Username");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel3.setText("Password");
