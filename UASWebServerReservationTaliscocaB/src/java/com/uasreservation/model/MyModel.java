@@ -30,7 +30,7 @@ public abstract class MyModel {
         if (MyModel.conn == null) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-                return DriverManager.getConnection("jdbc:mysql://localhost/ezparking_160422124", "root", "");
+                return DriverManager.getConnection("jdbc:mysql://localhost/dbreservation", "root", "");
             } catch (Exception ex) {
                 System.out.println("error di getConnection" + ex.getMessage());
             }

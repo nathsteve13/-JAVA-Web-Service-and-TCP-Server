@@ -206,6 +206,7 @@ public class Account extends MyModel {
         return collections;
     }
     public Boolean checkLogin() {
+        boolean check = false;
         try {
             if (!MyModel.conn.isClosed()) {
                 PreparedStatement sql = (PreparedStatement) MyModel.conn.prepareStatement(
@@ -226,14 +227,17 @@ public class Account extends MyModel {
                     this.setUpdated_at(this.result.getDate("updated_at").toLocalDate());
                     this.setCreated_at(this.result.getDate("created_at").toLocalDate());
                     sql.close();
-                    return true;
+                    check = true;
+                }
+                else {
+                    check = false;
                 }
             }
         } catch (Exception e) {
             System.out.println("Error di checklogin " + e);
         }
 
-        return false;
+        return check;
     }
     
     public boolean checkEmail() {
