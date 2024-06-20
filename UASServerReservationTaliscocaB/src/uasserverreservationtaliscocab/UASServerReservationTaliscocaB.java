@@ -13,6 +13,7 @@ import java.net.Socket;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -49,7 +50,16 @@ public class UASServerReservationTaliscocaB implements Runnable{
             Socket incoming;
             String message;
             ServerSocket s = new ServerSocket(6666);
-            
+            int id_user = 0;
+            String name = "";
+            LocalDate dob = LocalDate.now();
+            String email = "";
+            String username = "";
+            double balance = 0f;
+            LocalDate updated_at = LocalDate.now();
+            LocalDate created_at = LocalDate.now();
+            DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            DateTimeFormatter inputFormatterTime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             while (true) {
                 incoming = s.accept();
 
@@ -62,7 +72,27 @@ public class UASServerReservationTaliscocaB implements Runnable{
                 
                 DataOutputStream msgToClient = new DataOutputStream(incoming.getOutputStream());
                 if (commands[0].equals("LOGIN")) {
-                    
+                    boolean check = checkLogin(commands[1], commands[2]);
+                    if (check) {
+                        List<String> dataList = viewListDataAccount();
+                        System.out.println(dataList);
+                        for (String data : dataList) {
+                            String[] splitData = data.split("~");
+                            id_user = Integer.parseInt(splitData[0]);
+                            name = splitData[1];
+                            dob = LocalDate.parse(splitData[2], inputFormatter);
+                            email = splitData[3];
+                            username = splitData[4];
+                            balance = Double.parseDouble(splitData[5]);
+                            updated_at = LocalDate.parse(splitData[6], inputFormatterTime);
+                            created_at = LocalDate.parse(splitData[7], inputFormatterTime);
+                        }
+                        
+                        msgToClient.writeBytes("TRUE~" + name + "~" + id_user + "\n");
+                    }
+                    else {
+                        msgToClient.writeBytes("FALSE~" + "\n");
+                    }
                 } else if (commands[0].equals("REGISTER")) {
                     
                 } else if(commands[0].equals("EVENT")) {
@@ -86,6 +116,18 @@ public class UASServerReservationTaliscocaB implements Runnable{
                 Logger.getLogger(UASServerReservationTaliscocaB.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    private static boolean checkLogin(java.lang.String email, java.lang.String password) {
+        uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
+        uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
+        return port.checkLogin(email, password);
+    }
+
+    private static java.util.List<java.lang.String> viewListDataAccount() {
+        uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
+        uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
+        return port.viewListDataAccount();
     }
     
 }

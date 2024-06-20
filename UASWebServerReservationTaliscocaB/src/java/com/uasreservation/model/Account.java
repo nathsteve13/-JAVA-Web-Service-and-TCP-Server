@@ -184,21 +184,19 @@ public class Account extends MyModel {
         ArrayList<String> collections = new ArrayList<String>();
         try {
             statement = MyModel.conn.createStatement();
-            result = statement.executeQuery("SELECT * FROM accounts");
+            result = statement.executeQuery("SELECT * FROM accounts where id = " + this.getId());
             
             while (result.next()) {
                 Account tempv = new Account();
-                tempv.setId(result.getInt("id"));
                 tempv.setName(result.getString("name"));
                 tempv.setDob(result.getDate("dob").toLocalDate());
                 tempv.setEmail(result.getString("email"));
                 tempv.setUsername(result.getString("username"));
-                tempv.setPassword(result.getString("password"));
                 tempv.setBalance(result.getDouble("balance"));
                 tempv.setUpdated_at(result.getDate("updated_at").toLocalDate());
                 tempv.setCreated_at(result.getDate("created_at").toLocalDate());
 
-                collections.add(tempv.getId() + "-" + tempv.getName() + "-" + tempv.getDob() + "-" + tempv.getEmail() + "-" + tempv.getUsername() + "-" + tempv.getPassword() + "-" + tempv.getBalance() + "-" + tempv.getUpdated_at() + "-" + tempv.getCreated_at());
+                collections.add(tempv.getId() + "-" + tempv.getName() + "~" + tempv.getDob() + "~" + tempv.getEmail() + "~" + tempv.getUsername() + "~" + tempv.getBalance() + "~" + tempv.getUpdated_at() + "~" + tempv.getCreated_at());
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
