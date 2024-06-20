@@ -71,24 +71,7 @@ public class reservationServices {
         a.setPassword(password);
         return a.checkEmail();
     }
-    
-    @WebMethod(operationName = "insertDataEvent")
-    public void insertDataEvent(
-        @WebParam(name = "event_name") String event_name,
-        @WebParam(name = "event_date") LocalDate event_date,
-        @WebParam(name = "category") String category,
-        @WebParam(name = "status") String status,
-        @WebParam(name = "participant_slot") int participant_slot,
-        @WebParam(name = "number_of_participant") int number_of_participant,
-        @WebParam(name = "open_reservation_date") LocalDate open_reservation_date,
-        @WebParam(name = "close_reservation_date") LocalDate close_reservation_date,
-        @WebParam(name = "locations_id") int locations_id,
-        @WebParam(name = "price") double price,
-        @WebParam(name = "description") String description
-    ) {
-        e = new Events(event_name, event_date, category, status, participant_slot, number_of_participant, open_reservation_date, close_reservation_date, locations_id, price, description);
-        e.insertData();
-    }
+
 
     @WebMethod(operationName = "updateDataEvent")
     public void updateDataEvent(
@@ -123,20 +106,6 @@ public class reservationServices {
         return e.viewListData();
     }
     
-    @WebMethod(operationName = "insertDataParking")
-    public void insertDataParking(
-        @WebParam(name = "parking_area") String parking_area,
-        @WebParam(name = "status") String status,
-        @WebParam(name = "available_date") LocalDate available_date,
-        @WebParam(name = "locations_id") int locations_id,
-        @WebParam(name = "price") double price,
-        @WebParam(name = "updated_at") LocalDate updated_at,
-        @WebParam(name = "created_at") LocalDate created_at
-    ) {
-        p = new Parkings(parking_area, status, available_date, locations_id, price, updated_at, created_at);
-        p.insertData();
-    }
-
     @WebMethod(operationName = "updateDataParking")
     public void updateDataParking(
         @WebParam(name = "id") int id,
