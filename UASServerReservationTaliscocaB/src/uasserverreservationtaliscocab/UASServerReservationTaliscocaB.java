@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,8 +57,8 @@ public class UASServerReservationTaliscocaB implements Runnable{
             String email = "";
             String username = "";
             double balance = 0f;
-            LocalDate updated_at = LocalDate.now();
-            LocalDate created_at = LocalDate.now();
+            LocalDateTime updated_at = LocalDateTime.now();
+            LocalDateTime created_at = LocalDateTime.now();
             DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             DateTimeFormatter inputFormatterTime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             while (true) {
@@ -72,25 +73,22 @@ public class UASServerReservationTaliscocaB implements Runnable{
                 
                 DataOutputStream msgToClient = new DataOutputStream(incoming.getOutputStream());
                 if (commands[0].equals("LOGIN")) {
-                    boolean check = checkLogin(commands[1], commands[2]);
-                    if (check) {
-                        List<String> dataList = viewListDataAccount();
-                        System.out.println(dataList);
-                        for (String data : dataList) {
-                            String[] splitData = data.split("~");
-                            id_user = Integer.parseInt(splitData[0]);
-                            name = splitData[1];
-                            dob = LocalDate.parse(splitData[2], inputFormatter);
-                            email = splitData[3];
-                            username = splitData[4];
-                            balance = Double.parseDouble(splitData[5]);
-                            updated_at = LocalDate.parse(splitData[6], inputFormatterTime);
-                            created_at = LocalDate.parse(splitData[7], inputFormatterTime);
-                        }
+                    String check = checkLogin(commands[1], commands[2]);
+                    System.out.println(check);
+                    String[] checkData = check.split("~");
+                    if (checkData[0].equals("TRUE")) {
+                        id_user = Integer.parseInt(checkData[1]);
+                        name = checkData[2];
+                        dob = LocalDate.parse(checkData[3], inputFormatter);
+                        email = checkData[4];
+                        username = checkData[5];
+                        balance = Double.parseDouble(checkData[6]);
+                        updated_at = LocalDateTime.parse(checkData[7], inputFormatterTime);
+                        created_at = LocalDateTime.parse(checkData[8], inputFormatterTime);
                         
                         msgToClient.writeBytes("TRUE~" + name + "~" + id_user + "\n");
                     }
-                    else {
+                    else if (checkData[0].equals("FALSE")){
                         msgToClient.writeBytes("FALSE~" + "\n");
                     }
                 } else if (commands[0].equals("REGISTER")) {
@@ -118,16 +116,18 @@ public class UASServerReservationTaliscocaB implements Runnable{
         }
     }
 
-    private static boolean checkLogin(java.lang.String email, java.lang.String password) {
-        uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
-        uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
-        return port.checkLogin(email, password);
-    }
 
     private static java.util.List<java.lang.String> viewListDataAccount() {
         uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
         uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
         return port.viewListDataAccount();
     }
+
+    private static String checkLogin(java.lang.String email, java.lang.String password) {
+        uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
+        uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
+        return port.checkLogin(email, password);
+    }
+
     
 }

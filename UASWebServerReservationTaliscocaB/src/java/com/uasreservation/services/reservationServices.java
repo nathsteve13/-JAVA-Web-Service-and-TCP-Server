@@ -57,7 +57,7 @@ public class reservationServices {
     }
 
     @WebMethod(operationName = "checkLogin")
-    public boolean checkLogin(@WebParam(name = "email") String email, @WebParam(name = "password") String password) {
+    public String checkLogin(@WebParam(name = "email") String email, @WebParam(name = "password") String password) {
         a = new Account();
         a.setEmail(email);
         a.setPassword(password);

@@ -149,15 +149,17 @@ public class FormLogin extends javax.swing.JFrame {
             sendToServer.writeBytes("LOGIN~" + emailTxt.getText() + "~" + passwordTxt.getText() + "\n");
             
             BufferedReader chatFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            System.out.println("check0");
             hasil = chatFromServer.readLine();
-            
+            System.out.println(hasil);
             String[] hasils = hasil.split("~");
-            
+            System.out.println("check");
             if(hasils[0].equals("TRUE")) {
+                System.out.println("check1");
                 FormMenu home = new FormMenu();
                 home.show();
-        
                 dispose();
+                
                 home.name = hasils[1];
                 home.id_user = Integer.parseInt(hasils[2]);
                 System.out.println(home.id_user + ", " + home.name);
