@@ -31,10 +31,22 @@ public class reservationServices {
     
     /**
      * Web service operation
+     * @param name
+     * @param dob
+     * @param email
+     * @param username
+     * @param password
+     * @param balance
+     * @param updated_at
+     * @param created_at
      */
     @WebMethod(operationName = "insertDataAccount")
-    public void insertDataAccount(@WebParam(name = "name") String name, @WebParam(name = "dob") LocalDate dob, @WebParam(name = "email") String email, @WebParam(name = "username") String username, @WebParam(name = "password") String password, @WebParam(name = "balance") double balance, @WebParam(name = "updated_at") Timestamp updated_at, @WebParam(name = "created_at") Timestamp created_at) {
-        a = new Account(name, dob, email, username, password, balance, updated_at, created_at);
+    public void insertDataAccount(@WebParam(name = "name") String name, @WebParam(name = "dob") String dob, 
+            @WebParam(name = "email") String email, @WebParam(name = "username") String username, @WebParam(name = "password") String password, 
+            @WebParam(name = "balance") double balance, @WebParam(name = "updated_at") String updated_at, 
+            @WebParam(name = "created_at") String created_at) {
+        a = new Account(name, LocalDate.parse(dob), email, username, password, balance, Timestamp.valueOf(updated_at), 
+                Timestamp.valueOf(created_at));
         a.insertData();
     }
     

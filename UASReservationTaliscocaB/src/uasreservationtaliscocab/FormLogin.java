@@ -142,7 +142,7 @@ public class FormLogin extends javax.swing.JFrame {
     
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
         try {
-            String chatClient,hasil;
+            String hasil;
             
             Socket clientSocket = new Socket("localhost",6666);
             DataOutputStream sendToServer = new DataOutputStream(clientSocket.getOutputStream());

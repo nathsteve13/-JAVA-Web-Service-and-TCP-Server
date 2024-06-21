@@ -11,7 +11,6 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -93,7 +92,15 @@ public class UASServerReservationTaliscocaB implements Runnable{
                         msgToClient.writeBytes("FALSE~" + "\n");
                     }
                 } else if (commands[0].equals("REGISTER")) {
-                    
+                    boolean check = checkEmail(commands[3], commands[5]);
+                    if (check) {
+                        insertDataAccount(commands[1], LocalDate.parse(commands[2], inputFormatter).toString(), commands[3], commands[4], commands[5], 0f, 
+                                new java.sql.Timestamp(System.currentTimeMillis()).toString(), new java.sql.Timestamp(System.currentTimeMillis()).toString());
+                        msgToClient.writeBytes("TRUE~" + "\n");
+                    }
+                    else { 
+                        msgToClient.writeBytes("TRUE~" + "\n");
+                    }
                 } else if(commands[0].equals("EVENT")) {
                     System.out.println("");
                 }
@@ -129,6 +136,22 @@ public class UASServerReservationTaliscocaB implements Runnable{
         uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
         return port.checkLogin(email, password);
     }
+
+    private static boolean checkEmail(java.lang.String email, java.lang.String password) {
+        uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
+        uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
+        return port.checkEmail(email, password);
+    }
+
+    private static void insertDataAccount(java.lang.String name, java.lang.String dob, java.lang.String email, java.lang.String username, java.lang.String password, double balance, java.lang.String updatedAt, java.lang.String createdAt) {
+        uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
+        uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
+        port.insertDataAccount(name, dob, email, username, password, balance, updatedAt, createdAt);
+    }
+
+    
+
+    
 
 
 
