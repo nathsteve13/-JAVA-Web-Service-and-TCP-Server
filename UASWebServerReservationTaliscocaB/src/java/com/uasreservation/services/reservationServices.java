@@ -204,7 +204,7 @@ public class reservationServices {
         @WebParam(name = "quantity") int quantity,
         @WebParam(name = "amount") double amount,
         @WebParam(name = "status") String status,
-        @WebParam(name = "claim_date") Timestamp claim_date,
+        @WebParam(name = "claim_date") LocalDate claim_date,
         @WebParam(name = "claimed_date") Timestamp claimed_date,
         @WebParam(name = "updated_at") Timestamp updated_at,
         @WebParam(name = "created_at") Timestamp created_at
@@ -220,7 +220,7 @@ public class reservationServices {
         @WebParam(name = "quantity") int quantity,
         @WebParam(name = "amount") double amount,
         @WebParam(name = "status") String status,
-        @WebParam(name = "claim_date") Timestamp claim_date,
+        @WebParam(name = "claim_date") LocalDate claim_date,
         @WebParam(name = "claimed_date") Timestamp claimed_date,
         @WebParam(name = "updated_at") Timestamp updated_at,
         @WebParam(name = "created_at") Timestamp created_at

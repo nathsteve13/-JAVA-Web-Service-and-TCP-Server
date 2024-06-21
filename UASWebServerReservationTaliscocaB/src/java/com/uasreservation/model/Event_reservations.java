@@ -10,6 +10,7 @@ package com.uasreservation.model;
  */
 import java.sql.*;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Event_reservations extends MyModel{
@@ -18,7 +19,7 @@ public class Event_reservations extends MyModel{
     private int quantity;
     private double amount;
     private String status;
-    private Timestamp claim_date;
+    private LocalDate claim_date;
     private Timestamp claimed_date;
     private Timestamp updated_at;
     private Timestamp created_at;
@@ -29,13 +30,13 @@ public class Event_reservations extends MyModel{
         this.quantity = 0;
         this.amount = 0.0;
         this.status = "";
-        this.claim_date = new java.sql.Timestamp(System.currentTimeMillis());
+        this.claim_date = LocalDate.now();
         this.claimed_date = new java.sql.Timestamp(System.currentTimeMillis());
         this.updated_at = new java.sql.Timestamp(System.currentTimeMillis());
         this.created_at = new java.sql.Timestamp(System.currentTimeMillis());
     }
 
-    public Event_reservations(int account_id, int event_id, int quantity, double amount, String status, Timestamp claim_date, Timestamp claimed_date, Timestamp updated_at, Timestamp created_at) {
+    public Event_reservations(int account_id, int event_id, int quantity, double amount, String status, LocalDate claim_date, Timestamp claimed_date, Timestamp updated_at, Timestamp created_at) {
         this.account_id.setId(account_id);
         this.event_id.setId(event_id);
         this.quantity = quantity;
@@ -87,11 +88,11 @@ public class Event_reservations extends MyModel{
         this.status = status;
     }
 
-    public Timestamp getClaim_date() {
+    public LocalDate getClaim_date() {
         return claim_date;
     }
 
-    public void setClaim_date(Timestamp claim_date) {
+    public void setClaim_date(LocalDate claim_date) {
         this.claim_date = claim_date;
     }
 
@@ -130,7 +131,7 @@ public class Event_reservations extends MyModel{
                 sql.setInt(3, this.quantity);
                 sql.setDouble(4, this.amount);
                 sql.setString(5, this.status);
-                sql.setTimestamp(6, this.claim_date);
+                sql.setDate(6, java.sql.Date.valueOf(this.claim_date));
                 sql.setTimestamp(7, this.claimed_date);
                 sql.setTimestamp(8, this.updated_at);
                 sql.setTimestamp(9, this.created_at);
@@ -151,7 +152,7 @@ public class Event_reservations extends MyModel{
                 sql.setInt(1, this.quantity);
                 sql.setDouble(2, this.amount);
                 sql.setString(3, this.status);
-                sql.setTimestamp(4, this.claim_date);
+                sql.setDate(4, java.sql.Date.valueOf(this.claim_date));
                 sql.setTimestamp(5, this.claimed_date);
                 sql.setTimestamp(6, this.updated_at);
                 sql.setTimestamp(7, this.created_at);
@@ -195,7 +196,7 @@ public class Event_reservations extends MyModel{
                 tempReservation.setQuantity(result.getInt("quantity"));
                 tempReservation.setAmount(result.getDouble("amount"));
                 tempReservation.setStatus(result.getString("status"));
-                tempReservation.setClaim_date(result.getTimestamp("claim_date"));
+                tempReservation.setClaim_date(result.getDate("claim_date").toLocalDate());
                 tempReservation.setClaimed_date(result.getTimestamp("claimed_date"));
                 tempReservation.setUpdated_at(result.getTimestamp("updated_at"));
                 tempReservation.setCreated_at(result.getTimestamp("created_at"));
