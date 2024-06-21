@@ -5,8 +5,7 @@
 package com.uasreservation.model;
 
 import java.sql.PreparedStatement;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 /**
@@ -17,18 +16,18 @@ public class Events extends MyModel{
 
     private int id;
     private String event_name;
-    private LocalDate event_date;
+    private Timestamp event_date;
     private String category;
     private String status;
     private int participant_slot;
     private int number_of_participant;
-    private LocalDate open_reservation_date;
-    private LocalDate close_reservation_date;
+    private Timestamp open_reservation_date;
+    private Timestamp close_reservation_date;
     private Locations locations_id;
     private double price;
     private String description;
     
-    public Events(String event_name, LocalDate event_date, String category, String status, int participant_slot, int number_of_participant, LocalDate open_reservation_date, LocalDate close_reservation_date, int locations_id, double price, String description) {
+    public Events(String event_name, Timestamp event_date, String category, String status, int participant_slot, int number_of_participant, Timestamp open_reservation_date, Timestamp close_reservation_date, int locations_id, double price, String description) {
         this.event_name = event_name;
         this.event_date = event_date;
         this.category = category;
@@ -45,13 +44,13 @@ public class Events extends MyModel{
     public Events() {
         this.id = 0;
         this.event_name = "";
-        this.event_date = LocalDate.now();
+        this.event_date =  new java.sql.Timestamp(System.currentTimeMillis());
         this.category = "";
         this.status = "";
         this.participant_slot = 0;
         this.number_of_participant = 0;
-        this.open_reservation_date = LocalDate.now();
-        this.close_reservation_date = LocalDate.now();
+        this.open_reservation_date =  new java.sql.Timestamp(System.currentTimeMillis());
+        this.close_reservation_date =  new java.sql.Timestamp(System.currentTimeMillis());
         this.locations_id.setId(0);
         this.price = 0f;
         this.description = "";
@@ -73,11 +72,11 @@ public class Events extends MyModel{
         this.event_name = event_name;
     }
 
-    public LocalDate getEvent_date() {
+    public Timestamp getEvent_date() {
         return event_date;
     }
 
-    public void setEvent_date(LocalDate event_date) {
+    public void setEvent_date(Timestamp event_date) {
         this.event_date = event_date;
     }
 
@@ -113,19 +112,19 @@ public class Events extends MyModel{
         this.number_of_participant = number_of_participant;
     }
 
-    public LocalDate getOpen_reservation_date() {
+    public Timestamp getOpen_reservation_date() {
         return open_reservation_date;
     }
 
-    public void setOpen_reservation_date(LocalDate open_reservation_date) {
+    public void setOpen_reservation_date(Timestamp open_reservation_date) {
         this.open_reservation_date = open_reservation_date;
     }
 
-    public LocalDate getClose_reservation_date() {
+    public Timestamp getClose_reservation_date() {
         return close_reservation_date;
     }
 
-    public void setClose_reservation_date(LocalDate close_reservation_date) {
+    public void setClose_reservation_date(Timestamp close_reservation_date) {
         this.close_reservation_date = close_reservation_date;
     }
 
@@ -160,13 +159,13 @@ public class Events extends MyModel{
                 PreparedStatement sql = MyModel.conn.prepareStatement(
                         "INSERT INTO events (event_name, event_date, category, status, participant_slot, number_of_participant, open_reservation_date, close_reservation_date, locations_id, price, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
                 sql.setString(1, this.event_name);
-                sql.setDate(2, java.sql.Date.valueOf(this.event_date));
+                sql.setTimestamp(2, this.event_date);
                 sql.setString(3, this.category);
                 sql.setString(4, this.status);
                 sql.setInt(5, this.participant_slot);
                 sql.setInt(6, this.number_of_participant);
-                sql.setDate(7, java.sql.Date.valueOf(this.open_reservation_date));
-                sql.setDate(8, java.sql.Date.valueOf(this.close_reservation_date));
+                sql.setTimestamp(7, this.open_reservation_date);
+                sql.setTimestamp(8, this.close_reservation_date);
                 sql.setInt(9, this.locations_id.getId());
                 sql.setDouble(10, this.price);
                 sql.setString(11, this.description);
@@ -185,13 +184,13 @@ public class Events extends MyModel{
                 PreparedStatement sql = MyModel.conn.prepareStatement(
                         "UPDATE events SET event_name = ?, event_date = ?, category = ?, status = ?, participant_slot = ?, number_of_participant = ?, open_reservation_date = ?, close_reservation_date = ?, locations_id = ?, price = ?, description = ? WHERE id = ?");
                 sql.setString(1, this.event_name);
-                sql.setDate(2, java.sql.Date.valueOf(this.event_date));
+                sql.setTimestamp(2, this.event_date);
                 sql.setString(3, this.category);
                 sql.setString(4, this.status);
                 sql.setInt(5, this.participant_slot);
                 sql.setInt(6, this.number_of_participant);
-                sql.setDate(7, java.sql.Date.valueOf(this.open_reservation_date));
-                sql.setDate(8, java.sql.Date.valueOf(this.close_reservation_date));
+                sql.setTimestamp(7, this.open_reservation_date);
+                sql.setTimestamp(8, this.close_reservation_date);
                 sql.setInt(9, this.locations_id.getId());
                 sql.setDouble(10, this.price);
                 sql.setString(11, this.description);
@@ -230,13 +229,13 @@ public class Events extends MyModel{
                 Events tempEvent = new Events();
                 tempEvent.setId(result.getInt("id"));
                 tempEvent.setEvent_name(result.getString("event_name"));
-                tempEvent.setEvent_date(result.getDate("event_date").toLocalDate());
+                tempEvent.setEvent_date(result.getTimestamp("event_date"));
                 tempEvent.setCategory(result.getString("category"));
                 tempEvent.setStatus(result.getString("status"));
                 tempEvent.setParticipant_slot(result.getInt("participant_slot"));
                 tempEvent.setNumber_of_participant(result.getInt("number_of_participant"));
-                tempEvent.setOpen_reservation_date(result.getDate("open_reservation_date").toLocalDate());
-                tempEvent.setClose_reservation_date(result.getDate("close_reservation_date").toLocalDate());
+                tempEvent.setOpen_reservation_date(result.getTimestamp("open_reservation_date"));
+                tempEvent.setClose_reservation_date(result.getTimestamp("close_reservation_date"));
                 tempEvent.setLocations_id(result.getInt("locations_id"));
                 tempEvent.setPrice(result.getDouble("price"));
                 tempEvent.setDescription(result.getString("description"));

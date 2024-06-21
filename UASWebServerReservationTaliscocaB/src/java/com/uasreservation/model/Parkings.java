@@ -10,31 +10,31 @@ package com.uasreservation.model;
  */
 
 import java.sql.*;
-import java.time.LocalDate;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class Parkings extends MyModel{
     private int id;
     private String parking_area;
     private String status;
-    private LocalDate available_date;
+    private Timestamp available_date;
     private Locations locations_id;
     private double price;
-    private LocalDate updated_at;
-    private LocalDate created_at;
+    private Timestamp updated_at;
+    private Timestamp created_at;
 
     public Parkings() {
         this.id = 0;
         this.parking_area = "";
         this.status = "";
-        this.available_date = LocalDate.now();
+        this.available_date = new java.sql.Timestamp(System.currentTimeMillis());
         this.locations_id.setId(0);
         this.price = 0.0;
-        this.updated_at = LocalDate.now();
-        this.created_at = LocalDate.now();
+        this.updated_at = new java.sql.Timestamp(System.currentTimeMillis());
+        this.created_at = new java.sql.Timestamp(System.currentTimeMillis());
     }
 
-    public Parkings(String parking_area, String status, LocalDate available_date, int locations_id, double price, LocalDate updated_at, LocalDate created_at) {
+    public Parkings(String parking_area, String status, Timestamp available_date, int locations_id, double price, Timestamp updated_at, Timestamp created_at) {
         this.parking_area = parking_area;
         this.status = status;
         this.available_date = available_date;
@@ -68,11 +68,11 @@ public class Parkings extends MyModel{
         this.status = status;
     }
 
-    public LocalDate getAvailable_date() {
+    public Timestamp getAvailable_date() {
         return available_date;
     }
 
-    public void setAvailable_date(LocalDate available_date) {
+    public void setAvailable_date(Timestamp available_date) {
         this.available_date = available_date;
     }
 
@@ -92,19 +92,19 @@ public class Parkings extends MyModel{
         this.price = price;
     }
 
-    public LocalDate getUpdated_at() {
+    public Timestamp getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdated_at(LocalDate updated_at) {
+    public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
     }
 
-    public LocalDate getCreated_at() {
+    public Timestamp getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(LocalDate created_at) {
+    public void setCreated_at(Timestamp created_at) {
         this.created_at = created_at;
     }
 
@@ -116,11 +116,11 @@ public class Parkings extends MyModel{
                         "INSERT INTO parkings (parking_area, status, available_date, locations_id, price, updated_at, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)");
                 sql.setString(1, this.parking_area);
                 sql.setString(2, this.status);
-                sql.setDate(3, java.sql.Date.valueOf(this.available_date));
+                sql.setTimestamp(3, this.available_date);
                 sql.setInt(4, this.locations_id.getId());
                 sql.setDouble(5, this.price);
-                sql.setDate(6, java.sql.Date.valueOf(this.updated_at));
-                sql.setDate(7, java.sql.Date.valueOf(this.created_at));
+                sql.setTimestamp(6, this.updated_at);
+                sql.setTimestamp(7, this.created_at);
                 sql.executeUpdate();
                 sql.close();
             }
@@ -137,11 +137,11 @@ public class Parkings extends MyModel{
                         "UPDATE parkings SET parking_area = ?, status = ?, available_date = ?, locations_id = ?, price = ?, updated_at = ?, created_at = ? WHERE id = ?");
                 sql.setString(1, this.parking_area);
                 sql.setString(2, this.status);
-                sql.setDate(3, java.sql.Date.valueOf(this.available_date));
+                sql.setTimestamp(3, this.available_date);
                 sql.setInt(4, this.locations_id.getId());
                 sql.setDouble(5, this.price);
-                sql.setDate(6, java.sql.Date.valueOf(this.updated_at));
-                sql.setDate(7, java.sql.Date.valueOf(this.created_at));
+                sql.setTimestamp(6, this.updated_at);
+                sql.setTimestamp(7, this.created_at);
                 sql.setInt(8, this.id);
                 sql.executeUpdate();
                 sql.close();
@@ -178,11 +178,11 @@ public class Parkings extends MyModel{
                 tempParking.setId(result.getInt("id"));
                 tempParking.setParking_area(result.getString("parking_area"));
                 tempParking.setStatus(result.getString("status"));
-                tempParking.setAvailable_date(result.getDate("available_date").toLocalDate());
+                tempParking.setAvailable_date(result.getTimestamp("available_date"));
                 tempParking.setLocations_id(result.getInt("locations_id"));
                 tempParking.setPrice(result.getDouble("price"));
-                tempParking.setUpdated_at(result.getDate("updated_at").toLocalDate());
-                tempParking.setCreated_at(result.getDate("created_at").toLocalDate());
+                tempParking.setUpdated_at(result.getTimestamp("updated_at"));
+                tempParking.setCreated_at(result.getTimestamp("created_at"));
 
                 collections.add(tempParking.getId() + "-" + tempParking.getParking_area() + "-" + tempParking.getStatus() + "-" + tempParking.getAvailable_date() + "-" + tempParking.getLocations_id() + "-" + tempParking.getPrice() + "-" + tempParking.getUpdated_at() + "-" + tempParking.getCreated_at());
             }

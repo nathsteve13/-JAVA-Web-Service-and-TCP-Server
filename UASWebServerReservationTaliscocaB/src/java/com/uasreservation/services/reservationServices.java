@@ -78,13 +78,13 @@ public class reservationServices {
     public void updateDataEvent(
         @WebParam(name = "id") int id,
         @WebParam(name = "event_name") String event_name,
-        @WebParam(name = "event_date") LocalDate event_date,
+        @WebParam(name = "event_date") Timestamp event_date,
         @WebParam(name = "category") String category,
         @WebParam(name = "status") String status,
         @WebParam(name = "participant_slot") int participant_slot,
         @WebParam(name = "number_of_participant") int number_of_participant,
-        @WebParam(name = "open_reservation_date") LocalDate open_reservation_date,
-        @WebParam(name = "close_reservation_date") LocalDate close_reservation_date,
+        @WebParam(name = "open_reservation_date") Timestamp open_reservation_date,
+        @WebParam(name = "close_reservation_date") Timestamp close_reservation_date,
         @WebParam(name = "locations_id") int locations_id,
         @WebParam(name = "price") double price,
         @WebParam(name = "description") String description
@@ -112,11 +112,11 @@ public class reservationServices {
         @WebParam(name = "id") int id,
         @WebParam(name = "parking_area") String parking_area,
         @WebParam(name = "status") String status,
-        @WebParam(name = "available_date") LocalDate available_date,
+        @WebParam(name = "available_date") Timestamp available_date,
         @WebParam(name = "locations_id") int locations_id,
         @WebParam(name = "price") double price,
-        @WebParam(name = "updated_at") LocalDate updated_at,
-        @WebParam(name = "created_at") LocalDate created_at
+        @WebParam(name = "updated_at") Timestamp updated_at,
+        @WebParam(name = "created_at") Timestamp created_at
     ) {
         p = new Parkings(parking_area, status, available_date, locations_id, price, updated_at, created_at);
         p.setId(id);
@@ -143,10 +143,10 @@ public class reservationServices {
         @WebParam(name = "quantity") int quantity,
         @WebParam(name = "amount") double amount,
         @WebParam(name = "status") String status,
-        @WebParam(name = "claim_date") LocalDate claim_date,
-        @WebParam(name = "claimed_date") LocalDate claimed_date,
-        @WebParam(name = "updated_at") LocalDate updated_at,
-        @WebParam(name = "created_at") LocalDate created_at
+        @WebParam(name = "claim_date") Timestamp claim_date,
+        @WebParam(name = "claimed_date") Timestamp claimed_date,
+        @WebParam(name = "updated_at") Timestamp updated_at,
+        @WebParam(name = "created_at") Timestamp created_at
     ) {
         pr = new Parking_reservations(accounts_id, parkings_id, quantity, amount, status, claim_date, claimed_date, updated_at, created_at);
         pr.insertData();
@@ -159,10 +159,10 @@ public class reservationServices {
         @WebParam(name = "quantity") int quantity,
         @WebParam(name = "amount") double amount,
         @WebParam(name = "status") String status,
-        @WebParam(name = "claim_date") LocalDate claim_date,
-        @WebParam(name = "claimed_date") LocalDate claimed_date,
-        @WebParam(name = "updated_at") LocalDate updated_at,
-        @WebParam(name = "created_at") LocalDate created_at
+        @WebParam(name = "claim_date") Timestamp claim_date,
+        @WebParam(name = "claimed_date") Timestamp claimed_date,
+        @WebParam(name = "updated_at") Timestamp updated_at,
+        @WebParam(name = "created_at") Timestamp created_at
     ) {
         pr = new Parking_reservations(accounts_id, parkings_id, quantity, amount, status, claim_date, claimed_date, updated_at, created_at);
         pr.updateData();
@@ -192,10 +192,10 @@ public class reservationServices {
         @WebParam(name = "quantity") int quantity,
         @WebParam(name = "amount") double amount,
         @WebParam(name = "status") String status,
-        @WebParam(name = "claim_date") LocalDate claim_date,
-        @WebParam(name = "claimed_date") LocalDate claimed_date,
-        @WebParam(name = "updated_at") LocalDate updated_at,
-        @WebParam(name = "created_at") LocalDate created_at
+        @WebParam(name = "claim_date") Timestamp claim_date,
+        @WebParam(name = "claimed_date") Timestamp claimed_date,
+        @WebParam(name = "updated_at") Timestamp updated_at,
+        @WebParam(name = "created_at") Timestamp created_at
     ) {
         er = new Event_reservations(account_id, event_id, quantity, amount, status, claim_date, claimed_date, updated_at, created_at);
         er.insertData();
@@ -208,10 +208,10 @@ public class reservationServices {
         @WebParam(name = "quantity") int quantity,
         @WebParam(name = "amount") double amount,
         @WebParam(name = "status") String status,
-        @WebParam(name = "claim_date") LocalDate claim_date,
-        @WebParam(name = "claimed_date") LocalDate claimed_date,
-        @WebParam(name = "updated_at") LocalDate updated_at,
-        @WebParam(name = "created_at") LocalDate created_at
+        @WebParam(name = "claim_date") Timestamp claim_date,
+        @WebParam(name = "claimed_date") Timestamp claimed_date,
+        @WebParam(name = "updated_at") Timestamp updated_at,
+        @WebParam(name = "created_at") Timestamp created_at
     ) {
         er = new Event_reservations(account_id, event_id, quantity, amount, status, claim_date, claimed_date, updated_at, created_at);
         er.updateData();
