@@ -72,6 +72,7 @@ public class UASServerReservationTaliscocaB implements Runnable{
                 System.out.println(command);
                 
                 DataOutputStream msgToClient = new DataOutputStream(incoming.getOutputStream());
+                
                 if (commands[0].equals("LOGIN")) {
                     String check = checkLogin(commands[1], commands[2]);
                     System.out.println(check);
@@ -91,7 +92,9 @@ public class UASServerReservationTaliscocaB implements Runnable{
                     else if (checkData[0].equals("FALSE")){
                         msgToClient.writeBytes("FALSE~" + "\n");
                     }
-                } else if (commands[0].equals("REGISTER")) {
+                } 
+                
+                else if (commands[0].equals("REGISTER")) {
                     boolean check = checkEmail(commands[3], commands[5]);
                     if (check) {
                         insertDataAccount(commands[1], LocalDate.parse(commands[2], inputFormatter).toString(), commands[3], commands[4], commands[5], 0f, 
@@ -99,10 +102,24 @@ public class UASServerReservationTaliscocaB implements Runnable{
                         msgToClient.writeBytes("TRUE~" + "\n");
                     }
                     else { 
-                        msgToClient.writeBytes("TRUE~" + "\n");
+                        msgToClient.writeBytes("FALSE~" + "\n");
                     }
-                } else if(commands[0].equals("EVENT")) {
+                } 
+                
+                else if(commands[0].equals("EVENTVIEW")) {
                     System.out.println("");
+                }
+                
+                else if(commands[0].equals("EVENTRESERVATION")) {
+                    System.out.println("");
+                }
+                
+                else if(commands[0].equals("PARKINGVIEW")) {
+                    System.out.println("");
+                }
+                
+                else if (commands[0].equals("PARKINGRESERVATION")) {
+                    
                 }
             }
         } catch (Exception ex) {
@@ -147,6 +164,12 @@ public class UASServerReservationTaliscocaB implements Runnable{
         uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
         uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
         port.insertDataAccount(name, dob, email, username, password, balance, updatedAt, createdAt);
+    }
+
+    private static java.util.List<java.lang.String> viewListDataEvent() {
+        uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
+        uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
+        return port.viewListDataEvent();
     }
 
     
