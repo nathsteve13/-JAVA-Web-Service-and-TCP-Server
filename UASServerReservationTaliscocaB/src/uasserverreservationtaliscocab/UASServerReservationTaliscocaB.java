@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.sql.Timestamp;
 
 /**
  *
@@ -57,8 +58,8 @@ public class UASServerReservationTaliscocaB implements Runnable{
             String email = "";
             String username = "";
             double balance = 0f;
-            LocalDateTime updated_at = LocalDateTime.now();
-            LocalDateTime created_at = LocalDateTime.now();
+            Timestamp updated_at = new java.sql.Timestamp(System.currentTimeMillis());
+            Timestamp created_at = new java.sql.Timestamp(System.currentTimeMillis());
             DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             DateTimeFormatter inputFormatterTime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             while (true) {
@@ -83,8 +84,8 @@ public class UASServerReservationTaliscocaB implements Runnable{
                         email = checkData[4];
                         username = checkData[5];
                         balance = Double.parseDouble(checkData[6]);
-                        updated_at = LocalDateTime.parse(checkData[7], inputFormatterTime);
-                        created_at = LocalDateTime.parse(checkData[8], inputFormatterTime);
+                        updated_at = Timestamp.valueOf(checkData[7]);
+                        created_at = Timestamp.valueOf(checkData[8]);
                         
                         msgToClient.writeBytes("TRUE~" + name + "~" + id_user + "\n");
                     }
@@ -128,6 +129,8 @@ public class UASServerReservationTaliscocaB implements Runnable{
         uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
         return port.checkLogin(email, password);
     }
+
+
 
     
 }

@@ -4,95 +4,17 @@
 <xsd:import namespace="http://services.uasreservation.com/" schemaLocation="http://localhost:8080/UASWebServerReservationTaliscocaB/reservationServices?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="updateDataAccount">
-<part name="parameters" element="tns:updateDataAccount"/>
+<message name="checkLogin">
+<part name="parameters" element="tns:checkLogin"/>
 </message>
-<message name="updateDataAccountResponse">
-<part name="parameters" element="tns:updateDataAccountResponse"/>
+<message name="checkLoginResponse">
+<part name="parameters" element="tns:checkLoginResponse"/>
 </message>
-<message name="updateDataEventReservation">
-<part name="parameters" element="tns:updateDataEventReservation"/>
+<message name="checkEmail">
+<part name="parameters" element="tns:checkEmail"/>
 </message>
-<message name="updateDataEventReservationResponse">
-<part name="parameters" element="tns:updateDataEventReservationResponse"/>
-</message>
-<message name="viewListDataAccount">
-<part name="parameters" element="tns:viewListDataAccount"/>
-</message>
-<message name="viewListDataAccountResponse">
-<part name="parameters" element="tns:viewListDataAccountResponse"/>
-</message>
-<message name="viewListDataEvent">
-<part name="parameters" element="tns:viewListDataEvent"/>
-</message>
-<message name="viewListDataEventResponse">
-<part name="parameters" element="tns:viewListDataEventResponse"/>
-</message>
-<message name="viewListDataEventReservation">
-<part name="parameters" element="tns:viewListDataEventReservation"/>
-</message>
-<message name="viewListDataEventReservationResponse">
-<part name="parameters" element="tns:viewListDataEventReservationResponse"/>
-</message>
-<message name="deleteDataEventReservation">
-<part name="parameters" element="tns:deleteDataEventReservation"/>
-</message>
-<message name="deleteDataEventReservationResponse">
-<part name="parameters" element="tns:deleteDataEventReservationResponse"/>
-</message>
-<message name="insertDataEventReservation">
-<part name="parameters" element="tns:insertDataEventReservation"/>
-</message>
-<message name="insertDataEventReservationResponse">
-<part name="parameters" element="tns:insertDataEventReservationResponse"/>
-</message>
-<message name="deleteDataAccount">
-<part name="parameters" element="tns:deleteDataAccount"/>
-</message>
-<message name="deleteDataAccountResponse">
-<part name="parameters" element="tns:deleteDataAccountResponse"/>
-</message>
-<message name="viewListDataParkingReservation">
-<part name="parameters" element="tns:viewListDataParkingReservation"/>
-</message>
-<message name="viewListDataParkingReservationResponse">
-<part name="parameters" element="tns:viewListDataParkingReservationResponse"/>
-</message>
-<message name="deleteDataParking">
-<part name="parameters" element="tns:deleteDataParking"/>
-</message>
-<message name="deleteDataParkingResponse">
-<part name="parameters" element="tns:deleteDataParkingResponse"/>
-</message>
-<message name="updateDataParking">
-<part name="parameters" element="tns:updateDataParking"/>
-</message>
-<message name="updateDataParkingResponse">
-<part name="parameters" element="tns:updateDataParkingResponse"/>
-</message>
-<message name="viewListDataParking">
-<part name="parameters" element="tns:viewListDataParking"/>
-</message>
-<message name="viewListDataParkingResponse">
-<part name="parameters" element="tns:viewListDataParkingResponse"/>
-</message>
-<message name="deleteDataParkingReservation">
-<part name="parameters" element="tns:deleteDataParkingReservation"/>
-</message>
-<message name="deleteDataParkingReservationResponse">
-<part name="parameters" element="tns:deleteDataParkingReservationResponse"/>
-</message>
-<message name="updateDataParkingReservation">
-<part name="parameters" element="tns:updateDataParkingReservation"/>
-</message>
-<message name="updateDataParkingReservationResponse">
-<part name="parameters" element="tns:updateDataParkingReservationResponse"/>
-</message>
-<message name="insertDataParkingReservation">
-<part name="parameters" element="tns:insertDataParkingReservation"/>
-</message>
-<message name="insertDataParkingReservationResponse">
-<part name="parameters" element="tns:insertDataParkingReservationResponse"/>
+<message name="checkEmailResponse">
+<part name="parameters" element="tns:checkEmailResponse"/>
 </message>
 <message name="insertDataAccount">
 <part name="parameters" element="tns:insertDataAccount"/>
@@ -100,11 +22,95 @@
 <message name="insertDataAccountResponse">
 <part name="parameters" element="tns:insertDataAccountResponse"/>
 </message>
-<message name="checkLogin">
-<part name="parameters" element="tns:checkLogin"/>
+<message name="deleteDataAccount">
+<part name="parameters" element="tns:deleteDataAccount"/>
 </message>
-<message name="checkLoginResponse">
-<part name="parameters" element="tns:checkLoginResponse"/>
+<message name="deleteDataAccountResponse">
+<part name="parameters" element="tns:deleteDataAccountResponse"/>
+</message>
+<message name="deleteDataParkingReservation">
+<part name="parameters" element="tns:deleteDataParkingReservation"/>
+</message>
+<message name="deleteDataParkingReservationResponse">
+<part name="parameters" element="tns:deleteDataParkingReservationResponse"/>
+</message>
+<message name="updateDataAccount">
+<part name="parameters" element="tns:updateDataAccount"/>
+</message>
+<message name="updateDataAccountResponse">
+<part name="parameters" element="tns:updateDataAccountResponse"/>
+</message>
+<message name="deleteDataEventReservation">
+<part name="parameters" element="tns:deleteDataEventReservation"/>
+</message>
+<message name="deleteDataEventReservationResponse">
+<part name="parameters" element="tns:deleteDataEventReservationResponse"/>
+</message>
+<message name="viewListDataParking">
+<part name="parameters" element="tns:viewListDataParking"/>
+</message>
+<message name="viewListDataParkingResponse">
+<part name="parameters" element="tns:viewListDataParkingResponse"/>
+</message>
+<message name="viewListDataEventReservation">
+<part name="parameters" element="tns:viewListDataEventReservation"/>
+</message>
+<message name="viewListDataEventReservationResponse">
+<part name="parameters" element="tns:viewListDataEventReservationResponse"/>
+</message>
+<message name="updateDataParking">
+<part name="parameters" element="tns:updateDataParking"/>
+</message>
+<message name="updateDataParkingResponse">
+<part name="parameters" element="tns:updateDataParkingResponse"/>
+</message>
+<message name="viewListDataParkingReservation">
+<part name="parameters" element="tns:viewListDataParkingReservation"/>
+</message>
+<message name="viewListDataParkingReservationResponse">
+<part name="parameters" element="tns:viewListDataParkingReservationResponse"/>
+</message>
+<message name="viewListDataAccount">
+<part name="parameters" element="tns:viewListDataAccount"/>
+</message>
+<message name="viewListDataAccountResponse">
+<part name="parameters" element="tns:viewListDataAccountResponse"/>
+</message>
+<message name="insertDataParkingReservation">
+<part name="parameters" element="tns:insertDataParkingReservation"/>
+</message>
+<message name="insertDataParkingReservationResponse">
+<part name="parameters" element="tns:insertDataParkingReservationResponse"/>
+</message>
+<message name="insertDataEventReservation">
+<part name="parameters" element="tns:insertDataEventReservation"/>
+</message>
+<message name="insertDataEventReservationResponse">
+<part name="parameters" element="tns:insertDataEventReservationResponse"/>
+</message>
+<message name="viewListDataEvent">
+<part name="parameters" element="tns:viewListDataEvent"/>
+</message>
+<message name="viewListDataEventResponse">
+<part name="parameters" element="tns:viewListDataEventResponse"/>
+</message>
+<message name="deleteDataParking">
+<part name="parameters" element="tns:deleteDataParking"/>
+</message>
+<message name="deleteDataParkingResponse">
+<part name="parameters" element="tns:deleteDataParkingResponse"/>
+</message>
+<message name="updateDataEventReservation">
+<part name="parameters" element="tns:updateDataEventReservation"/>
+</message>
+<message name="updateDataEventReservationResponse">
+<part name="parameters" element="tns:updateDataEventReservationResponse"/>
+</message>
+<message name="updateDataParkingReservation">
+<part name="parameters" element="tns:updateDataParkingReservation"/>
+</message>
+<message name="updateDataParkingReservationResponse">
+<part name="parameters" element="tns:updateDataParkingReservationResponse"/>
 </message>
 <message name="updateDataEvent">
 <part name="parameters" element="tns:updateDataEvent"/>
@@ -118,80 +124,78 @@
 <message name="deleteDataEventResponse">
 <part name="parameters" element="tns:deleteDataEventResponse"/>
 </message>
-<message name="checkEmail">
-<part name="parameters" element="tns:checkEmail"/>
-</message>
-<message name="checkEmailResponse">
-<part name="parameters" element="tns:checkEmailResponse"/>
-</message>
 <portType name="reservationServices">
-<operation name="updateDataAccount">
-<input wsam:Action="http://services.uasreservation.com/reservationServices/updateDataAccountRequest" message="tns:updateDataAccount"/>
-<output wsam:Action="http://services.uasreservation.com/reservationServices/updateDataAccountResponse" message="tns:updateDataAccountResponse"/>
+<operation name="checkLogin">
+<input wsam:Action="http://services.uasreservation.com/reservationServices/checkLoginRequest" message="tns:checkLogin"/>
+<output wsam:Action="http://services.uasreservation.com/reservationServices/checkLoginResponse" message="tns:checkLoginResponse"/>
 </operation>
-<operation name="updateDataEventReservation">
-<input wsam:Action="http://services.uasreservation.com/reservationServices/updateDataEventReservationRequest" message="tns:updateDataEventReservation"/>
-<output wsam:Action="http://services.uasreservation.com/reservationServices/updateDataEventReservationResponse" message="tns:updateDataEventReservationResponse"/>
-</operation>
-<operation name="viewListDataAccount">
-<input wsam:Action="http://services.uasreservation.com/reservationServices/viewListDataAccountRequest" message="tns:viewListDataAccount"/>
-<output wsam:Action="http://services.uasreservation.com/reservationServices/viewListDataAccountResponse" message="tns:viewListDataAccountResponse"/>
-</operation>
-<operation name="viewListDataEvent">
-<input wsam:Action="http://services.uasreservation.com/reservationServices/viewListDataEventRequest" message="tns:viewListDataEvent"/>
-<output wsam:Action="http://services.uasreservation.com/reservationServices/viewListDataEventResponse" message="tns:viewListDataEventResponse"/>
-</operation>
-<operation name="viewListDataEventReservation">
-<input wsam:Action="http://services.uasreservation.com/reservationServices/viewListDataEventReservationRequest" message="tns:viewListDataEventReservation"/>
-<output wsam:Action="http://services.uasreservation.com/reservationServices/viewListDataEventReservationResponse" message="tns:viewListDataEventReservationResponse"/>
-</operation>
-<operation name="deleteDataEventReservation">
-<input wsam:Action="http://services.uasreservation.com/reservationServices/deleteDataEventReservationRequest" message="tns:deleteDataEventReservation"/>
-<output wsam:Action="http://services.uasreservation.com/reservationServices/deleteDataEventReservationResponse" message="tns:deleteDataEventReservationResponse"/>
-</operation>
-<operation name="insertDataEventReservation">
-<input wsam:Action="http://services.uasreservation.com/reservationServices/insertDataEventReservationRequest" message="tns:insertDataEventReservation"/>
-<output wsam:Action="http://services.uasreservation.com/reservationServices/insertDataEventReservationResponse" message="tns:insertDataEventReservationResponse"/>
-</operation>
-<operation name="deleteDataAccount">
-<input wsam:Action="http://services.uasreservation.com/reservationServices/deleteDataAccountRequest" message="tns:deleteDataAccount"/>
-<output wsam:Action="http://services.uasreservation.com/reservationServices/deleteDataAccountResponse" message="tns:deleteDataAccountResponse"/>
-</operation>
-<operation name="viewListDataParkingReservation">
-<input wsam:Action="http://services.uasreservation.com/reservationServices/viewListDataParkingReservationRequest" message="tns:viewListDataParkingReservation"/>
-<output wsam:Action="http://services.uasreservation.com/reservationServices/viewListDataParkingReservationResponse" message="tns:viewListDataParkingReservationResponse"/>
-</operation>
-<operation name="deleteDataParking">
-<input wsam:Action="http://services.uasreservation.com/reservationServices/deleteDataParkingRequest" message="tns:deleteDataParking"/>
-<output wsam:Action="http://services.uasreservation.com/reservationServices/deleteDataParkingResponse" message="tns:deleteDataParkingResponse"/>
-</operation>
-<operation name="updateDataParking">
-<input wsam:Action="http://services.uasreservation.com/reservationServices/updateDataParkingRequest" message="tns:updateDataParking"/>
-<output wsam:Action="http://services.uasreservation.com/reservationServices/updateDataParkingResponse" message="tns:updateDataParkingResponse"/>
-</operation>
-<operation name="viewListDataParking">
-<input wsam:Action="http://services.uasreservation.com/reservationServices/viewListDataParkingRequest" message="tns:viewListDataParking"/>
-<output wsam:Action="http://services.uasreservation.com/reservationServices/viewListDataParkingResponse" message="tns:viewListDataParkingResponse"/>
-</operation>
-<operation name="deleteDataParkingReservation">
-<input wsam:Action="http://services.uasreservation.com/reservationServices/deleteDataParkingReservationRequest" message="tns:deleteDataParkingReservation"/>
-<output wsam:Action="http://services.uasreservation.com/reservationServices/deleteDataParkingReservationResponse" message="tns:deleteDataParkingReservationResponse"/>
-</operation>
-<operation name="updateDataParkingReservation">
-<input wsam:Action="http://services.uasreservation.com/reservationServices/updateDataParkingReservationRequest" message="tns:updateDataParkingReservation"/>
-<output wsam:Action="http://services.uasreservation.com/reservationServices/updateDataParkingReservationResponse" message="tns:updateDataParkingReservationResponse"/>
-</operation>
-<operation name="insertDataParkingReservation">
-<input wsam:Action="http://services.uasreservation.com/reservationServices/insertDataParkingReservationRequest" message="tns:insertDataParkingReservation"/>
-<output wsam:Action="http://services.uasreservation.com/reservationServices/insertDataParkingReservationResponse" message="tns:insertDataParkingReservationResponse"/>
+<operation name="checkEmail">
+<input wsam:Action="http://services.uasreservation.com/reservationServices/checkEmailRequest" message="tns:checkEmail"/>
+<output wsam:Action="http://services.uasreservation.com/reservationServices/checkEmailResponse" message="tns:checkEmailResponse"/>
 </operation>
 <operation name="insertDataAccount">
 <input wsam:Action="http://services.uasreservation.com/reservationServices/insertDataAccountRequest" message="tns:insertDataAccount"/>
 <output wsam:Action="http://services.uasreservation.com/reservationServices/insertDataAccountResponse" message="tns:insertDataAccountResponse"/>
 </operation>
-<operation name="checkLogin">
-<input wsam:Action="http://services.uasreservation.com/reservationServices/checkLoginRequest" message="tns:checkLogin"/>
-<output wsam:Action="http://services.uasreservation.com/reservationServices/checkLoginResponse" message="tns:checkLoginResponse"/>
+<operation name="deleteDataAccount">
+<input wsam:Action="http://services.uasreservation.com/reservationServices/deleteDataAccountRequest" message="tns:deleteDataAccount"/>
+<output wsam:Action="http://services.uasreservation.com/reservationServices/deleteDataAccountResponse" message="tns:deleteDataAccountResponse"/>
+</operation>
+<operation name="deleteDataParkingReservation">
+<input wsam:Action="http://services.uasreservation.com/reservationServices/deleteDataParkingReservationRequest" message="tns:deleteDataParkingReservation"/>
+<output wsam:Action="http://services.uasreservation.com/reservationServices/deleteDataParkingReservationResponse" message="tns:deleteDataParkingReservationResponse"/>
+</operation>
+<operation name="updateDataAccount">
+<input wsam:Action="http://services.uasreservation.com/reservationServices/updateDataAccountRequest" message="tns:updateDataAccount"/>
+<output wsam:Action="http://services.uasreservation.com/reservationServices/updateDataAccountResponse" message="tns:updateDataAccountResponse"/>
+</operation>
+<operation name="deleteDataEventReservation">
+<input wsam:Action="http://services.uasreservation.com/reservationServices/deleteDataEventReservationRequest" message="tns:deleteDataEventReservation"/>
+<output wsam:Action="http://services.uasreservation.com/reservationServices/deleteDataEventReservationResponse" message="tns:deleteDataEventReservationResponse"/>
+</operation>
+<operation name="viewListDataParking">
+<input wsam:Action="http://services.uasreservation.com/reservationServices/viewListDataParkingRequest" message="tns:viewListDataParking"/>
+<output wsam:Action="http://services.uasreservation.com/reservationServices/viewListDataParkingResponse" message="tns:viewListDataParkingResponse"/>
+</operation>
+<operation name="viewListDataEventReservation">
+<input wsam:Action="http://services.uasreservation.com/reservationServices/viewListDataEventReservationRequest" message="tns:viewListDataEventReservation"/>
+<output wsam:Action="http://services.uasreservation.com/reservationServices/viewListDataEventReservationResponse" message="tns:viewListDataEventReservationResponse"/>
+</operation>
+<operation name="updateDataParking">
+<input wsam:Action="http://services.uasreservation.com/reservationServices/updateDataParkingRequest" message="tns:updateDataParking"/>
+<output wsam:Action="http://services.uasreservation.com/reservationServices/updateDataParkingResponse" message="tns:updateDataParkingResponse"/>
+</operation>
+<operation name="viewListDataParkingReservation">
+<input wsam:Action="http://services.uasreservation.com/reservationServices/viewListDataParkingReservationRequest" message="tns:viewListDataParkingReservation"/>
+<output wsam:Action="http://services.uasreservation.com/reservationServices/viewListDataParkingReservationResponse" message="tns:viewListDataParkingReservationResponse"/>
+</operation>
+<operation name="viewListDataAccount">
+<input wsam:Action="http://services.uasreservation.com/reservationServices/viewListDataAccountRequest" message="tns:viewListDataAccount"/>
+<output wsam:Action="http://services.uasreservation.com/reservationServices/viewListDataAccountResponse" message="tns:viewListDataAccountResponse"/>
+</operation>
+<operation name="insertDataParkingReservation">
+<input wsam:Action="http://services.uasreservation.com/reservationServices/insertDataParkingReservationRequest" message="tns:insertDataParkingReservation"/>
+<output wsam:Action="http://services.uasreservation.com/reservationServices/insertDataParkingReservationResponse" message="tns:insertDataParkingReservationResponse"/>
+</operation>
+<operation name="insertDataEventReservation">
+<input wsam:Action="http://services.uasreservation.com/reservationServices/insertDataEventReservationRequest" message="tns:insertDataEventReservation"/>
+<output wsam:Action="http://services.uasreservation.com/reservationServices/insertDataEventReservationResponse" message="tns:insertDataEventReservationResponse"/>
+</operation>
+<operation name="viewListDataEvent">
+<input wsam:Action="http://services.uasreservation.com/reservationServices/viewListDataEventRequest" message="tns:viewListDataEvent"/>
+<output wsam:Action="http://services.uasreservation.com/reservationServices/viewListDataEventResponse" message="tns:viewListDataEventResponse"/>
+</operation>
+<operation name="deleteDataParking">
+<input wsam:Action="http://services.uasreservation.com/reservationServices/deleteDataParkingRequest" message="tns:deleteDataParking"/>
+<output wsam:Action="http://services.uasreservation.com/reservationServices/deleteDataParkingResponse" message="tns:deleteDataParkingResponse"/>
+</operation>
+<operation name="updateDataEventReservation">
+<input wsam:Action="http://services.uasreservation.com/reservationServices/updateDataEventReservationRequest" message="tns:updateDataEventReservation"/>
+<output wsam:Action="http://services.uasreservation.com/reservationServices/updateDataEventReservationResponse" message="tns:updateDataEventReservationResponse"/>
+</operation>
+<operation name="updateDataParkingReservation">
+<input wsam:Action="http://services.uasreservation.com/reservationServices/updateDataParkingReservationRequest" message="tns:updateDataParkingReservation"/>
+<output wsam:Action="http://services.uasreservation.com/reservationServices/updateDataParkingReservationResponse" message="tns:updateDataParkingReservationResponse"/>
 </operation>
 <operation name="updateDataEvent">
 <input wsam:Action="http://services.uasreservation.com/reservationServices/updateDataEventRequest" message="tns:updateDataEvent"/>
@@ -201,14 +205,10 @@
 <input wsam:Action="http://services.uasreservation.com/reservationServices/deleteDataEventRequest" message="tns:deleteDataEvent"/>
 <output wsam:Action="http://services.uasreservation.com/reservationServices/deleteDataEventResponse" message="tns:deleteDataEventResponse"/>
 </operation>
-<operation name="checkEmail">
-<input wsam:Action="http://services.uasreservation.com/reservationServices/checkEmailRequest" message="tns:checkEmail"/>
-<output wsam:Action="http://services.uasreservation.com/reservationServices/checkEmailResponse" message="tns:checkEmailResponse"/>
-</operation>
 </portType>
 <binding name="reservationServicesPortBinding" type="tns:reservationServices">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="updateDataAccount">
+<operation name="checkLogin">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -217,124 +217,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="updateDataEventReservation">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="viewListDataAccount">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="viewListDataEvent">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="viewListDataEventReservation">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="deleteDataEventReservation">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="insertDataEventReservation">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="deleteDataAccount">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="viewListDataParkingReservation">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="deleteDataParking">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="updateDataParking">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="viewListDataParking">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="deleteDataParkingReservation">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="updateDataParkingReservation">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="insertDataParkingReservation">
+<operation name="checkEmail">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -352,7 +235,133 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="checkLogin">
+<operation name="deleteDataAccount">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="deleteDataParkingReservation">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="updateDataAccount">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="deleteDataEventReservation">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="viewListDataParking">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="viewListDataEventReservation">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="updateDataParking">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="viewListDataParkingReservation">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="viewListDataAccount">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="insertDataParkingReservation">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="insertDataEventReservation">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="viewListDataEvent">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="deleteDataParking">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="updateDataEventReservation">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="updateDataParkingReservation">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -371,15 +380,6 @@
 </output>
 </operation>
 <operation name="deleteDataEvent">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="checkEmail">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

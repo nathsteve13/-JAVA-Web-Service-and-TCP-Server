@@ -4,7 +4,9 @@
  */
 package com.uasreservation.model;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -20,8 +22,8 @@ public class Account extends MyModel {
     private String username;
     private String password;
     private double balance;
-    private LocalDate updated_at;
-    private LocalDate created_at;
+    private Timestamp updated_at;
+    private Timestamp created_at;
 
     public Account() {
         id = 0;
@@ -31,11 +33,11 @@ public class Account extends MyModel {
         username = "";
         password = "";
         balance = 0f;
-        updated_at = LocalDate.now();
-        created_at = LocalDate.now();
+        updated_at = new java.sql.Timestamp(System.currentTimeMillis());
+        created_at = new java.sql.Timestamp(System.currentTimeMillis());
     }
     
-    public Account(String _name, LocalDate _dob, String _email, String _username, String _password, double _balance, LocalDate _updated_at, LocalDate _created_at) { 
+    public Account(String _name, LocalDate _dob, String _email, String _username, String _password, double _balance, Timestamp _updated_at, Timestamp _created_at) { 
         this.name = _name;
         this.dob = _dob;
         this.email = _email;
@@ -102,19 +104,19 @@ public class Account extends MyModel {
         this.balance = balance;
     }
 
-    public LocalDate getUpdated_at() {
+    public Timestamp getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdated_at(LocalDate updated_at) {
+    public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
     }
 
-    public LocalDate getCreated_at() {
+    public Timestamp getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(LocalDate created_at) {
+    public void setCreated_at(Timestamp created_at) {
         this.created_at = created_at;
     }
 
@@ -130,8 +132,8 @@ public class Account extends MyModel {
                 sql.setString(4, this.username);
                 sql.setString(5, this.password);
                 sql.setDouble(6, this.balance);
-                sql.setDate(7, java.sql.Date.valueOf(this.updated_at));
-                sql.setDate(8, java.sql.Date.valueOf(this.created_at));
+                sql.setTimestamp(7, this.updated_at);
+                sql.setTimestamp(8, this.created_at);
                 sql.executeUpdate();
                 sql.close();
             }
@@ -152,8 +154,8 @@ public class Account extends MyModel {
                 sql.setString(4, this.username);
                 sql.setString(5, this.password);
                 sql.setDouble(6, this.balance);
-                sql.setDate(7, java.sql.Date.valueOf(this.updated_at));
-                sql.setDate(8, java.sql.Date.valueOf(this.created_at));
+                sql.setTimestamp(7, this.updated_at);
+                sql.setTimestamp(8, this.created_at);
                 sql.setInt(9, id);
 
                 sql.executeUpdate();
@@ -193,8 +195,8 @@ public class Account extends MyModel {
                 tempv.setEmail(result.getString("email"));
                 tempv.setUsername(result.getString("username"));
                 tempv.setBalance(result.getDouble("balance"));
-                tempv.setUpdated_at(result.getDate("updated_at").toLocalDate());
-                tempv.setCreated_at(result.getDate("created_at").toLocalDate());
+                tempv.setUpdated_at(result.getTimestamp("updated_at"));
+                tempv.setCreated_at(result.getTimestamp("created_at"));
 
                 collections.add(tempv.getId() + "-" + tempv.getName() + "~" + tempv.getDob() + "~" + tempv.getEmail() + "~" + tempv.getUsername() + "~" + tempv.getBalance() + "~" + tempv.getUpdated_at() + "~" + tempv.getCreated_at());
             }
@@ -221,11 +223,11 @@ public class Account extends MyModel {
                     this.setUsername(this.result.getString("username"));
                     this.setPassword(this.result.getString("password"));
                     this.setBalance(this.result.getDouble("balance"));
-                    this.setUpdated_at(this.result.getDate("updated_at").toLocalDate());
-                    this.setCreated_at(this.result.getDate("created_at").toLocalDate());
+                    this.setUpdated_at(this.result.getTimestamp("updated_at"));
+                    this.setCreated_at(this.result.getTimestamp("created_at"));
                     sql.close();
-                    dataUser = "TRUE~" + getId() + "~" + getName() + "~" + getDob() + "~" + getEmail() + "~" + getUsername() 
-                    + "~" + getBalance() + "~" + getUpdated_at() + "~" + getCreated_at() + "\n";
+                    dataUser = "TRUE~" + id + "~" + name + "~" + dob + "~" + email + "~" + username 
+                    + "~" + balance + "~" + updated_at + "~" + created_at + "\n";
                     
                 }
                 else {

@@ -9,6 +9,7 @@ import com.uasreservation.model.Event_reservations;
 import com.uasreservation.model.Events;
 import com.uasreservation.model.Parking_reservations;
 import com.uasreservation.model.Parkings;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.jws.WebService;
@@ -32,13 +33,13 @@ public class reservationServices {
      * Web service operation
      */
     @WebMethod(operationName = "insertDataAccount")
-    public void insertDataAccount(@WebParam(name = "name") String name, @WebParam(name = "dob") LocalDate dob, @WebParam(name = "email") String email, @WebParam(name = "username") String username, @WebParam(name = "password") String password, @WebParam(name = "balance") double balance, @WebParam(name = "updated_at") LocalDate updated_at, @WebParam(name = "created_at") LocalDate created_at) {
+    public void insertDataAccount(@WebParam(name = "name") String name, @WebParam(name = "dob") LocalDate dob, @WebParam(name = "email") String email, @WebParam(name = "username") String username, @WebParam(name = "password") String password, @WebParam(name = "balance") double balance, @WebParam(name = "updated_at") Timestamp updated_at, @WebParam(name = "created_at") Timestamp created_at) {
         a = new Account(name, dob, email, username, password, balance, updated_at, created_at);
         a.insertData();
     }
     
     @WebMethod(operationName = "updateDataAccount")
-    public void updateDataAccount(@WebParam(name = "name") String name, @WebParam(name = "dob") LocalDate dob, @WebParam(name = "email") String email, @WebParam(name = "username") String username, @WebParam(name = "password") String password, @WebParam(name = "balance") double balance, @WebParam(name = "updated_at") LocalDate updated_at, @WebParam(name = "created_at") LocalDate created_at) {
+    public void updateDataAccount(@WebParam(name = "name") String name, @WebParam(name = "dob") LocalDate dob, @WebParam(name = "email") String email, @WebParam(name = "username") String username, @WebParam(name = "password") String password, @WebParam(name = "balance") double balance, @WebParam(name = "updated_at") Timestamp updated_at, @WebParam(name = "created_at") Timestamp created_at) {
         a = new Account(name, dob, email, username, password, balance, updated_at, created_at);
         a.updateData();
     }
