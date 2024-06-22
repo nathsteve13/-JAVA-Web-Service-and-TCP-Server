@@ -26,32 +26,77 @@ public class FormMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        nameTxt = new javax.swing.JTextField();
+        jLabelUsername = new javax.swing.JLabel();
+        jLabelBalance = new javax.swing.JLabel();
+        jButtonEvent = new javax.swing.JButton();
+        jButtonMyEvent = new javax.swing.JButton();
+        jButtonParking = new javax.swing.JButton();
+        jButtonMyParking = new javax.swing.JButton();
+        jButtonTopUp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(900, 450));
+        setSize(new java.awt.Dimension(900, 450));
 
-        nameTxt.setText("jTextField1");
-        nameTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameTxtActionPerformed(evt);
-            }
-        });
+        jLabelUsername.setText("NAMA USER");
+
+        jLabelBalance.setText("BALANCE");
+
+        jButtonEvent.setText("Event");
+
+        jButtonMyEvent.setText("My Event");
+
+        jButtonParking.setText("Parking");
+
+        jButtonMyParking.setText("My Parking");
+
+        jButtonTopUp.setText("Top Up");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(159, 159, 159)
-                .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(284, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(jLabelUsername)
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabelBalance))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButtonParking)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonMyParking))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButtonEvent)
+                                .addGap(28, 28, 28)
+                                .addComponent(jButtonMyEvent))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(123, 123, 123)
+                        .addComponent(jButtonTopUp)))
+                .addContainerGap(647, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(114, 114, 114)
-                .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(209, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelUsername)
+                    .addComponent(jLabelBalance))
+                .addGap(85, 85, 85)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonEvent)
+                    .addComponent(jButtonMyEvent))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonParking)
+                    .addComponent(jButtonMyParking))
+                .addGap(18, 18, 18)
+                .addComponent(jButtonTopUp)
+                .addContainerGap(215, Short.MAX_VALUE))
         );
 
         pack();
@@ -60,10 +105,6 @@ public class FormMenu extends javax.swing.JFrame {
     public static String name;
     public static int id_user;
     
-    private void nameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTxtActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nameTxtActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -100,6 +141,12 @@ public class FormMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField nameTxt;
+    private javax.swing.JButton jButtonEvent;
+    private javax.swing.JButton jButtonMyEvent;
+    private javax.swing.JButton jButtonMyParking;
+    private javax.swing.JButton jButtonParking;
+    private javax.swing.JButton jButtonTopUp;
+    private javax.swing.JLabel jLabelBalance;
+    private javax.swing.JLabel jLabelUsername;
     // End of variables declaration//GEN-END:variables
 }
