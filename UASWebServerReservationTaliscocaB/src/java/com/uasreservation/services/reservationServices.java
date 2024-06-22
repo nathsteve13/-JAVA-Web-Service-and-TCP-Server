@@ -101,7 +101,7 @@ public class reservationServices {
         @WebParam(name = "price") double price,
         @WebParam(name = "description") String description
     ) {
-        e = new Events(event_name, event_date, category, status, participant_slot, number_of_participant, open_reservation_date, close_reservation_date, locations_id, price, description);
+        e = new Events(id, event_name, event_date, category, status, participant_slot, number_of_participant, open_reservation_date, close_reservation_date, locations_id, price, description);
         e.setId(id);
         e.updateData();
     }

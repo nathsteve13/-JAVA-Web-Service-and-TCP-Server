@@ -107,7 +107,9 @@ public class UASServerReservationTaliscocaB implements Runnable{
                 } 
                 
                 else if(commands[0].equals("EVENTVIEW")) {
-                    System.out.println("");
+                    List<String> dataList = viewListDataEvent();
+                    String data = String.join("~", dataList);
+                    msgToClient.writeBytes(data + "\n");
                 }
                 
                 else if(commands[0].equals("EVENTRESERVATION")) {
@@ -171,6 +173,7 @@ public class UASServerReservationTaliscocaB implements Runnable{
         uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
         return port.viewListDataEvent();
     }
+
 
     
 

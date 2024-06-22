@@ -5,6 +5,7 @@
 package com.uasreservation.model;
 
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
@@ -27,7 +28,10 @@ public class Events extends MyModel{
     private double price;
     private String description;
     
-    public Events(String event_name, Timestamp event_date, String category, String status, int participant_slot, int number_of_participant, Timestamp open_reservation_date, Timestamp close_reservation_date, int locations_id, double price, String description) {
+    public Events(int id, String event_name, Timestamp event_date, String category, String status, 
+            int participant_slot, int number_of_participant, Timestamp open_reservation_date, 
+            Timestamp close_reservation_date, int locations_id, double price, String description) {
+        this.id = id;
         this.event_name = event_name;
         this.event_date = event_date;
         this.category = category;
@@ -36,6 +40,7 @@ public class Events extends MyModel{
         this.number_of_participant = number_of_participant;
         this.open_reservation_date = open_reservation_date;
         this.close_reservation_date = close_reservation_date;
+        this.locations_id = new Locations();
         this.locations_id.setId(locations_id); 
         this.price = price;
         this.description = description;
@@ -51,6 +56,7 @@ public class Events extends MyModel{
         this.number_of_participant = 0;
         this.open_reservation_date =  new java.sql.Timestamp(System.currentTimeMillis());
         this.close_reservation_date =  new java.sql.Timestamp(System.currentTimeMillis());
+        this.locations_id = new Locations();
         this.locations_id.setId(0);
         this.price = 0f;
         this.description = "";
@@ -220,42 +226,28 @@ public class Events extends MyModel{
 
     @Override
     public ArrayList<String> viewListData() {
-        ArrayList<String> collections = new ArrayList<>();
+        ArrayList<String> collections = new ArrayList<String>();
         try {
-            statement = MyModel.conn.createStatement();
-            result = statement.executeQuery("SELECT * FROM events");
+            this.statement = (Statement)MyModel.conn.createStatement();
+            this.result = this.statement.executeQuery("SELECT * FROM events");
 
-            while (result.next()) {
-                Events tempEvent = new Events();
-                tempEvent.setId(result.getInt("id"));
-                tempEvent.setEvent_name(result.getString("event_name"));
-                tempEvent.setEvent_date(result.getTimestamp("event_date"));
-                tempEvent.setCategory(result.getString("category"));
-                tempEvent.setStatus(result.getString("status"));
-                tempEvent.setParticipant_slot(result.getInt("participant_slot"));
-                tempEvent.setNumber_of_participant(result.getInt("number_of_participant"));
-                tempEvent.setOpen_reservation_date(result.getTimestamp("open_reservation_date"));
-                tempEvent.setClose_reservation_date(result.getTimestamp("close_reservation_date"));
-                tempEvent.setLocations_id(result.getInt("locations_id"));
-                tempEvent.setPrice(result.getDouble("price"));
-                tempEvent.setDescription(result.getString("description"));
-
-                collections.add(tempEvent.getId() + "-" + tempEvent.getEvent_name() + "-" + tempEvent.getEvent_date() + "-" 
-                        + tempEvent.getCategory() + "-" + tempEvent.getStatus() + "-" + tempEvent.getParticipant_slot() + "-" 
-                        + tempEvent.getNumber_of_participant() + "-" + tempEvent.getOpen_reservation_date() + "-" 
-                        + tempEvent.getClose_reservation_date() + "-" + tempEvent.getLocations_id() + "-" + tempEvent.getPrice() + "-" 
-                        + tempEvent.getDescription());
+            while (this.result.next()) {
+                Events e = new Events(result.getInt("id"), result.getString("event_name"),
+                        result.getTimestamp("event_date"), result.getString("category"), 
+                        result.getString("status"), result.getInt("participant_slot"), 
+                        result.getInt("number_of_participant"), result.getTimestamp("open_reservation_date"), 
+                        result.getTimestamp("close_reservation_date"), result.getInt("locations_id"), 
+                        result.getDouble("price"),result.getString("description"));
+                
+                collections.add(e.id + "~" + e.event_name + "~" + e.event_date + "~" 
+                        + e.category + "~" + e.status + "~" + e.participant_slot + "~" 
+                        + e.number_of_participant + "~" + e.open_reservation_date + "~" 
+                        + e.close_reservation_date + "~" + e.getLocations_id() + "~" + e.price + "~" 
+                        + e.description);
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-        } finally {
-            try {
-                if (result != null) result.close();
-                if (statement != null) statement.close();
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
+        } 
         return collections;
     }
     
