@@ -25,7 +25,9 @@ public class Event_reservations extends MyModel{
     private Timestamp created_at;
 
     public Event_reservations() {
+        this.account_id = new Account();
         this.account_id.setId(0);
+        this.event_id = new Events();
         this.event_id.setId(0);
         this.quantity = 0;
         this.amount = 0.0;
@@ -37,7 +39,9 @@ public class Event_reservations extends MyModel{
     }
 
     public Event_reservations(int account_id, int event_id, int quantity, double amount, String status, LocalDate claim_date, Timestamp claimed_date, Timestamp updated_at, Timestamp created_at) {
+        this.account_id = new Account();
         this.account_id.setId(account_id);
+        this.event_id = new Events();
         this.event_id.setId(event_id);
         this.quantity = quantity;
         this.amount = amount;
@@ -184,35 +188,24 @@ public class Event_reservations extends MyModel{
 
     @Override
     public ArrayList<String> viewListData() {
-        ArrayList<String> collections = new ArrayList<>();
+        ArrayList<String> collections = new ArrayList<String>();
         try {
             statement = MyModel.conn.createStatement();
             result = statement.executeQuery("SELECT * FROM event_reservations");
 
             while (result.next()) {
-                Event_reservations tempReservation = new Event_reservations();
-                tempReservation.setAccount_id(result.getInt("account_id"));
-                tempReservation.setEvent_id(result.getInt("event_id"));
-                tempReservation.setQuantity(result.getInt("quantity"));
-                tempReservation.setAmount(result.getDouble("amount"));
-                tempReservation.setStatus(result.getString("status"));
-                tempReservation.setClaim_date(result.getDate("claim_date").toLocalDate());
-                tempReservation.setClaimed_date(result.getTimestamp("claimed_date"));
-                tempReservation.setUpdated_at(result.getTimestamp("updated_at"));
-                tempReservation.setCreated_at(result.getTimestamp("created_at"));
-
-                collections.add(tempReservation.getAccount_id() + "-" + tempReservation.getEvent_id() + "-" + tempReservation.getQuantity() + "-" + tempReservation.getAmount() + "-" + tempReservation.getStatus() + "-" + tempReservation.getClaim_date() + "-" + tempReservation.getClaimed_date() + "-" + tempReservation.getUpdated_at() + "-" + tempReservation.getCreated_at());
+                Event_reservations tempReservation = new Event_reservations(result.getInt("account_id"), result.getInt("account_id"), 
+                        result.getInt("quantity"), result.getDouble("amount"), result.getString("status"), 
+                        result.getDate("claim_date").toLocalDate(), result.getTimestamp("claimed_date"), 
+                        result.getTimestamp("updated_at"), result.getTimestamp("created_at"));
+                
+                collections.add(tempReservation.getAccount_id() + "~" + tempReservation.getEvent_id() + "~" + tempReservation.quantity + "~" 
+                        + tempReservation.amount + "~" + tempReservation.status + "~" + tempReservation.claim_date + "~" 
+                        + tempReservation.claimed_date + "~" + tempReservation.updated_at + "~" + tempReservation.created_at);
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-        } finally {
-            try {
-                if (result != null) result.close();
-                if (statement != null) statement.close();
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
+        } 
         return collections;
     }
     

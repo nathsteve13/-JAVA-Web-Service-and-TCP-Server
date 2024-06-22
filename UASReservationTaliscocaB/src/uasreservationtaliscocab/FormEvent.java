@@ -69,6 +69,11 @@ public class FormEvent extends javax.swing.JFrame {
         });
 
         jButtonReservationEvent.setText("Reserve");
+        jButtonReservationEvent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReservationEventActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Quantity");
 
@@ -138,6 +143,25 @@ public class FormEvent extends javax.swing.JFrame {
             Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE,null,ex);
         }
     }//GEN-LAST:event_jButtonViewEventActionPerformed
+
+    private void jButtonReservationEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReservationEventActionPerformed
+        try {
+            String hasil;
+            
+            Socket clientSocket = new Socket("localhost",6666);
+            DataOutputStream sendToServer = new DataOutputStream(clientSocket.getOutputStream());
+            sendToServer.writeBytes("EVENTRESERVATION~" + "\n");
+            
+            BufferedReader chatFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            hasil = chatFromServer.readLine();
+            System.out.println(hasil);
+            
+            String[] hasils = hasil.split("~");
+            
+        } catch(IOException ex) {
+            Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE,null,ex);
+        }
+    }//GEN-LAST:event_jButtonReservationEventActionPerformed
 
     /**
      * @param args the command line arguments
