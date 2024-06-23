@@ -204,12 +204,9 @@ public class reservationServices {
         @WebParam(name = "quantity") int quantity,
         @WebParam(name = "amount") double amount,
         @WebParam(name = "status") String status,
-        @WebParam(name = "claim_date") LocalDate claim_date,
-        @WebParam(name = "claimed_date") Timestamp claimed_date,
-        @WebParam(name = "updated_at") Timestamp updated_at,
-        @WebParam(name = "created_at") Timestamp created_at
+        @WebParam(name = "claim_date") String claim_date
     ) {
-        er = new Event_reservations(account_id, event_id, quantity, amount, status, claim_date, claimed_date, updated_at, created_at);
+        er = new Event_reservations(account_id, event_id, quantity, amount, status, LocalDate.parse(claim_date));
         er.insertData();
     }
 

@@ -33,7 +33,7 @@ public class FormMenu extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButtonView1 = new javax.swing.JButton();
+        formEventBtn = new javax.swing.JButton();
         jButtonLogout1 = new javax.swing.JButton();
         jButtonSettings1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -70,10 +70,15 @@ public class FormMenu extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Welcome");
 
-        jButtonView1.setBackground(new java.awt.Color(0, 153, 153));
-        jButtonView1.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonView1.setText("View Profile");
-        jButtonView1.setBorder(null);
+        formEventBtn.setBackground(new java.awt.Color(0, 153, 153));
+        formEventBtn.setForeground(new java.awt.Color(255, 255, 255));
+        formEventBtn.setText("View Profile");
+        formEventBtn.setBorder(null);
+        formEventBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formEventBtnActionPerformed(evt);
+            }
+        });
 
         jButtonLogout1.setBackground(new java.awt.Color(0, 153, 153));
         jButtonLogout1.setForeground(new java.awt.Color(255, 255, 255));
@@ -100,7 +105,7 @@ public class FormMenu extends javax.swing.JFrame {
                         .addGap(57, 57, 57)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtonSettings1)
-                            .addComponent(jButtonView1)
+                            .addComponent(formEventBtn)
                             .addComponent(jButtonLogout1))))
                 .addContainerGap(66, Short.MAX_VALUE))
         );
@@ -111,13 +116,13 @@ public class FormMenu extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addGap(102, 102, 102)
                 .addComponent(jLabel5)
-                .addGap(117, 117, 117)
-                .addComponent(jButtonView1)
+                .addGap(111, 111, 111)
+                .addComponent(formEventBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonSettings1)
                 .addGap(12, 12, 12)
                 .addComponent(jButtonLogout1)
-                .addContainerGap(170, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
@@ -204,6 +209,12 @@ public class FormMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formEventBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formEventBtnActionPerformed
+        FormEvent home = new FormEvent();
+        home.show();
+        dispose();
+    }//GEN-LAST:event_formEventBtnActionPerformed
+
     public static String name;
     public static int id_user;
     
@@ -243,20 +254,14 @@ public class FormMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonLogout;
+    private javax.swing.JButton formEventBtn;
     private javax.swing.JButton jButtonLogout1;
-    private javax.swing.JButton jButtonSettings;
     private javax.swing.JButton jButtonSettings1;
-    private javax.swing.JButton jButtonView;
-    private javax.swing.JButton jButtonView1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

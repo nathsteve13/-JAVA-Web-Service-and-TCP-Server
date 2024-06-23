@@ -113,7 +113,17 @@ public class UASServerReservationTaliscocaB implements Runnable{
                 }
                 
                 else if(commands[0].equals("EVENTRESERVATION")) {
-                    System.out.println("");
+                    LocalDate claimDate = LocalDate.parse(commands[5], inputFormatter);
+                    double amount = Double.parseDouble(commands[13]) * Integer.parseInt(commands[3]);
+                    insertDataEventReservation(
+                        Integer.parseInt(commands[1]),
+                        Integer.parseInt(commands[2]),
+                        Integer.parseInt(commands[3]),
+                        amount,
+                        "not claimed",
+                        claimDate.toString()
+                    );
+                    msgToClient.writeBytes("TRUE~" + "\n");
                 }
                 
                 else if(commands[0].equals("PARKINGVIEW")) {
@@ -173,6 +183,17 @@ public class UASServerReservationTaliscocaB implements Runnable{
         uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
         return port.viewListDataEvent();
     }
+
+    private static void insertDataEventReservation(int accountId, int eventId, int quantity, double amount, java.lang.String status, java.lang.String claimDate) {
+        uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
+        uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
+        port.insertDataEventReservation(accountId, eventId, quantity, amount, status, claimDate);
+    }
+
+
+    
+
+    
 
 
     

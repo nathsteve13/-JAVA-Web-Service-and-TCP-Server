@@ -9,6 +9,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,7 +45,9 @@ public class FormEvent extends javax.swing.JFrame {
         jButtonViewEvent = new javax.swing.JButton();
         jButtonReservationEvent = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jSpinnerQuantityEvent = new javax.swing.JSpinner();
+        qtyTxt = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        idEventTxt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(900, 450));
@@ -77,6 +82,12 @@ public class FormEvent extends javax.swing.JFrame {
 
         jLabel1.setText("Quantity");
 
+        qtyTxt.setText("jTextField1");
+
+        jLabel2.setText("ID Event");
+
+        idEventTxt.setText("jTextField1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,9 +104,15 @@ public class FormEvent extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(62, 62, 62)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSpinnerQuantityEvent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(32, 32, 32)
+                        .addComponent(idEventTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(32, 32, 32)
+                        .addComponent(qtyTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonViewEvent)
                 .addGap(192, 192, 192))
@@ -108,9 +125,13 @@ public class FormEvent extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jSpinnerQuantityEvent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonViewEvent))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                    .addComponent(jButtonViewEvent)
+                    .addComponent(qtyTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(idEventTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jButtonReservationEvent)
                 .addGap(57, 57, 57))
         );
@@ -147,19 +168,95 @@ public class FormEvent extends javax.swing.JFrame {
     private void jButtonReservationEventActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReservationEventActionPerformed
         try {
             String hasil;
-            
-            Socket clientSocket = new Socket("localhost",6666);
+            int id_event = Integer.parseInt(idEventTxt.getText());
+            int quantity = Integer.parseInt(qtyTxt.getText());
+
+            DefaultTableModel tableModel = (DefaultTableModel) jTableEvent.getModel();
+            int rowCount = tableModel.getRowCount();
+            boolean found = false;
+
+            String eventName = "";
+            String eventDate = "";
+            String category = "";
+            String status = "";
+            int participantSlot = 0;
+            int numberOfParticipant = 0;
+            String openReservationDate = "";
+            String closeReservationDate = "";
+            int locationsId = 0;
+            double price = 0.0;
+            String description = "";
+
+            for (int row = 0; row < rowCount; row++) {
+                if (Integer.parseInt(String.valueOf(tableModel.getValueAt(row, 0))) == id_event) {
+                    found = true;
+                    eventName = String.valueOf(tableModel.getValueAt(row, 1));
+
+                    // Ubah format tanggal
+                    String rawEventDate = String.valueOf(tableModel.getValueAt(row, 2));
+                    SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    try {
+                        Date date = inputFormat.parse(rawEventDate);
+                        eventDate = outputFormat.format(date);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                        eventDate = rawEventDate; // Jika parsing gagal, gunakan format asli
+                    }
+
+                    category = String.valueOf(tableModel.getValueAt(row, 3));
+                    status = String.valueOf(tableModel.getValueAt(row, 4));
+                    participantSlot = Integer.parseInt(String.valueOf(tableModel.getValueAt(row, 5)));
+                    numberOfParticipant = Integer.parseInt(String.valueOf(tableModel.getValueAt(row, 6)));
+                    openReservationDate = String.valueOf(tableModel.getValueAt(row, 7));
+                    closeReservationDate = String.valueOf(tableModel.getValueAt(row, 8));
+                    locationsId = Integer.parseInt(String.valueOf(tableModel.getValueAt(row, 9)));
+                    price = Double.parseDouble(String.valueOf(tableModel.getValueAt(row, 10)));
+                    description = String.valueOf(tableModel.getValueAt(row, 11));
+                    break;
+                }
+            }
+
+            if (!found) {
+                JOptionPane.showMessageDialog(this, "Event ID not found in table.");
+                return;
+            }
+
+            Socket clientSocket = new Socket("localhost", 6666);
             DataOutputStream sendToServer = new DataOutputStream(clientSocket.getOutputStream());
-            sendToServer.writeBytes("EVENTRESERVATION~" + "\n");
-            
+
+            FormMenu menu = new FormMenu();
+            String dataToSend = "EVENTRESERVATION~" 
+                + menu.id_user + "~" 
+                + id_event + "~" 
+                + quantity + "~" 
+                + eventName + "~" 
+                + eventDate + "~" 
+                + category + "~" 
+                + status + "~" 
+                + participantSlot + "~" 
+                + numberOfParticipant + "~" 
+                + openReservationDate + "~" 
+                + closeReservationDate + "~" 
+                + locationsId + "~" 
+                + price + "~" 
+                + description + "\n";
+        
+            sendToServer.writeBytes(dataToSend);
+
             BufferedReader chatFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             hasil = chatFromServer.readLine();
             System.out.println(hasil);
-            
+
             String[] hasils = hasil.split("~");
             
-        } catch(IOException ex) {
-            Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE,null,ex);
+            if (hasils[0].equals("TRUE")) {
+                JOptionPane.showMessageDialog(this, "Reservation successful!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Reservation failed");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonReservationEventActionPerformed
 
@@ -199,11 +296,13 @@ public class FormEvent extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField idEventTxt;
     private javax.swing.JButton jButtonReservationEvent;
     private javax.swing.JButton jButtonViewEvent;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner jSpinnerQuantityEvent;
     private javax.swing.JTable jTableEvent;
+    private javax.swing.JTextField qtyTxt;
     // End of variables declaration//GEN-END:variables
 }

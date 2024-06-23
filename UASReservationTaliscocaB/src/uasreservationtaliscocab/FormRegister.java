@@ -212,6 +212,7 @@ public class FormRegister extends javax.swing.JFrame {
             
             Socket clientSocket = new Socket("localhost",6666);
             DataOutputStream sendToServer = new DataOutputStream(clientSocket.getOutputStream());
+            
             if (!passTxt.getText().equals(repeatPassTxt.getText())) {
                 JOptionPane.showConfirmDialog(this, "Password dan repeat password berbeda!");
             } else {
