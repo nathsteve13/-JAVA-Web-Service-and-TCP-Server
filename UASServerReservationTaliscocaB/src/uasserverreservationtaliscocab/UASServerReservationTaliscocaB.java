@@ -116,7 +116,7 @@ public class UASServerReservationTaliscocaB implements Runnable{
                     LocalDate claimDate = LocalDate.parse(commands[5], inputFormatter);
                     double amount = Double.parseDouble(commands[13]) * Integer.parseInt(commands[3]);
                     
-                    if(balance >= amount ) {
+                    if(balance >= amount) {
                         insertDataEventReservation(
                         Integer.parseInt(commands[1]),
                         Integer.parseInt(commands[2]),
@@ -135,9 +135,17 @@ public class UASServerReservationTaliscocaB implements Runnable{
                     } else {
                         msgToClient.writeBytes("FALSE~" + balance + "\n");
                     }
+                }
+                
+                else if(commands[0].equals("TOPUP")) {
+                    double jumlah = Double.parseDouble(commands[2]);
+                    balance += jumlah;
                     
-                    
-                    
+                    updateDataAccount(balance, 
+                                new java.sql.Timestamp(System.currentTimeMillis()).toString(), 
+                                new java.sql.Timestamp(System.currentTimeMillis()).toString());
+
+                    msgToClient.writeBytes("TRUE~" + balance + "\n");
                 }
                 
                 else if(commands[0].equals("PARKINGVIEW")) {

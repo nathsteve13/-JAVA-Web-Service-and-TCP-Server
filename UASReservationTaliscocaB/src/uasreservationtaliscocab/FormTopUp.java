@@ -4,6 +4,17 @@
  */
 package uasreservationtaliscocab;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import static uasreservationtaliscocab.FormMenu.balance;
+import static uasreservationtaliscocab.FormMenu.name;
+
 /**
  *
  * @author Bryan
@@ -29,7 +40,9 @@ public class FormTopUp extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextFieldSaldo = new javax.swing.JTextField();
-        jButtonTopUp = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        topUpBtn = new javax.swing.JButton();
+        jumlahTxt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(900, 450));
@@ -43,10 +56,14 @@ public class FormTopUp extends javax.swing.JFrame {
         jTextFieldSaldo.setBackground(new java.awt.Color(0, 153, 153));
         jTextFieldSaldo.setBorder(null);
 
-        jButtonTopUp.setBackground(new java.awt.Color(0, 153, 153));
-        jButtonTopUp.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonTopUp.setText("Top Up");
-        jButtonTopUp.setBorder(null);
+        jLabel2.setText("Jumlah : ");
+
+        topUpBtn.setText("Top Up");
+        topUpBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                topUpBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -54,13 +71,18 @@ public class FormTopUp extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonTopUp)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jTextFieldSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jumlahTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(25, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(topUpBtn)
+                .addGap(43, 43, 43))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -69,9 +91,13 @@ public class FormTopUp extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextFieldSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addComponent(jButtonTopUp)
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addGap(44, 44, 44)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jumlahTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                .addComponent(topUpBtn)
+                .addGap(42, 42, 42))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -89,6 +115,36 @@ public class FormTopUp extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void topUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topUpBtnActionPerformed
+        try {
+            String hasil;
+            
+            Socket clientSocket = new Socket("localhost",6666);
+            DataOutputStream sendToServer = new DataOutputStream(clientSocket.getOutputStream());
+            
+            double jumlah = Double.parseDouble(jumlahTxt.getText());
+            
+            sendToServer.writeBytes("TOPUP~" + jumlah + "\n");
+            
+            BufferedReader chatFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            hasil = chatFromServer.readLine();
+            System.out.println(hasil);
+            
+            String[] hasils = hasil.split("~");
+            
+            if(hasils[0] == "TRUE") {
+                FormMenu form = new FormMenu();
+                form.balance = Double.parseDouble(hasils[1]);
+                System.out.println(form.balance);
+                JOptionPane.showMessageDialog(this, "Top Up berhasil!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Gagal Top Up!");
+            }
+        } catch(IOException ex) {
+            Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE,null,ex);
+        }
+    }//GEN-LAST:event_topUpBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -126,9 +182,11 @@ public class FormTopUp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonTopUp;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextFieldSaldo;
+    private javax.swing.JTextField jumlahTxt;
+    private javax.swing.JButton topUpBtn;
     // End of variables declaration//GEN-END:variables
 }
