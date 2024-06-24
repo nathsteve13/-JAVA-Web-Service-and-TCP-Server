@@ -251,19 +251,10 @@
 
 <xs:complexType name="updateDataAccount">
 <xs:sequence>
-<xs:element name="name" type="xs:string" minOccurs="0"/>
-<xs:element name="dob" type="tns:localDate" minOccurs="0"/>
-<xs:element name="email" type="xs:string" minOccurs="0"/>
-<xs:element name="username" type="xs:string" minOccurs="0"/>
-<xs:element name="password" type="xs:string" minOccurs="0"/>
 <xs:element name="balance" type="xs:double"/>
-<xs:element name="updated_at" type="tns:timestamp" minOccurs="0"/>
-<xs:element name="created_at" type="tns:timestamp" minOccurs="0"/>
+<xs:element name="updated_at" type="xs:string" minOccurs="0"/>
+<xs:element name="created_at" type="xs:string" minOccurs="0"/>
 </xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="localDate" final="extension restriction">
-<xs:sequence/>
 </xs:complexType>
 
 <xs:complexType name="updateDataAccountResponse">
@@ -320,6 +311,10 @@
 <xs:element name="updated_at" type="tns:timestamp" minOccurs="0"/>
 <xs:element name="created_at" type="tns:timestamp" minOccurs="0"/>
 </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="localDate" final="extension restriction">
+<xs:sequence/>
 </xs:complexType>
 
 <xs:complexType name="updateDataEventReservationResponse">

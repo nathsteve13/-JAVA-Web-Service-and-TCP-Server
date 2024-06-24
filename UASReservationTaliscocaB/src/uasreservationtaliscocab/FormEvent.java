@@ -252,8 +252,14 @@ public class FormEvent extends javax.swing.JFrame {
             
             if (hasils[0].equals("TRUE")) {
                 JOptionPane.showMessageDialog(this, "Reservation successful!");
+                FormMenu form = new FormMenu();
+                form.balance = Double.parseDouble(hasils[1]);
+                System.out.println(form.balance);
             } else {
-                JOptionPane.showMessageDialog(this, "Reservation failed");
+                JOptionPane.showMessageDialog(this, "Reservation failed, balance insufficient");
+                FormMenu form = new FormMenu();
+                form.balance = Double.parseDouble(hasils[1]);
+                System.out.println(form.balance);
             }
         } catch (IOException ex) {
             Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE, null, ex);
