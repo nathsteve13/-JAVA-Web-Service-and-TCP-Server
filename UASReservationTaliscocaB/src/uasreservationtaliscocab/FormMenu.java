@@ -282,7 +282,7 @@ public class FormMenu extends javax.swing.JFrame {
             
             Socket clientSocket = new Socket("localhost",6666);
             DataOutputStream sendToServer = new DataOutputStream(clientSocket.getOutputStream());
-            sendToServer.writeBytes("EVENTVIEW~" + "\n");
+            sendToServer.writeBytes("REFRESH~" + "\n");
             
             BufferedReader chatFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             hasil = chatFromServer.readLine();
