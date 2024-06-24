@@ -269,7 +269,9 @@ public class FormMenu extends javax.swing.JFrame {
             String[] hasils = hasil.split("~");
             
             if(hasils[0] == "TRUE") {
-                balance = Double.parseDouble(hasils[1]);
+                name = hasils[1];
+                nameTxt.setText(name);
+                balance = Double.parseDouble(hasils[2]);
                 saldoTxt.setText(Double.toString(balance));
                 nameTxt.setText(name);
                 

@@ -151,6 +151,10 @@ public class UASServerReservationTaliscocaB implements Runnable{
                 else if (commands[0].equals("PARKINGRESERVATION")) {
                     
                 }
+                
+                else if (commands[0].equals("REFRESH")) {
+                    msgToClient.writeBytes("TRUE~" + name + balance + "\n");
+                }
             }
         } catch (Exception ex) {
             System.out.println("Error di server : " + ex);
