@@ -37,10 +37,9 @@ public class Account extends MyModel {
         created_at = new java.sql.Timestamp(System.currentTimeMillis());
     }
     
-    public Account(double _balance, Timestamp _updated_at, Timestamp _created_at) {
+    public Account(int _id, double _balance) {
+        this.id = _id;
         this.balance = _balance;
-        this.updated_at = _updated_at;
-        this.created_at = _created_at; 
     }
      
     public Account(String _name, LocalDate _dob, String _email, String _username, String _password, double _balance, Timestamp _updated_at, Timestamp _created_at) { 
@@ -153,11 +152,10 @@ public class Account extends MyModel {
         try {
             if (!MyModel.conn.isClosed()) {
                 PreparedStatement sql = MyModel.conn.prepareStatement(
-                        "UPDATE accounts SET balance = ?, updated_at = ?, created_at = ? WHERE id = ?");
+                        "UPDATE accounts SET balance = ?, updated_at = ? WHERE id = ?");
                 sql.setDouble(1, this.balance);
-                sql.setTimestamp(2, this.updated_at);
-                sql.setTimestamp(3, this.created_at);
-                sql.setInt(4, id);
+                sql.setTimestamp(2, new java.sql.Timestamp(System.currentTimeMillis()));
+                sql.setInt(3, this.id);
 
                 sql.executeUpdate();
                 sql.close();

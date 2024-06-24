@@ -51,8 +51,8 @@ public class reservationServices {
     }
     
     @WebMethod(operationName = "updateDataAccount")
-    public void updateDataAccount(@WebParam(name = "balance") double balance, @WebParam(name = "updated_at") String updated_at, @WebParam(name = "created_at") String created_at) {
-        a = new Account(balance, Timestamp.valueOf(updated_at), Timestamp.valueOf(created_at));
+    public void updateDataAccount(@WebParam(name = "id") int id, @WebParam(name = "balance") double balance) {
+        a = new Account(id, balance);
         a.updateData();
     }
 

@@ -127,9 +127,7 @@ public class UASServerReservationTaliscocaB implements Runnable{
                         );
                         
                         balance -= amount;
-                        updateDataAccount(balance, 
-                                new java.sql.Timestamp(System.currentTimeMillis()).toString(), 
-                                new java.sql.Timestamp(System.currentTimeMillis()).toString());
+                        updateDataAccount(id_user, balance);
 
                         msgToClient.writeBytes("TRUE~" + balance + "\n");
                     } else {
@@ -138,13 +136,11 @@ public class UASServerReservationTaliscocaB implements Runnable{
                 }
                 
                 else if(commands[0].equals("TOPUP")) {
-                    double jumlah = Double.parseDouble(commands[2]);
+                    double jumlah = Double.parseDouble(commands[1]);
                     balance += jumlah;
                     
-                    updateDataAccount(balance, 
-                                new java.sql.Timestamp(System.currentTimeMillis()).toString(), 
-                                new java.sql.Timestamp(System.currentTimeMillis()).toString());
-
+                    updateDataAccount(id_user, balance);
+                    
                     msgToClient.writeBytes("TRUE~" + balance + "\n");
                 }
                 
@@ -207,11 +203,13 @@ public class UASServerReservationTaliscocaB implements Runnable{
         port.insertDataEventReservation(accountId, eventId, quantity, amount, status, claimDate);
     }
 
-    private static void updateDataAccount(double balance, java.lang.String updatedAt, java.lang.String createdAt) {
+    private static void updateDataAccount(int id, double balance) {
         uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
         uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
-        port.updateDataAccount(balance, updatedAt, createdAt);
+        port.updateDataAccount(id, balance);
     }
+
+   
 
 
     

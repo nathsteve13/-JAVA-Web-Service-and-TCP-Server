@@ -138,8 +138,9 @@ public class FormTopUp extends javax.swing.JFrame {
                 form.balance = Double.parseDouble(hasils[1]);
                 System.out.println(form.balance);
                 JOptionPane.showMessageDialog(this, "Top Up berhasil!");
+                
             } else {
-                JOptionPane.showMessageDialog(this, "Gagal Top Up!");
+                
             }
         } catch(IOException ex) {
             Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE,null,ex);
