@@ -201,19 +201,27 @@ public class Event_reservations extends MyModel{
     public ArrayList<String> viewListData() {
         ArrayList<String> collections = new ArrayList<String>();
         try {
-            statement = MyModel.conn.createStatement();
-            result = statement.executeQuery("SELECT * FROM event_reservations");
+            if (!MyModel.conn.isClosed()) {
+                PreparedStatement sql = MyModel.conn.prepareStatement(
+                        "SELECT * FROM event_reservations where account_id = ?");
+                sql.setInt(1, this.account_id.getId());
+                ResultSet result = sql.executeQuery();
 
-            while (result.next()) {
-                Event_reservations tempReservation = new Event_reservations(result.getInt("account_id"), result.getInt("account_id"), 
-                        result.getInt("quantity"), result.getDouble("amount"), result.getString("status"), 
-                        result.getDate("claim_date").toLocalDate(), result.getTimestamp("claimed_date"), 
-                        result.getTimestamp("updated_at"), result.getTimestamp("created_at"));
-                
-                collections.add(tempReservation.getAccount_id() + "~" + tempReservation.getEvent_id() + "~" + tempReservation.quantity + "~" 
-                        + tempReservation.amount + "~" + tempReservation.status + "~" + tempReservation.claim_date + "~" 
-                        + tempReservation.claimed_date + "~" + tempReservation.updated_at + "~" + tempReservation.created_at);
+                while (result.next()) {
+                    Event_reservations tempReservation = new Event_reservations(result.getInt("account_id"), result.getInt("event_id"), 
+                            result.getInt("quantity"), result.getDouble("amount"), result.getString("status"), 
+                            result.getDate("claim_date").toLocalDate(), result.getTimestamp("claimed_date"), 
+                            result.getTimestamp("updated_at"), result.getTimestamp("created_at"));
+
+                    collections.add(tempReservation.getAccount_id() + "~" + tempReservation.getEvent_id() + "~" + tempReservation.quantity + "~" 
+                            + tempReservation.amount + "~" + tempReservation.status + "~" + tempReservation.claim_date + "~" 
+                            + tempReservation.claimed_date + "~" + tempReservation.updated_at + "~" + tempReservation.created_at);
+                }
+
+                result.close();
+                sql.close();
             }
+
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         } 

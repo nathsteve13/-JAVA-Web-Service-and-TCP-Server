@@ -238,8 +238,9 @@ public class reservationServices {
     }
 
     @WebMethod(operationName = "viewListDataEventReservation")
-    public ArrayList<String> viewListDataEventReservation() {
+    public ArrayList<String> viewListDataEventReservation( @WebParam(name = "account_id") int account_id) {
         er = new Event_reservations();
+        er.setAccount_id(account_id);
         return er.viewListData();
     }
     
