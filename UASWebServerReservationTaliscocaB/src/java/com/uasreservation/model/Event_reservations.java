@@ -211,7 +211,8 @@ public class Event_reservations extends MyModel{
                 ResultSet result = sql.executeQuery();
 
                 while (result.next()) {
-                    Event_reservations tempReservation = new Event_reservations(result.getInt("id_event_reservation"), 
+                    Event_reservations tempReservation = new Event_reservations(
+                            result.getInt("id_event_reservation"), 
                             result.getInt("account_id"), 
                             result.getInt("event_id"), 
                             result.getInt("quantity"), 
@@ -222,9 +223,16 @@ public class Event_reservations extends MyModel{
                             result.getTimestamp("updated_at"), 
                             result.getTimestamp("created_at"));
 
-                    collections.add(tempReservation.getAccount_id() + "~" + tempReservation.getEvent_id() + "~" + tempReservation.quantity + "~" 
-                            + tempReservation.amount + "~" + tempReservation.status + "~" + tempReservation.claim_date + "~" 
-                            + tempReservation.claimed_date + "~" + tempReservation.updated_at + "~" + tempReservation.created_at);
+                    collections.add(tempReservation.id_event_reservation + "~" 
+                            + tempReservation.getAccount_id() + "~" 
+                            + tempReservation.getEvent_id() + "~" 
+                            + tempReservation.quantity + "~" 
+                            + tempReservation.amount + "~" 
+                            + tempReservation.status + "~" 
+                            + tempReservation.claim_date + "~" 
+                            + tempReservation.claimed_date + "~" 
+                            + tempReservation.updated_at + "~" 
+                            + tempReservation.created_at);
                 }
 
                 result.close();

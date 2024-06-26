@@ -115,26 +115,63 @@ public class UASServerReservationTaliscocaB implements Runnable{
                 else if(commands[0].equals("EVENTRESERVATION")) {
                     LocalDate claimDate = LocalDate.parse(commands[5], inputFormatter);
                     double amount = Double.parseDouble(commands[13]) * Integer.parseInt(commands[3]);
+                    String status = commands[7];
+                    int participant_slot = Integer.parseInt(commands[8]);
                     
-                    if(balance >= amount) {
-                        insertDataEventReservation(
-                        Integer.parseInt(commands[1]),
-                        Integer.parseInt(commands[2]),
-                        Integer.parseInt(commands[3]),
-                        amount,
-                        "not claimed",
-                        claimDate.toString()
-                        );
-                        
-                        balance -= amount;
-                        updateDataAccount(id_user, balance);
+                    if (status.equals("available") && participant_slot >= Integer.parseInt(commands[3])) {
+                        if(balance >= amount) {
+                            insertDataEventReservation(
+                            Integer.parseInt(commands[1]),
+                            Integer.parseInt(commands[2]),
+                            Integer.parseInt(commands[3]),
+                            amount,
+                            "not claimed",
+                            claimDate.toString()
+                            );
+                            
+                            if (participant_slot - Integer.parseInt(commands[3]) > 0) {
+                                updateDataEvent(Integer.parseInt(commands[2]), "available", 
+                                        (participant_slot - Integer.parseInt(commands[3])), Integer.parseInt(commands[3]));
 
-                        msgToClient.writeBytes("TRUE~" + balance + "\n");
-                    } else {
-                        msgToClient.writeBytes("FALSE~" + balance + "\n");
+                            } else {
+                                updateDataEvent(Integer.parseInt(commands[2]), "not available", 
+                                        (participant_slot - Integer.parseInt(commands[3])), Integer.parseInt(commands[3]));
+                            }
+                            
+                            balance -= amount;
+                            updateDataAccount(id_user, balance);
+
+                            msgToClient.writeBytes("TRUE~" + balance + "\n");
+                        } else {
+                            msgToClient.writeBytes("FALSE~" + balance + "\n");
+                        }
                     }
+                    
                 }
                 
+                else if(commands[0].equals("MYEVENTVIEW")) {
+                    List<String> dataList = viewListDataEventReservation(id_user);
+                    String data = String.join("~", dataList);
+                    msgToClient.writeBytes(data + "\n");
+                }
+                
+                else if(commands[0].equals("MYEVENTCLAIM")) {
+                    System.out.println("masuk");
+                    int id_event_reservation = Integer.parseInt(commands[1]);
+                    String status = commands[6];
+                    LocalDate claim_date = LocalDate.parse(commands[7]);
+                    if (status.equals("not claimed")) {
+                        if (claim_date.isEqual(LocalDate.now())) {
+                            updateDataEventReservation(id_event_reservation, "claimed");
+                            msgToClient.writeBytes("TRUE~" + "\n");
+                        } else {
+                            System.out.println("ada error : " + LocalDate.now() + " : " + claim_date);
+                            msgToClient.writeBytes("FALSE~" + "\n");
+                        }
+                    } else {
+                        msgToClient.writeBytes("FALSE~" + "\n");
+                    }
+                }
                 else if(commands[0].equals("TOPUP")) {
                     double jumlah = Double.parseDouble(commands[1]);
                     balance += jumlah;
@@ -153,7 +190,7 @@ public class UASServerReservationTaliscocaB implements Runnable{
                 }
                 
                 else if (commands[0].equals("REFRESH")) {
-                    msgToClient.writeBytes("TRUE~" + name + balance + "\n");
+                    msgToClient.writeBytes("TRUE~" + name + "~" + balance + "\n");
                 }
             }
         } catch (Exception ex) {
@@ -211,6 +248,24 @@ public class UASServerReservationTaliscocaB implements Runnable{
         uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
         uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
         port.updateDataAccount(id, balance);
+    }
+
+    private static void updateDataEvent(int id, java.lang.String status, int participantSlot, int numberOfParticipant) {
+        uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
+        uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
+        port.updateDataEvent(id, status, participantSlot, numberOfParticipant);
+    }
+
+    private static java.util.List<java.lang.String> viewListDataEventReservation(int accountId) {
+        uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
+        uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
+        return port.viewListDataEventReservation(accountId);
+    }
+
+    private static void updateDataEventReservation(int idEventReservation, java.lang.String status) {
+        uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
+        uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
+        port.updateDataEventReservation(idEventReservation, status);
     }
 
    

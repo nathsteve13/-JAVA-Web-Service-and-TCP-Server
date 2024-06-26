@@ -152,7 +152,7 @@
                       <Group type="102" attributes="0">
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="idEventTxt" min="-2" pref="71" max="-2" attributes="0"/>
+                          <Component id="idMyEventTxt" min="-2" pref="71" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jButtonClaim" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
@@ -173,7 +173,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="viewBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="idEventTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="idMyEventTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonClaim" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="13" max="32767" attributes="0"/>
@@ -189,7 +189,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="jTable1">
+            <Component class="javax.swing.JTable" name="jTableMyEvent">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="10" rowCount="4">
@@ -287,6 +287,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Claim"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonClaimActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="viewBtn">
           <Properties>
@@ -302,7 +305,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewBtnActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="idEventTxt">
+        <Component class="javax.swing.JTextField" name="idMyEventTxt">
         </Component>
       </SubComponents>
     </Container>

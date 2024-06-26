@@ -9,9 +9,13 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -42,11 +46,11 @@ public class FormMyEvent extends javax.swing.JFrame {
         jButtonReservationParking = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableMyEvent = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jButtonClaim = new javax.swing.JButton();
         viewBtn = new javax.swing.JButton();
-        idEventTxt = new javax.swing.JTextField();
+        idMyEventTxt = new javax.swing.JTextField();
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -103,7 +107,7 @@ public class FormMyEvent extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(0, 153, 153));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableMyEvent.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null},
@@ -114,7 +118,7 @@ public class FormMyEvent extends javax.swing.JFrame {
                 "id_event_reservation", "account_id ", "event_id ", "quantity", "amount", "status", "claim_date", "claimed_date", "updated_at", "created_at"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableMyEvent);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Light", 1, 20)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -123,6 +127,11 @@ public class FormMyEvent extends javax.swing.JFrame {
         jButtonClaim.setBackground(new java.awt.Color(0, 153, 153));
         jButtonClaim.setForeground(new java.awt.Color(255, 255, 255));
         jButtonClaim.setText("Claim");
+        jButtonClaim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonClaimActionPerformed(evt);
+            }
+        });
 
         viewBtn.setBackground(new java.awt.Color(0, 153, 153));
         viewBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -143,7 +152,7 @@ public class FormMyEvent extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(idEventTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(idMyEventTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonClaim)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -160,7 +169,7 @@ public class FormMyEvent extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(viewBtn)
-                    .addComponent(idEventTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(idMyEventTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonClaim, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
@@ -196,21 +205,103 @@ public class FormMyEvent extends javax.swing.JFrame {
             hasil = chatFromServer.readLine();
             System.out.println(hasil);
             
+            DefaultTableModel tableModel = (DefaultTableModel) jTableMyEvent.getModel();
+            tableModel.setRowCount(0);  
             String[] hasils = hasil.split("~");
             
-            if(hasils[0] == "TRUE") {
-                FormMenu form = new FormMenu();
-                form.balance = Double.parseDouble(hasils[1]);
-                System.out.println(form.balance);
-                JOptionPane.showMessageDialog(this, "Top Up berhasil!");
-                
-            } else {
-                
+            for (int i = 0; i < hasils.length; i += 10) {
+                String[] row = new String[10];
+                System.arraycopy(hasils, i, row, 0, 10);
+                tableModel.addRow(row);
             }
+            
         } catch(IOException ex) {
             Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE,null,ex);
         }
     }//GEN-LAST:event_viewBtnActionPerformed
+
+    private void jButtonClaimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClaimActionPerformed
+        try {
+            String hasil;
+            int id_myevent = Integer.parseInt(idMyEventTxt.getText());
+
+            DefaultTableModel tableModel = (DefaultTableModel) jTableMyEvent.getModel();
+            int rowCount = tableModel.getRowCount();
+            boolean found = false;
+
+            int account_id = 0;
+            int event_id = 0;
+            int quantity = 0;
+            double amount = 0.0; 
+            String status = "";
+            String claim_date = "";
+            String claimed_date = "";
+            String updated_at = "";
+            String created_at = "";
+
+            for (int row = 0; row < rowCount; row++) {
+                if (Integer.parseInt(String.valueOf(tableModel.getValueAt(row, 0))) == id_myevent) {
+                    found = true;
+                    account_id = Integer.parseInt(String.valueOf(tableModel.getValueAt(row, 1)));
+                    event_id = Integer.parseInt(String.valueOf(tableModel.getValueAt(row, 2)));
+                    quantity = Integer.parseInt(String.valueOf(tableModel.getValueAt(row, 3)));
+                    amount = Double.parseDouble(String.valueOf(tableModel.getValueAt(row, 4)));  
+                    status = String.valueOf(tableModel.getValueAt(row, 5));
+                    claim_date = String.valueOf(tableModel.getValueAt(row, 6));
+                    claimed_date = String.valueOf(tableModel.getValueAt(row, 7));
+                    updated_at = String.valueOf(tableModel.getValueAt(row, 8));
+                    created_at = String.valueOf(tableModel.getValueAt(row, 9));
+                    break;
+                }
+            }
+
+            if (!found) {
+                JOptionPane.showMessageDialog(this, "Event ID not found in table.");
+                return;
+            }
+
+            Socket clientSocket = new Socket("localhost", 6666);
+            DataOutputStream sendToServer = new DataOutputStream(clientSocket.getOutputStream());
+
+            FormMenu menu = new FormMenu();
+            String dataToSend = "MYEVENTCLAIM~" 
+                + id_myevent + "~" 
+                + account_id + "~" 
+                + event_id + "~" 
+                + quantity + "~" 
+                + amount + "~"  // Mengirim amount sebagai double
+                + status + "~" 
+                + claim_date + "~" 
+                + claimed_date + "~" 
+                + updated_at + "~" 
+                + created_at + "\n";
+
+            sendToServer.writeBytes(dataToSend);
+
+            BufferedReader chatFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            hasil = chatFromServer.readLine();
+            System.out.println(hasil);
+
+            String[] hasils = hasil.split("~");
+
+            if (hasils[0].equals("TRUE")) {
+                JOptionPane.showMessageDialog(this, "Claim successful!");
+                FormMenu form = new FormMenu();
+                form.balance = Double.parseDouble(hasils[1]);
+                System.out.println(form.balance);
+            } else {
+                JOptionPane.showMessageDialog(this, "Claim failed, coba lagi!");
+                FormMenu form = new FormMenu();
+                form.balance = Double.parseDouble(hasils[1]);
+                System.out.println(form.balance);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Invalid number format: " + ex.getMessage());
+        }
+
+    }//GEN-LAST:event_jButtonClaimActionPerformed
 
     /**
      * @param args the command line arguments
@@ -248,7 +339,7 @@ public class FormMyEvent extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField idEventTxt;
+    private javax.swing.JTextField idMyEventTxt;
     private javax.swing.JButton jButtonClaim;
     private javax.swing.JButton jButtonReservationParking;
     private javax.swing.JButton jButtonViewParking;
@@ -257,8 +348,8 @@ public class FormMyEvent extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTableMyEvent;
     private javax.swing.JButton viewBtn;
     // End of variables declaration//GEN-END:variables
 }
