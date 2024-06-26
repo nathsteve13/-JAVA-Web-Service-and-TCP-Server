@@ -89,19 +89,11 @@ public class reservationServices {
     @WebMethod(operationName = "updateDataEvent")
     public void updateDataEvent(
         @WebParam(name = "id") int id,
-        @WebParam(name = "event_name") String event_name,
-        @WebParam(name = "event_date") Timestamp event_date,
-        @WebParam(name = "category") String category,
         @WebParam(name = "status") String status,
         @WebParam(name = "participant_slot") int participant_slot,
-        @WebParam(name = "number_of_participant") int number_of_participant,
-        @WebParam(name = "open_reservation_date") Timestamp open_reservation_date,
-        @WebParam(name = "close_reservation_date") Timestamp close_reservation_date,
-        @WebParam(name = "locations_id") int locations_id,
-        @WebParam(name = "price") double price,
-        @WebParam(name = "description") String description
+        @WebParam(name = "number_of_participant") int number_of_participant
     ) {
-        e = new Events(id, event_name, event_date, category, status, participant_slot, number_of_participant, open_reservation_date, close_reservation_date, locations_id, price, description);
+        e = new Events(id, status, participant_slot, number_of_participant);
         e.setId(id);
         e.updateData();
     }

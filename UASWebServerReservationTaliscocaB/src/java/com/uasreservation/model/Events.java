@@ -45,7 +45,14 @@ public class Events extends MyModel{
         this.price = price;
         this.description = description;
     }
-
+    
+    public Events(int id, String status, int participant_slot, int number_of_participant) {
+        this.id = id;
+        this.status = status;
+        this.participant_slot = participant_slot;
+        this.number_of_participant = number_of_participant;
+    }
+    
     public Events() {
         this.id = 0;
         this.event_name = "";
@@ -188,19 +195,11 @@ public class Events extends MyModel{
         try {
             if (!MyModel.conn.isClosed()) {
                 PreparedStatement sql = MyModel.conn.prepareStatement(
-                        "UPDATE events SET event_name = ?, event_date = ?, category = ?, status = ?, participant_slot = ?, number_of_participant = ?, open_reservation_date = ?, close_reservation_date = ?, locations_id = ?, price = ?, description = ? WHERE id = ?");
-                sql.setString(1, this.event_name);
-                sql.setTimestamp(2, this.event_date);
-                sql.setString(3, this.category);
-                sql.setString(4, this.status);
-                sql.setInt(5, this.participant_slot);
-                sql.setInt(6, this.number_of_participant);
-                sql.setTimestamp(7, this.open_reservation_date);
-                sql.setTimestamp(8, this.close_reservation_date);
-                sql.setInt(9, this.locations_id.getId());
-                sql.setDouble(10, this.price);
-                sql.setString(11, this.description);
-                sql.setInt(12, this.id);
+                        "UPDATE events SET status = ?, participant_slot = ?, number_of_participant = ? WHERE id = ?");
+                sql.setString(1, this.status);
+                sql.setInt(2, this.participant_slot);
+                sql.setInt(3, this.number_of_participant);
+                sql.setInt(4, this.id);
                 sql.executeUpdate();
                 sql.close();
             }
