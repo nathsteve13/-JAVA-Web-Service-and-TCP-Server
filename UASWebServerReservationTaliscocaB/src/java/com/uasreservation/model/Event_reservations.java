@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Event_reservations extends MyModel{
+    private int id_event_reservation;
     private Account account_id;
     private Events event_id;
     private int quantity;
@@ -25,6 +26,7 @@ public class Event_reservations extends MyModel{
     private Timestamp created_at;
 
     public Event_reservations() {
+        this.id_event_reservation = 0;
         this.account_id = new Account();
         this.account_id.setId(0);
         this.event_id = new Events();
@@ -38,7 +40,8 @@ public class Event_reservations extends MyModel{
         this.created_at = new java.sql.Timestamp(System.currentTimeMillis());
     }
 
-    public Event_reservations(int account_id, int event_id, int quantity, double amount, String status, LocalDate claim_date, Timestamp claimed_date, Timestamp updated_at, Timestamp created_at) {
+    public Event_reservations(int id_event_reservation, int account_id, int event_id, int quantity, double amount, String status, LocalDate claim_date, Timestamp claimed_date, Timestamp updated_at, Timestamp created_at) {
+        this.id_event_reservation = id_event_reservation;
         this.account_id = new Account();
         this.account_id.setId(account_id);
         this.event_id = new Events();
@@ -61,6 +64,11 @@ public class Event_reservations extends MyModel{
         this.amount = amount;
         this.status = status;
         this.claim_date = claim_date;
+    }
+    
+    public Event_reservations(int id_event_reservation, String status) {
+        this.id_event_reservation = id_event_reservation;
+        this.status = status;
     }
     
     public int getAccount_id() {
@@ -163,16 +171,11 @@ public class Event_reservations extends MyModel{
         try {
             if (!MyModel.conn.isClosed()) {
                 PreparedStatement sql = MyModel.conn.prepareStatement(
-                        "UPDATE event_reservations SET quantity = ?, amount = ?, status = ?, claim_date = ?, claimed_date = ?, updated_at = ?, created_at = ? WHERE account_id = ? AND event_id = ?");
-                sql.setInt(1, this.quantity);
-                sql.setDouble(2, this.amount);
-                sql.setString(3, this.status);
-                sql.setDate(4, java.sql.Date.valueOf(this.claim_date));
-                sql.setTimestamp(5, this.claimed_date);
-                sql.setTimestamp(6, this.updated_at);
-                sql.setTimestamp(7, this.created_at);
-                sql.setInt(8, this.account_id.getId());
-                sql.setInt(9, this.event_id.getId());
+                        "UPDATE event_reservations SET status = ?, claimed_date = ?, updated_at = ? WHERE id_event_reservation = ?");
+                sql.setString(1, this.status);
+                sql.setTimestamp(2, new java.sql.Timestamp(System.currentTimeMillis()));
+                sql.setTimestamp(3, new java.sql.Timestamp(System.currentTimeMillis()));
+                sql.setInt(4, this.id_event_reservation);
                 sql.executeUpdate();
                 sql.close();
             }
@@ -208,10 +211,16 @@ public class Event_reservations extends MyModel{
                 ResultSet result = sql.executeQuery();
 
                 while (result.next()) {
-                    Event_reservations tempReservation = new Event_reservations(result.getInt("account_id"), result.getInt("event_id"), 
-                            result.getInt("quantity"), result.getDouble("amount"), result.getString("status"), 
-                            result.getDate("claim_date").toLocalDate(), result.getTimestamp("claimed_date"), 
-                            result.getTimestamp("updated_at"), result.getTimestamp("created_at"));
+                    Event_reservations tempReservation = new Event_reservations(result.getInt("id_event_reservation"), 
+                            result.getInt("account_id"), 
+                            result.getInt("event_id"), 
+                            result.getInt("quantity"), 
+                            result.getDouble("amount"), 
+                            result.getString("status"), 
+                            result.getDate("claim_date").toLocalDate(),
+                            result.getTimestamp("claimed_date"), 
+                            result.getTimestamp("updated_at"), 
+                            result.getTimestamp("created_at"));
 
                     collections.add(tempReservation.getAccount_id() + "~" + tempReservation.getEvent_id() + "~" + tempReservation.quantity + "~" 
                             + tempReservation.amount + "~" + tempReservation.status + "~" + tempReservation.claim_date + "~" 
@@ -226,6 +235,14 @@ public class Event_reservations extends MyModel{
             System.out.println(ex.getMessage());
         } 
         return collections;
+    }
+
+    public int getId_event_reservation() {
+        return id_event_reservation;
+    }
+
+    public void setId_event_reservation(int id_event_reservation) {
+        this.id_event_reservation = id_event_reservation;
     }
     
 }

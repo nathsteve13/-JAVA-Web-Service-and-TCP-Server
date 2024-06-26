@@ -212,17 +212,10 @@ public class reservationServices {
 
     @WebMethod(operationName = "updateDataEventReservation")
     public void updateDataEventReservation(
-        @WebParam(name = "account_id") int account_id,
-        @WebParam(name = "event_id") int event_id,
-        @WebParam(name = "quantity") int quantity,
-        @WebParam(name = "amount") double amount,
-        @WebParam(name = "status") String status,
-        @WebParam(name = "claim_date") LocalDate claim_date,
-        @WebParam(name = "claimed_date") Timestamp claimed_date,
-        @WebParam(name = "updated_at") Timestamp updated_at,
-        @WebParam(name = "created_at") Timestamp created_at
+        @WebParam(name = "id_event_reservation") int id_event_reservation,
+        @WebParam(name = "status") String status
     ) {
-        er = new Event_reservations(account_id, event_id, quantity, amount, status, claim_date, claimed_date, updated_at, created_at);
+        er = new Event_reservations(id_event_reservation, status);
         er.updateData();
     }
 
