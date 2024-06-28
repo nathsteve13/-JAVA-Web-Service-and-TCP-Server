@@ -4,6 +4,15 @@
  */
 package uasreservationtaliscocab;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Bryan
@@ -30,7 +39,8 @@ public class FormMyParking extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableMyParking = new javax.swing.JTable();
+        viewBtn = new javax.swing.JButton();
 
         jButtonClaim.setBackground(new java.awt.Color(0, 153, 153));
         jButtonClaim.setForeground(new java.awt.Color(255, 255, 255));
@@ -45,7 +55,7 @@ public class FormMyParking extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableMyParking.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -56,7 +66,16 @@ public class FormMyParking extends javax.swing.JFrame {
                 "ID Parkir", "ID Akun", "Kapasitas", "Jumlah", "Status"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableMyParking);
+
+        viewBtn.setBackground(new java.awt.Color(0, 153, 153));
+        viewBtn.setForeground(new java.awt.Color(255, 255, 255));
+        viewBtn.setText("VIEW");
+        viewBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -64,7 +83,9 @@ public class FormMyParking extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 866, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(viewBtn)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 866, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -72,7 +93,9 @@ public class FormMyParking extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(viewBtn)
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -90,6 +113,35 @@ public class FormMyParking extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
+        // TODO add your handling code here:
+        try {
+            String hasil;
+            
+            Socket clientSocket = new Socket("localhost",6666);
+            DataOutputStream sendToServer = new DataOutputStream(clientSocket.getOutputStream());
+            
+            sendToServer.writeBytes("MYPARKINGVIEW~" + "\n");
+            
+            BufferedReader chatFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            hasil = chatFromServer.readLine();
+            System.out.println(hasil);
+            
+            DefaultTableModel tableModel = (DefaultTableModel) jTableMyParking.getModel();
+            tableModel.setRowCount(0);  
+            String[] hasils = hasil.split("~");
+            
+            for (int i = 0; i < hasils.length; i += 5) {
+                String[] row = new String[5];
+                System.arraycopy(hasils, i, row, 0, 5);
+                tableModel.addRow(row);
+            }
+            
+        } catch(IOException ex) {
+            Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE,null,ex);
+        }
+    }//GEN-LAST:event_viewBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,6 +183,7 @@ public class FormMyParking extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableMyParking;
+    private javax.swing.JButton viewBtn;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,6 +4,16 @@
  */
 package uasreservationtaliscocab;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
+import java.io.InputStreamReader;
+import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Bryan
@@ -29,9 +39,11 @@ public class FormParking extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableParking = new javax.swing.JTable();
         jButtonViewParking = new javax.swing.JButton();
         jButtonReservationParking = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldIdParking = new javax.swing.JTextField();
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -51,7 +63,7 @@ public class FormParking extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 153));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableParking.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -62,15 +74,29 @@ public class FormParking extends javax.swing.JFrame {
                 "ID", "Parkir Area", "Status", "Tanggal", "Lokasi", "Harga", "Update", "Created"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableParking);
 
         jButtonViewParking.setBackground(new java.awt.Color(0, 153, 153));
         jButtonViewParking.setForeground(new java.awt.Color(255, 255, 255));
         jButtonViewParking.setText("View");
+        jButtonViewParking.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonViewParkingActionPerformed(evt);
+            }
+        });
 
         jButtonReservationParking.setBackground(new java.awt.Color(0, 153, 153));
         jButtonReservationParking.setForeground(new java.awt.Color(255, 255, 255));
         jButtonReservationParking.setText("Reserve");
+        jButtonReservationParking.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReservationParkingActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("ID Parking");
+
+        jTextFieldIdParking.setText("jTextField1");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -81,9 +107,13 @@ public class FormParking extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jButtonViewParking)
+                .addGap(32, 32, 32)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextFieldIdParking, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonViewParking)
+                .addGap(18, 18, 18)
                 .addComponent(jButtonReservationParking)
                 .addGap(15, 15, 15))
         );
@@ -92,10 +122,12 @@ public class FormParking extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonReservationParking)
                     .addComponent(jButtonViewParking)
-                    .addComponent(jButtonReservationParking))
+                    .addComponent(jLabel1)
+                    .addComponent(jTextFieldIdParking, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
@@ -114,6 +146,56 @@ public class FormParking extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonViewParkingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonViewParkingActionPerformed
+        // TODO add your handling code here:
+        try {
+            String hasil;
+            
+            Socket clientSocket = new Socket("localhost",6666);
+            DataOutputStream sendToServer = new DataOutputStream(clientSocket.getOutputStream());
+            sendToServer.writeBytes("PARKINGVIEW~" + "\n");
+            
+            BufferedReader chatFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            hasil = chatFromServer.readLine();
+            System.out.println(hasil);
+            
+            DefaultTableModel tableModel = (DefaultTableModel) jTableParking.getModel();
+            tableModel.setRowCount(0);  
+            String[] hasils = hasil.split("~");
+            
+            for (int i = 0; i < hasils.length; i += 8) {
+                String[] row = new String[8];
+                System.arraycopy(hasils, i, row, 0, 8);
+                tableModel.addRow(row);
+            }
+        } catch(IOException ex) {
+            Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE,null,ex);
+        }
+    }//GEN-LAST:event_jButtonViewParkingActionPerformed
+
+    private void jButtonReservationParkingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReservationParkingActionPerformed
+        // TODO add your handling code here:
+        try{
+            String hasil;
+            DefaultTableModel tableModel = (DefaultTableModel) jTableParking.getModel();
+            int rowCount = tableModel.getRowCount();
+            boolean found = false;
+            
+            String parkingArea = "";
+            String status = "";
+            String availableDate = "";
+            int locationsId = 0;
+            double price = 0.0;
+            String updatedAt = "";
+            String createdAt = "";
+            
+            
+        }
+        catch(IOException ex){
+            Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonReservationParkingActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,9 +235,11 @@ public class FormParking extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonReservationParking;
     private javax.swing.JButton jButtonViewParking;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableParking;
+    private javax.swing.JTextField jTextFieldIdParking;
     // End of variables declaration//GEN-END:variables
 }

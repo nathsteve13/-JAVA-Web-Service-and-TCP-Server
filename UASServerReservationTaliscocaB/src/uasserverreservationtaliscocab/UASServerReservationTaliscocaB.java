@@ -182,7 +182,15 @@ public class UASServerReservationTaliscocaB implements Runnable{
                 }
                 
                 else if(commands[0].equals("PARKINGVIEW")) {
-                    System.out.println("");
+                    List<String> dataList = viewListDataParking();
+                    String data = String.join("~", dataList);
+                    msgToClient.writeBytes(data + "\n");
+                }
+                
+                else if(commands[0].equals("MYPARKINGVIEW")){
+                    List<String> dataList = viewListDataParkingReservation();
+                    String data = String.join("~", dataList);
+                    msgToClient.writeBytes(data + "\n");
                 }
                 
                 else if (commands[0].equals("PARKINGRESERVATION")) {
@@ -266,6 +274,24 @@ public class UASServerReservationTaliscocaB implements Runnable{
         uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
         uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
         port.updateDataEventReservation(idEventReservation, status);
+    }
+
+    private static java.util.List<java.lang.String> viewListDataParking() {
+        uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
+        uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
+        return port.viewListDataParking();
+    }
+
+    private static void insertDataParkingReservation(int accountsId, int parkingsId, int quantity, double amount, java.lang.String status, uasserverreservationtaliscocab.Timestamp claimDate, uasserverreservationtaliscocab.Timestamp claimedDate, uasserverreservationtaliscocab.Timestamp updatedAt, uasserverreservationtaliscocab.Timestamp createdAt) {
+        uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
+        uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
+        port.insertDataParkingReservation(accountsId, parkingsId, quantity, amount, status, claimDate, claimedDate, updatedAt, createdAt);
+    }
+
+    private static java.util.List<java.lang.String> viewListDataParkingReservation() {
+        uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
+        uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
+        return port.viewListDataParkingReservation();
     }
 
    
