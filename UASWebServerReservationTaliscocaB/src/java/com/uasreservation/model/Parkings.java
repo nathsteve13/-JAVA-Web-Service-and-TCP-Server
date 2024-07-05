@@ -109,6 +109,9 @@ public class Parkings extends MyModel{
     public void setSlot(String slot) {
         this.slot = slot;
     }
+    
+    
+    
     @Override
     public void insertData() {
         
@@ -142,15 +145,14 @@ public class Parkings extends MyModel{
             result = statement.executeQuery("SELECT * FROM parkings");
 
             while (result.next()) {
-                Parkings tempParking = new Parkings(result.getInt("id"), 
-                        result.getString("parking_area"), 
-                        result.getInt("locations_id"), 
-                        result.getDouble("price"), 
+                Parkings tempParking = new Parkings(result.getInt("id"),
+                        result.getString("parking_area"),
+                        result.getInt("locations_id"),
+                        result.getDouble("price"),
                         result.getTimestamp("updated_at"),
                         result.getTimestamp("created_at"),
                         result.getString("slot"));
                 
-
                 collections.add(tempParking.id + "~" + tempParking.parking_area + "~" + tempParking.getLocations_id() + "~" 
                         + tempParking.price + "~" + tempParking.updated_at + "~" + tempParking.created_at + "~" + tempParking.slot);
             }

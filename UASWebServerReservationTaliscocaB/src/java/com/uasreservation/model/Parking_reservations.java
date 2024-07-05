@@ -13,48 +13,68 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class Parking_reservations extends MyModel {
-    private Account account_id;
+    private int id;
     private Parkings parking_id;
-    private int quantity;
+    private Account account_id;
+    private Timestamp parking_date;
     private double amount;
     private String status;
-    private Timestamp claim_date;
     private Timestamp claimed_date;
     private Timestamp updated_at;
     private Timestamp created_at;
 
     public Parking_reservations() {
+        this.id = 0;
+        this.account_id = new Account();
         this.account_id.setId(0);
+        this.parking_id = new Parkings();
         this.parking_id.setId(0);
-        this.quantity = 0;
         this.amount = 0.0;
         this.status = "";
-        this.claim_date =  new java.sql.Timestamp(System.currentTimeMillis());
         this.claimed_date =  new java.sql.Timestamp(System.currentTimeMillis());
         this.updated_at =  new java.sql.Timestamp(System.currentTimeMillis());
         this.created_at =  new java.sql.Timestamp(System.currentTimeMillis());
     }
 
-    public Parking_reservations(int accounts_id, int parkings_id, int quantity, double amount, String status, Timestamp claim_date, Timestamp claimed_date, Timestamp updated_at, Timestamp created_at) {
+    public Parking_reservations(int id, int accounts_id, int parkings_id, Timestamp parking_date, double amount, 
+            String status, Timestamp claimed_date, Timestamp updated_at, Timestamp created_at) {
+        this.id = id;
+        this.account_id = new Account();
         this.account_id.setId(accounts_id);
+        this.parking_id = new Parkings();
         this.parking_id.setId(parkings_id);
-        this.quantity = quantity;
+        this.parking_date = parking_date;
         this.amount = amount;
         this.status = status;
-        this.claim_date = claim_date;
         this.claimed_date = claimed_date;
         this.updated_at = updated_at;
         this.created_at = created_at;
     }
     
-     public int getAccount_id() {
+    public Parking_reservations(int id, String status, Timestamp claimed_date, Timestamp updated_at) {
+        this.id = id;
+        this.status = status;
+        this.claimed_date = claimed_date;
+        this.updated_at = updated_at;
+    }
+    
+    public int getId() {
+        return id;
+    }
+    
+    public void setId(int account_id) {
+        this.setId(id);
+    }
+    
+    public int getAccount_id() {
         return account_id.getId();
     }
 
     public void setAccount_id(int account_id) {
         this.account_id.setId(account_id);
     }
-
+    
+    
     public int getParking_id() {
         return parking_id.getId();
     }
@@ -62,15 +82,15 @@ public class Parking_reservations extends MyModel {
     public void setParking_id(int event_id) {
         this.parking_id.setId(event_id);
     }
-
-    public int getQuantity() {
-        return quantity;
+    
+    public Timestamp getUpdated_at() {
+        return updated_at;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setUpdated_at(Timestamp updated_at) {
+        this.updated_at = updated_at;
     }
-
+    
     public double getAmount() {
         return amount;
     }
@@ -87,14 +107,6 @@ public class Parking_reservations extends MyModel {
         this.status = status;
     }
 
-    public Timestamp getClaim_date() {
-        return claim_date;
-    }
-
-    public void setClaim_date(Timestamp claim_date) {
-        this.claim_date = claim_date;
-    }
-
     public Timestamp getClaimed_date() {
         return claimed_date;
     }
@@ -103,12 +115,12 @@ public class Parking_reservations extends MyModel {
         this.claimed_date = claimed_date;
     }
 
-    public Timestamp getUpdated_at() {
-        return updated_at;
+    public Timestamp getParking_date() {
+        return parking_date;
     }
 
-    public void setUpdated_at(Timestamp updated_at) {
-        this.updated_at = updated_at;
+    public void setParking_date(Timestamp parking_date) {
+        this.parking_date = parking_date;
     }
 
     public Timestamp getCreated_at() {
@@ -118,19 +130,20 @@ public class Parking_reservations extends MyModel {
     public void setCreated_at(Timestamp created_at) {
         this.created_at = created_at;
     }
-
+    
+    
     @Override
     public void insertData() {
         try {
             if (!MyModel.conn.isClosed()) {
                 PreparedStatement sql = MyModel.conn.prepareStatement(
-                        "INSERT INTO parking_reservations (accounts_id, parkings_id, quantity, amount, status, claim_date, claimed_date, updated_at, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                sql.setInt(1, this.account_id.getId());
+                        "INSERT INTO parking_reservations (id, parkings_id, accounts_id, parking_date, amount, status, claimed_date, updated_at, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                sql.setInt(1, this.id);
                 sql.setInt(2, this.parking_id.getId());
-                sql.setInt(3, this.quantity);
-                sql.setDouble(4, this.amount);
-                sql.setString(5, this.status);
-                sql.setTimestamp(6, this.claim_date);
+                sql.setInt(3, this.account_id.getId());
+                sql.setTimestamp(4, this.parking_date);
+                sql.setDouble(5, this.amount);
+                sql.setString(6, this.status);
                 sql.setTimestamp(7, this.claimed_date);
                 sql.setTimestamp(8, this.updated_at);
                 sql.setTimestamp(9, this.created_at);
@@ -147,16 +160,11 @@ public class Parking_reservations extends MyModel {
         try {
             if (!MyModel.conn.isClosed()) {
                 PreparedStatement sql = MyModel.conn.prepareStatement(
-                        "UPDATE parking_reservations SET quantity = ?, amount = ?, status = ?, claim_date = ?, claimed_date = ?, updated_at = ?, created_at = ? WHERE accounts_id = ? AND parkings_id = ?");
-                sql.setInt(3, this.quantity);
-                sql.setDouble(4, this.amount);
-                sql.setString(5, this.status);
-                sql.setTimestamp(6, this.claim_date);
-                sql.setTimestamp(7, this.claimed_date);
-                sql.setTimestamp(8, this.updated_at);
-                sql.setTimestamp(9, this.created_at);
-                sql.setInt(10, this.account_id.getId());
-                sql.setInt(11, this.parking_id.getId());
+                        "UPDATE parking_reservations SET status = ?, claimed_date = ?, updated_at = ? WHERE id = ");
+                sql.setString(1, this.status);
+                sql.setTimestamp(2, this.claimed_date);
+                sql.setTimestamp(3, this.updated_at);
+                sql.setInt(4, this.id);
                 sql.executeUpdate();
                 sql.close();
             }
@@ -170,9 +178,8 @@ public class Parking_reservations extends MyModel {
         try {
             if (!MyModel.conn.isClosed()) {
                 PreparedStatement sql = MyModel.conn.prepareStatement(
-                        "DELETE FROM parking_reservations WHERE accounts_id = ? AND parkings_id = ?");
-                sql.setInt(1, this.account_id.getId());
-                sql.setInt(2, this.parking_id.getId());
+                        "DELETE FROM parking_reservations WHERE id = ?");
+                sql.setInt(1, this.id);
                 sql.executeUpdate();
                 sql.close();
             }
@@ -189,29 +196,23 @@ public class Parking_reservations extends MyModel {
             result = statement.executeQuery("SELECT * FROM parking_reservations");
 
             while (result.next()) {
-                Parking_reservations tempReservation = new Parking_reservations();
-                tempReservation.setAccount_id(result.getInt("accounts_id"));
-                tempReservation.setParking_id(result.getInt("parkings_id"));
-                tempReservation.setQuantity(result.getInt("quantity"));
-                tempReservation.setAmount(result.getDouble("amount"));
-                tempReservation.setStatus(result.getString("status"));
-                tempReservation.setClaim_date(result.getTimestamp("claim_date"));
-                tempReservation.setClaimed_date(result.getTimestamp("claimed_date"));
-                tempReservation.setUpdated_at(result.getTimestamp("updated_at"));
-                tempReservation.setCreated_at(result.getTimestamp("created_at"));
+                Parking_reservations tempReservation = new Parking_reservations(result.getInt("id"), 
+                result.getInt("accounts_id"),
+                result.getInt("parkings_id"),
+                result.getTimestamp("parking_date"),
+                result.getDouble("amount"),
+                result.getString("status"),
+                result.getTimestamp("claimed_date"),
+                result.getTimestamp("updated_at"),
+                result.getTimestamp("created_at"));
 
-                collections.add(tempReservation.getAccount_id() + "-" + tempReservation.getParking_id() + "-" + tempReservation.getQuantity() + "-" + tempReservation.getAmount() + "-" + tempReservation.getStatus() + "-" + tempReservation.getClaim_date() + "-" + tempReservation.getClaimed_date() + "-" + tempReservation.getUpdated_at() + "-" + tempReservation.getCreated_at());
+                collections.add(tempReservation.id + "~" + tempReservation.getAccount_id() + "~" + tempReservation.getParking_id() + "~" + 
+                        tempReservation.parking_date + "~" + tempReservation.amount + "~" + tempReservation.status + "~" +
+                        tempReservation.claimed_date + "~" + tempReservation.updated_at + "~" + tempReservation.created_at);
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-        } finally {
-            try {
-                if (result != null) result.close();
-                if (statement != null) statement.close();
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
+        } 
         return collections;
     }
 }

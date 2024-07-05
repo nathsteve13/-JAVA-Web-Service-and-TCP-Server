@@ -85,7 +85,6 @@ public class reservationServices {
         return a.checkEmail();
     }
 
-
     @WebMethod(operationName = "updateDataEvent")
     public void updateDataEvent(
         @WebParam(name = "id") int id,
@@ -119,33 +118,28 @@ public class reservationServices {
     
     @WebMethod(operationName = "insertDataParkingReservation")
     public void insertDataParkingReservation(
+        @WebParam(name = "id") int id,
         @WebParam(name = "accounts_id") int accounts_id,
         @WebParam(name = "parkings_id") int parkings_id,
-        @WebParam(name = "quantity") int quantity,
+        @WebParam(name = "parking_date") Timestamp parking_date,
         @WebParam(name = "amount") double amount,
         @WebParam(name = "status") String status,
-        @WebParam(name = "claim_date") Timestamp claim_date,
         @WebParam(name = "claimed_date") Timestamp claimed_date,
         @WebParam(name = "updated_at") Timestamp updated_at,
         @WebParam(name = "created_at") Timestamp created_at
     ) {
-        pr = new Parking_reservations(accounts_id, parkings_id, quantity, amount, status, claim_date, claimed_date, updated_at, created_at);
+        pr = new Parking_reservations(id, accounts_id, parkings_id, parking_date, amount, status, claimed_date, updated_at, created_at);
         pr.insertData();
     }
 
     @WebMethod(operationName = "updateDataParkingReservation")
     public void updateDataParkingReservation(
-        @WebParam(name = "accounts_id") int accounts_id,
-        @WebParam(name = "parkings_id") int parkings_id,
-        @WebParam(name = "quantity") int quantity,
-        @WebParam(name = "amount") double amount,
+        @WebParam(name = "accounts_id") int id,
         @WebParam(name = "status") String status,
-        @WebParam(name = "claim_date") Timestamp claim_date,
         @WebParam(name = "claimed_date") Timestamp claimed_date,
-        @WebParam(name = "updated_at") Timestamp updated_at,
-        @WebParam(name = "created_at") Timestamp created_at
+        @WebParam(name = "updated_at") Timestamp updated_at
     ) {
-        pr = new Parking_reservations(accounts_id, parkings_id, quantity, amount, status, claim_date, claimed_date, updated_at, created_at);
+        pr = new Parking_reservations(id, status, claimed_date, updated_at);
         pr.updateData();
     }
 
