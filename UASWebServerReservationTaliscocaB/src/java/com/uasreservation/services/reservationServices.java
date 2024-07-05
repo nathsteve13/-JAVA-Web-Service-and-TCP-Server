@@ -110,29 +110,6 @@ public class reservationServices {
         e = new Events();
         return e.viewListData();
     }
-    
-    @WebMethod(operationName = "updateDataParking")
-    public void updateDataParking(
-        @WebParam(name = "id") int id,
-        @WebParam(name = "parking_area") String parking_area,
-        @WebParam(name = "status") String status,
-        @WebParam(name = "available_date") Timestamp available_date,
-        @WebParam(name = "locations_id") int locations_id,
-        @WebParam(name = "price") double price,
-        @WebParam(name = "updated_at") Timestamp updated_at,
-        @WebParam(name = "created_at") Timestamp created_at
-    ) {
-        p = new Parkings(parking_area, status, available_date, locations_id, price, updated_at, created_at);
-        p.setId(id);
-        p.updateData();
-    }
-
-    @WebMethod(operationName = "deleteDataParking")
-    public void deleteDataParking(@WebParam(name = "id") int id) {
-        p = new Parkings();
-        p.setId(id);
-        p.deleteData();
-    }
 
     @WebMethod(operationName = "viewListDataParking")
     public ArrayList<String> viewListDataParking() {

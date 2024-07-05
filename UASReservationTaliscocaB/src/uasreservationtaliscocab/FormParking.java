@@ -175,8 +175,7 @@ public class FormParking extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonViewParkingActionPerformed
 
     private void jButtonReservationParkingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReservationParkingActionPerformed
-        // TODO add your handling code here:
-        try{
+        try {
             String hasil;
             DefaultTableModel tableModel = (DefaultTableModel) jTableParking.getModel();
             int rowCount = tableModel.getRowCount();
@@ -190,9 +189,8 @@ public class FormParking extends javax.swing.JFrame {
             String updatedAt = "";
             String createdAt = "";
             
-            
         }
-        catch(IOException ex){
+        catch(Exception ex){
             Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButtonReservationParkingActionPerformed
