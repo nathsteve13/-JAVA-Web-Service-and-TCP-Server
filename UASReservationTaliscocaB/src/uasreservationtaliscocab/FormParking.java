@@ -65,13 +65,13 @@ public class FormParking extends javax.swing.JFrame {
 
         jTableParking.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Parkir Area", "Status", "Tanggal", "Lokasi", "Harga", "Update", "Created"
+                "id", "parking_area", "locations_id", "price", "updated_at", "created_at", "slot"
             }
         ));
         jScrollPane1.setViewportView(jTableParking);
@@ -182,12 +182,11 @@ public class FormParking extends javax.swing.JFrame {
             boolean found = false;
             
             String parkingArea = "";
-            String status = "";
-            String availableDate = "";
             int locationsId = 0;
             double price = 0.0;
             String updatedAt = "";
             String createdAt = "";
+            String slot = "";
             
         }
         catch(Exception ex){

@@ -57,13 +57,13 @@ public class FormMyParking extends javax.swing.JFrame {
 
         jTableMyParking.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID Parkir", "ID Akun", "Kapasitas", "Jumlah", "Status"
+                "id", "parkings_id", "parking_date", "status", "claimed_date", "updated_date", "Title 7"
             }
         ));
         jScrollPane1.setViewportView(jTableMyParking);
