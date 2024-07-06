@@ -11,6 +11,7 @@ package com.uasreservation.model;
 
 import java.sql.*;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Parkings extends MyModel{
@@ -160,5 +161,32 @@ public class Parkings extends MyModel{
             System.out.println(ex.getMessage());
         } 
         return collections;
+    }
+    
+    public ArrayList<String> slotCheck(int id_location, Date reservation_date) {
+        ArrayList<String> collections = new ArrayList<>();
+        try {
+            if (!MyModel.conn.isClosed()) {
+                PreparedStatement sql = MyModel.conn.prepareStatement(
+                    "SELECT p.slot, p.locations_id FROM parkings p "
+                            + "left join parking_reservations pr on p.id = pr.parkings_id and pr.parking_date = ? "
+                            + "where p.locations_id = ? and pr.id is NULL;");
+                sql.setDate(1, reservation_date);
+                sql.setInt(2, id_location);
+                this.result = sql.executeQuery();
+                
+                while (this.result.next()) {
+                    collections.add(this.result.getString("slot") + "~" + this.result.getInt("locations_id"));
+                } 
+                
+                if (collections.isEmpty()) {
+                    collections.add("No slots available~" + "\n");
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println("error di slotcheck : " + ex);
+        }
+        return collections;
+        
     }
 }

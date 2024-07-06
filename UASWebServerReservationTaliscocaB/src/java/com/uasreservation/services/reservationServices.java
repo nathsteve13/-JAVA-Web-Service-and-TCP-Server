@@ -9,6 +9,7 @@ import com.uasreservation.model.Event_reservations;
 import com.uasreservation.model.Events;
 import com.uasreservation.model.Parking_reservations;
 import com.uasreservation.model.Parkings;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -200,5 +201,9 @@ public class reservationServices {
         return er.viewListData();
     }
     
-    
+    @WebMethod(operationName = "slotCheck")
+    public ArrayList<String> slotCheck( @WebParam(name = "id_location") int id_location, @WebParam(name = "reservation_date") Date reservation_date) {
+        p = new Parkings();
+        return p.slotCheck(id_location, reservation_date);
+    }
 }
