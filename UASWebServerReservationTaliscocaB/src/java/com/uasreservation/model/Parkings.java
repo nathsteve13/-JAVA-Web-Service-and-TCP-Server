@@ -168,7 +168,7 @@ public class Parkings extends MyModel{
         try {
             if (!MyModel.conn.isClosed()) {
                 PreparedStatement sql = MyModel.conn.prepareStatement(
-                    "SELECT p.slot, p.locations_id FROM parkings p "
+                    "SELECT p.id, p.parking_area, p.locations_id, p.price, p.slot FROM parkings p "
                             + "left join parking_reservations pr on p.id = pr.parkings_id and pr.parking_date = ? "
                             + "where p.locations_id = ? and pr.id is NULL;");
                 sql.setDate(1, reservation_date);
@@ -176,12 +176,13 @@ public class Parkings extends MyModel{
                 this.result = sql.executeQuery();
                 
                 while (this.result.next()) {
-                    collections.add(this.result.getString("slot") + "~" + this.result.getInt("locations_id"));
+                    collections.add(this.result.getInt("id") +
+                            "~" + this.result.getString("parking_area") +
+                            "~" + this.result.getInt("locations_id") +
+                            "~" + this.result.getDouble("price") +
+                            "~" + this.result.getString("slot"));
                 } 
                 
-                if (collections.isEmpty()) {
-                    collections.add("No slots available~" + "\n");
-                }
             }
         } catch (Exception ex) {
             System.out.println("error di slotcheck : " + ex);

@@ -192,7 +192,6 @@ public class FormEvent extends javax.swing.JFrame {
                     found = true;
                     eventName = String.valueOf(tableModel.getValueAt(row, 1));
 
-                    // Ubah format tanggal
                     String rawEventDate = String.valueOf(tableModel.getValueAt(row, 2));
                     SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -201,7 +200,7 @@ public class FormEvent extends javax.swing.JFrame {
                         eventDate = outputFormat.format(date);
                     } catch (ParseException e) {
                         e.printStackTrace();
-                        eventDate = rawEventDate; // Jika parsing gagal, gunakan format asli
+                        eventDate = rawEventDate; 
                     }
 
                     category = String.valueOf(tableModel.getValueAt(row, 3));

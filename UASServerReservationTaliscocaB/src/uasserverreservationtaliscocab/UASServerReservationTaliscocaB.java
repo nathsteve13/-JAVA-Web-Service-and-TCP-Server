@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 /**
  *
@@ -51,6 +52,7 @@ public class UASServerReservationTaliscocaB implements Runnable{
             Socket incoming;
             String message;
             ServerSocket s = new ServerSocket(6666);
+            
             int id_user = 0;
             String name = "";
             LocalDate dob = LocalDate.now();
@@ -60,7 +62,7 @@ public class UASServerReservationTaliscocaB implements Runnable{
             Timestamp updated_at = new java.sql.Timestamp(System.currentTimeMillis());
             Timestamp created_at = new java.sql.Timestamp(System.currentTimeMillis());
             DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            DateTimeFormatter inputFormatterTime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            
             while (true) {
                 incoming = s.accept();
 
@@ -156,7 +158,6 @@ public class UASServerReservationTaliscocaB implements Runnable{
                 }
                 
                 else if(commands[0].equals("MYEVENTCLAIM")) {
-                    System.out.println("masuk");
                     int id_event_reservation = Integer.parseInt(commands[1]);
                     String status = commands[6];
                     LocalDate claim_date = LocalDate.parse(commands[7]);
@@ -182,7 +183,7 @@ public class UASServerReservationTaliscocaB implements Runnable{
                 }
                 
                 else if(commands[0].equals("PARKINGVIEW")) {
-                    List<String> dataList = viewListDataParking();
+                    List<String> dataList = slotCheck(Integer.parseInt(commands[1]), commands[2]);
                     String data = String.join("~", dataList);
                     msgToClient.writeBytes(data + "\n");
                 }
@@ -282,17 +283,19 @@ public class UASServerReservationTaliscocaB implements Runnable{
         return port.viewListDataParking();
     }
 
-    private static void insertDataParkingReservation(int accountsId, int parkingsId, int quantity, double amount, java.lang.String status, uasserverreservationtaliscocab.Timestamp claimDate, uasserverreservationtaliscocab.Timestamp claimedDate, uasserverreservationtaliscocab.Timestamp updatedAt, uasserverreservationtaliscocab.Timestamp createdAt) {
-        uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
-        uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
-        port.insertDataParkingReservation(accountsId, parkingsId, quantity, amount, status, claimDate, claimedDate, updatedAt, createdAt);
-    }
 
     private static java.util.List<java.lang.String> viewListDataParkingReservation() {
         uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
         uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
         return port.viewListDataParkingReservation();
     }
+
+    private static java.util.List<java.lang.String> slotCheck(int idLocation, java.lang.String reservationDate) {
+        uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
+        uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
+        return port.slotCheck(idLocation, reservationDate);
+    }
+
 
    
 

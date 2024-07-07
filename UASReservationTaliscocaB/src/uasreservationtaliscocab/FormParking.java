@@ -10,8 +10,13 @@ import java.io.IOException;
 
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -40,10 +45,16 @@ public class FormParking extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableParking = new javax.swing.JTable();
-        jButtonViewParking = new javax.swing.JButton();
-        jButtonReservationParking = new javax.swing.JButton();
+        btnCheck = new javax.swing.JButton();
+        btnReserve = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextFieldIdParking = new javax.swing.JTextField();
+        idParkTxt = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        idLocTxt = new javax.swing.JTextField();
+        reserveDate = new com.toedter.calendar.JDateChooser();
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -65,57 +76,80 @@ public class FormParking extends javax.swing.JFrame {
 
         jTableParking.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "id", "parking_area", "locations_id", "price", "updated_at", "created_at", "slot"
+                "id", "parking_area", "locations_id", "price", "slot"
             }
         ));
         jScrollPane1.setViewportView(jTableParking);
 
-        jButtonViewParking.setBackground(new java.awt.Color(0, 153, 153));
-        jButtonViewParking.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonViewParking.setText("View");
-        jButtonViewParking.addActionListener(new java.awt.event.ActionListener() {
+        btnCheck.setBackground(new java.awt.Color(0, 153, 153));
+        btnCheck.setForeground(new java.awt.Color(255, 255, 255));
+        btnCheck.setText("Check");
+        btnCheck.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonViewParkingActionPerformed(evt);
+                btnCheckActionPerformed(evt);
             }
         });
 
-        jButtonReservationParking.setBackground(new java.awt.Color(0, 153, 153));
-        jButtonReservationParking.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonReservationParking.setText("Reserve");
-        jButtonReservationParking.addActionListener(new java.awt.event.ActionListener() {
+        btnReserve.setBackground(new java.awt.Color(0, 153, 153));
+        btnReserve.setForeground(new java.awt.Color(255, 255, 255));
+        btnReserve.setText("Reserve");
+        btnReserve.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonReservationParkingActionPerformed(evt);
+                btnReserveActionPerformed(evt);
             }
         });
 
         jLabel1.setText("ID Parking");
 
-        jTextFieldIdParking.setText("jTextField1");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel2.setText("BOOKING");
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel3.setText("CHECK");
+
+        jLabel4.setText("ID Location : ");
+
+        jLabel5.setText("Date : ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 846, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 27, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextFieldIdParking, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonViewParking)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonReservationParking)
-                .addGap(15, 15, 15))
+                .addGap(45, 45, 45)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(reserveDate, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCheck)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(idLocTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(idParkTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnReserve)))
+                        .addGap(70, 70, 70))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,12 +157,28 @@ public class FormParking extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonReservationParking)
-                    .addComponent(jButtonViewParking)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextFieldIdParking, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnCheck)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(11, 11, 11)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(idLocTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(11, 11, 11)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(idParkTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnReserve))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(reserveDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -139,22 +189,30 @@ public class FormParking extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonViewParkingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonViewParkingActionPerformed
+    private void btnCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckActionPerformed
         // TODO add your handling code here:
         try {
             String hasil;
+            int id_location = Integer.parseInt(idLocTxt.getText());
+            
             
             Socket clientSocket = new Socket("localhost",6666);
             DataOutputStream sendToServer = new DataOutputStream(clientSocket.getOutputStream());
-            sendToServer.writeBytes("PARKINGVIEW~" + "\n");
+            String reserve_date = ((JTextField)reserveDate.getDateEditor().getUiComponent()).getText();
+            System.out.println(reserve_date);
+            
+            SimpleDateFormat originalFormat = new SimpleDateFormat("MMM d, yyyy");
+            SimpleDateFormat targetFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = originalFormat.parse(reserve_date);
+            String formattedDate = targetFormat.format(date);
+            
+            sendToServer.writeBytes("PARKINGVIEW~" + id_location + "~" + formattedDate + "\n");
             
             BufferedReader chatFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             hasil = chatFromServer.readLine();
@@ -164,35 +222,86 @@ public class FormParking extends javax.swing.JFrame {
             tableModel.setRowCount(0);  
             String[] hasils = hasil.split("~");
             
-            for (int i = 0; i < hasils.length; i += 8) {
-                String[] row = new String[8];
-                System.arraycopy(hasils, i, row, 0, 8);
+            for (int i = 0; i < hasils.length; i += 5) {
+                String[] row = new String[5];
+                System.arraycopy(hasils, i, row, 0, 5);
                 tableModel.addRow(row);
             }
         } catch(IOException ex) {
             Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE,null,ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(FormParking.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButtonViewParkingActionPerformed
+    }//GEN-LAST:event_btnCheckActionPerformed
 
-    private void jButtonReservationParkingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReservationParkingActionPerformed
+    private void btnReserveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReserveActionPerformed
         try {
             String hasil;
+            
             DefaultTableModel tableModel = (DefaultTableModel) jTableParking.getModel();
             int rowCount = tableModel.getRowCount();
             boolean found = false;
             
-            String parkingArea = "";
-            int locationsId = 0;
+            int id_parking = Integer.parseInt(idParkTxt.getText());;
+            String parking_area = "";
+            int locations_id = 0;
             double price = 0.0;
-            String updatedAt = "";
-            String createdAt = "";
             String slot = "";
             
+            for (int row = 0; row < rowCount; row++) {
+                if (Integer.parseInt(String.valueOf(tableModel.getValueAt(row, 0))) == id_parking) {
+                    found = true;
+                    
+                    parking_area = String.valueOf(tableModel.getValueAt(row, 1));
+                    locations_id = Integer.parseInt(String.valueOf(tableModel.getValueAt(row, 2)));
+                    price = Double.parseDouble(String.valueOf(tableModel.getValueAt(row, 3)));
+                    slot = String.valueOf(tableModel.getValueAt(row, 4));
+                    
+                    break;
+                }
+            } 
+            
+            if (!found) {
+                JOptionPane.showMessageDialog(this, "Event ID not found in table.");
+                return;
+            }
+            
+            Socket clientSocket = new Socket("localhost", 6666);
+            DataOutputStream sendToServer = new DataOutputStream(clientSocket.getOutputStream());
+            
+            FormMenu menu = new FormMenu();
+            String dataToSend = "PARKINGRESERVATION~" 
+                    + menu.id_user + "~" 
+                    + id_parking + "~" 
+                    + parking_area + "~"
+                    + locations_id + "~"
+                    + price + "~"
+                    + slot;
+            
+            sendToServer.writeBytes(dataToSend);
+
+            BufferedReader chatFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            hasil = chatFromServer.readLine();
+            System.out.println(hasil);
+
+            String[] hasils = hasil.split("~");
+            
+            if (hasils[0].equals("TRUE")) {
+                JOptionPane.showMessageDialog(this, "Reservation successful!");
+                FormMenu form = new FormMenu();
+                form.balance = Double.parseDouble(hasils[1]);
+                System.out.println(form.balance);
+            } else {
+                JOptionPane.showMessageDialog(this, "Reservation failed, balance insufficient");
+                FormMenu form = new FormMenu();
+                form.balance = Double.parseDouble(hasils[1]);
+                System.out.println(form.balance);
+            }
         }
         catch(Exception ex){
             Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButtonReservationParkingActionPerformed
+    }//GEN-LAST:event_btnReserveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,13 +339,19 @@ public class FormParking extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonReservationParking;
-    private javax.swing.JButton jButtonViewParking;
+    private javax.swing.JButton btnCheck;
+    private javax.swing.JButton btnReserve;
+    private javax.swing.JTextField idLocTxt;
+    private javax.swing.JTextField idParkTxt;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableParking;
-    private javax.swing.JTextField jTextFieldIdParking;
+    private com.toedter.calendar.JDateChooser reserveDate;
     // End of variables declaration//GEN-END:variables
 }

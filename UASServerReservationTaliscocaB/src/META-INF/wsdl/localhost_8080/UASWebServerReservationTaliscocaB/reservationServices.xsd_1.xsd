@@ -20,13 +20,9 @@
 
 <xs:element name="deleteDataEventResponse" type="tns:deleteDataEventResponse"/>
 
-<xs:element name="deleteDataParking" type="tns:deleteDataParking"/>
-
 <xs:element name="deleteDataParkingReservation" type="tns:deleteDataParkingReservation"/>
 
 <xs:element name="deleteDataParkingReservationResponse" type="tns:deleteDataParkingReservationResponse"/>
-
-<xs:element name="deleteDataParkingResponse" type="tns:deleteDataParkingResponse"/>
 
 <xs:element name="insertDataAccount" type="tns:insertDataAccount"/>
 
@@ -40,6 +36,10 @@
 
 <xs:element name="insertDataParkingReservationResponse" type="tns:insertDataParkingReservationResponse"/>
 
+<xs:element name="slotCheck" type="tns:slotCheck"/>
+
+<xs:element name="slotCheckResponse" type="tns:slotCheckResponse"/>
+
 <xs:element name="updateDataAccount" type="tns:updateDataAccount"/>
 
 <xs:element name="updateDataAccountResponse" type="tns:updateDataAccountResponse"/>
@@ -52,13 +52,9 @@
 
 <xs:element name="updateDataEventResponse" type="tns:updateDataEventResponse"/>
 
-<xs:element name="updateDataParking" type="tns:updateDataParking"/>
-
 <xs:element name="updateDataParkingReservation" type="tns:updateDataParkingReservation"/>
 
 <xs:element name="updateDataParkingReservationResponse" type="tns:updateDataParkingReservationResponse"/>
-
-<xs:element name="updateDataParkingResponse" type="tns:updateDataParkingResponse"/>
 
 <xs:element name="viewListDataAccount" type="tns:viewListDataAccount"/>
 
@@ -97,12 +93,12 @@
 
 <xs:complexType name="insertDataParkingReservation">
 <xs:sequence>
+<xs:element name="id" type="xs:int"/>
 <xs:element name="accounts_id" type="xs:int"/>
 <xs:element name="parkings_id" type="xs:int"/>
-<xs:element name="quantity" type="xs:int"/>
+<xs:element name="parking_date" type="tns:timestamp" minOccurs="0"/>
 <xs:element name="amount" type="xs:double"/>
 <xs:element name="status" type="xs:string" minOccurs="0"/>
-<xs:element name="claim_date" type="tns:timestamp" minOccurs="0"/>
 <xs:element name="claimed_date" type="tns:timestamp" minOccurs="0"/>
 <xs:element name="updated_at" type="tns:timestamp" minOccurs="0"/>
 <xs:element name="created_at" type="tns:timestamp" minOccurs="0"/>
@@ -119,6 +115,19 @@
 <xs:sequence/>
 </xs:complexType>
 
+<xs:complexType name="updateDataParkingReservation">
+<xs:sequence>
+<xs:element name="accounts_id" type="xs:int"/>
+<xs:element name="status" type="xs:string" minOccurs="0"/>
+<xs:element name="claimed_date" type="tns:timestamp" minOccurs="0"/>
+<xs:element name="updated_at" type="tns:timestamp" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateDataParkingReservationResponse">
+<xs:sequence/>
+</xs:complexType>
+
 <xs:complexType name="deleteDataParkingReservation">
 <xs:sequence>
 <xs:element name="accounts_id" type="xs:int"/>
@@ -127,24 +136,6 @@
 </xs:complexType>
 
 <xs:complexType name="deleteDataParkingReservationResponse">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="updateDataParkingReservation">
-<xs:sequence>
-<xs:element name="accounts_id" type="xs:int"/>
-<xs:element name="parkings_id" type="xs:int"/>
-<xs:element name="quantity" type="xs:int"/>
-<xs:element name="amount" type="xs:double"/>
-<xs:element name="status" type="xs:string" minOccurs="0"/>
-<xs:element name="claim_date" type="tns:timestamp" minOccurs="0"/>
-<xs:element name="claimed_date" type="tns:timestamp" minOccurs="0"/>
-<xs:element name="updated_at" type="tns:timestamp" minOccurs="0"/>
-<xs:element name="created_at" type="tns:timestamp" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="updateDataParkingReservationResponse">
 <xs:sequence/>
 </xs:complexType>
 
@@ -233,16 +224,6 @@
 <xs:sequence/>
 </xs:complexType>
 
-<xs:complexType name="viewListDataEvent">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="viewListDataEventResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="updateDataAccount">
 <xs:sequence>
 <xs:element name="id" type="xs:int"/>
@@ -254,6 +235,16 @@
 <xs:sequence/>
 </xs:complexType>
 
+<xs:complexType name="viewListDataEvent">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="viewListDataEventResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="deleteDataEventReservation">
 <xs:sequence>
 <xs:element name="account_id" type="xs:int"/>
@@ -262,33 +253,6 @@
 </xs:complexType>
 
 <xs:complexType name="deleteDataEventReservationResponse">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="updateDataParking">
-<xs:sequence>
-<xs:element name="id" type="xs:int"/>
-<xs:element name="parking_area" type="xs:string" minOccurs="0"/>
-<xs:element name="status" type="xs:string" minOccurs="0"/>
-<xs:element name="available_date" type="tns:timestamp" minOccurs="0"/>
-<xs:element name="locations_id" type="xs:int"/>
-<xs:element name="price" type="xs:double"/>
-<xs:element name="updated_at" type="tns:timestamp" minOccurs="0"/>
-<xs:element name="created_at" type="tns:timestamp" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="updateDataParkingResponse">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="deleteDataParking">
-<xs:sequence>
-<xs:element name="id" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="deleteDataParkingResponse">
 <xs:sequence/>
 </xs:complexType>
 
@@ -308,6 +272,19 @@
 </xs:complexType>
 
 <xs:complexType name="viewListDataParkingResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="slotCheck">
+<xs:sequence>
+<xs:element name="id_location" type="xs:int"/>
+<xs:element name="reservation_date" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="slotCheckResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>

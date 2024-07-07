@@ -202,8 +202,9 @@ public class reservationServices {
     }
     
     @WebMethod(operationName = "slotCheck")
-    public ArrayList<String> slotCheck( @WebParam(name = "id_location") int id_location, @WebParam(name = "reservation_date") Date reservation_date) {
+    public ArrayList<String> slotCheck( @WebParam(name = "id_location") int id_location, @WebParam(name = "reservation_date") String reservation_date) {
         p = new Parkings();
-        return p.slotCheck(id_location, reservation_date);
+        Date sqlDate = Date.valueOf(reservation_date);
+        return p.slotCheck(id_location, sqlDate);
     }
 }
