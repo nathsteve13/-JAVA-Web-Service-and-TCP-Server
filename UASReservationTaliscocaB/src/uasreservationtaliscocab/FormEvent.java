@@ -82,11 +82,7 @@ public class FormEvent extends javax.swing.JFrame {
 
         jLabel1.setText("Quantity");
 
-        qtyTxt.setText("jTextField1");
-
         jLabel2.setText("ID Event");
-
-        idEventTxt.setText("jTextField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

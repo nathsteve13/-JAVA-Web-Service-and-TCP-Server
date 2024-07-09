@@ -142,8 +142,8 @@ public class Parking_reservations extends MyModel {
         try {
             if (!MyModel.conn.isClosed()) {
                 PreparedStatement sql = MyModel.conn.prepareStatement(
-                        "INSERT INTO parking_reservations (parkings_id, accounts_id, parking_date, amount, status, updated_at, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)");
-                
+                        "INSERT INTO parking_reservations (parkings_id, accounts_id, parking_date, amount, status, updated_at, created_at) "
+                                + "VALUES (?, ?, ?, ?, ?, ?, ?)");
                 sql.setInt(1, this.parking_id.getId());
                 sql.setInt(2, this.account_id.getId());
                 sql.setDate(3, java.sql.Date.valueOf(LocalDate.now()));

@@ -195,6 +195,14 @@ public class UASServerReservationTaliscocaB implements Runnable{
                 }
                 
                 else if (commands[0].equals("PARKINGRESERVATION")) {
+                    balance -= Double.parseDouble(commands[4]);
+                    insertDataParkingReservation(Integer.parseInt(commands[1]), Integer.parseInt(commands[2]), 
+                            Double.parseDouble(commands[4]));
+                    updateDataAccount(Integer.parseInt(commands[1]), balance);
+                    msgToClient.writeBytes("TRUE~" + balance + "\n");
+                }
+                
+                else if (commands[0].equals("MYPARKINGCLAIM")) {
                     
                 }
                 
@@ -296,16 +304,16 @@ public class UASServerReservationTaliscocaB implements Runnable{
         return port.slotCheck(idLocation, reservationDate);
     }
 
-    private static void insertDataParkingReservation(int id, int accountsId, int parkingsId, uasserverreservationtaliscocab.Timestamp parkingDate, double amount, java.lang.String status, uasserverreservationtaliscocab.Timestamp claimedDate, uasserverreservationtaliscocab.Timestamp updatedAt, uasserverreservationtaliscocab.Timestamp createdAt) {
-        uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
-        uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
-        port.insertDataParkingReservation(id, accountsId, parkingsId, parkingDate, amount, status, claimedDate, updatedAt, createdAt);
-    }
-
     private static void updateDataParkingReservation(int accountsId) {
         uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
         uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
         port.updateDataParkingReservation(accountsId);
+    }
+
+    private static void insertDataParkingReservation(int accountsId, int parkingsId, double amount) {
+        uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
+        uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
+        port.insertDataParkingReservation(accountsId, parkingsId, amount);
     }
 
 

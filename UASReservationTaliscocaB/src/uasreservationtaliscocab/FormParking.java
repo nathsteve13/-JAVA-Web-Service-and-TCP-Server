@@ -196,11 +196,9 @@ public class FormParking extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckActionPerformed
-        // TODO add your handling code here:
         try {
             String hasil;
             int id_location = Integer.parseInt(idLocTxt.getText());
-            
             
             Socket clientSocket = new Socket("localhost",6666);
             DataOutputStream sendToServer = new DataOutputStream(clientSocket.getOutputStream());
@@ -237,38 +235,37 @@ public class FormParking extends javax.swing.JFrame {
     private void btnReserveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReserveActionPerformed
         try {
             String hasil;
-            
+
             DefaultTableModel tableModel = (DefaultTableModel) jTableParking.getModel();
             int rowCount = tableModel.getRowCount();
             boolean found = false;
-            
-            int id_parking = Integer.parseInt(idParkTxt.getText());;
+
+            int id_parking = Integer.parseInt(idParkTxt.getText());
             String parking_area = "";
             int locations_id = 0;
             double price = 0.0;
             String slot = "";
-            
+
             for (int row = 0; row < rowCount; row++) {
-                if (Integer.parseInt(String.valueOf(tableModel.getValueAt(row, 0))) == id_parking) {
+                int tableId = Integer.parseInt(String.valueOf(tableModel.getValueAt(row, 0)));
+                if (tableId == id_parking) {
                     found = true;
-                    
                     parking_area = String.valueOf(tableModel.getValueAt(row, 1));
                     locations_id = Integer.parseInt(String.valueOf(tableModel.getValueAt(row, 2)));
                     price = Double.parseDouble(String.valueOf(tableModel.getValueAt(row, 3)));
                     slot = String.valueOf(tableModel.getValueAt(row, 4));
-                    
                     break;
                 }
-            } 
-            
+            }
+
             if (!found) {
                 JOptionPane.showMessageDialog(this, "Event ID not found in table.");
                 return;
             }
-            
+
             Socket clientSocket = new Socket("localhost", 6666);
             DataOutputStream sendToServer = new DataOutputStream(clientSocket.getOutputStream());
-            
+
             FormMenu menu = new FormMenu();
             String dataToSend = "PARKINGRESERVATION~" 
                     + menu.id_user + "~" 
@@ -277,15 +274,15 @@ public class FormParking extends javax.swing.JFrame {
                     + locations_id + "~"
                     + price + "~"
                     + slot;
-            
-            sendToServer.writeBytes(dataToSend);
+
+            sendToServer.writeBytes(dataToSend + "\n"); // Add newline to properly end the message
 
             BufferedReader chatFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             hasil = chatFromServer.readLine();
             System.out.println(hasil);
 
             String[] hasils = hasil.split("~");
-            
+
             if (hasils[0].equals("TRUE")) {
                 JOptionPane.showMessageDialog(this, "Reservation successful!");
                 FormMenu form = new FormMenu();
@@ -297,10 +294,10 @@ public class FormParking extends javax.swing.JFrame {
                 form.balance = Double.parseDouble(hasils[1]);
                 System.out.println(form.balance);
             }
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_btnReserveActionPerformed
 
     /**
