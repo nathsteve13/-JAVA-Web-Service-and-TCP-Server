@@ -10,13 +10,14 @@ package com.uasreservation.model;
  */
 import java.sql.*;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Parking_reservations extends MyModel {
     private int id;
     private Parkings parking_id;
     private Account account_id;
-    private Timestamp parking_date;
+    private LocalDate parking_date;
     private double amount;
     private String status;
     private Timestamp claimed_date;
@@ -36,9 +37,16 @@ public class Parking_reservations extends MyModel {
         this.created_at =  new java.sql.Timestamp(System.currentTimeMillis());
     }
 
-    public Parking_reservations(int id, int accounts_id, int parkings_id, Timestamp parking_date, double amount, 
+    public Parking_reservations(int accounts_id, int parkings_id, double amount) {
+        this.account_id = new Account();
+        this.account_id.setId(accounts_id);
+        this.parking_id = new Parkings();
+        this.parking_id.setId(parkings_id);
+        this.amount = amount;
+    }
+    
+    public Parking_reservations(int id, int accounts_id, int parkings_id, LocalDate parking_date, double amount, 
             String status, Timestamp claimed_date, Timestamp updated_at, Timestamp created_at) {
-        this.id = id;
         this.account_id = new Account();
         this.account_id.setId(accounts_id);
         this.parking_id = new Parkings();
@@ -51,18 +59,15 @@ public class Parking_reservations extends MyModel {
         this.created_at = created_at;
     }
     
-    public Parking_reservations(int id, String status, Timestamp claimed_date, Timestamp updated_at) {
+    public Parking_reservations(int id) {
         this.id = id;
-        this.status = status;
-        this.claimed_date = claimed_date;
-        this.updated_at = updated_at;
     }
     
     public int getId() {
         return id;
     }
     
-    public void setId(int account_id) {
+    public void setId(int id) {
         this.setId(id);
     }
     
@@ -115,11 +120,11 @@ public class Parking_reservations extends MyModel {
         this.claimed_date = claimed_date;
     }
 
-    public Timestamp getParking_date() {
+    public LocalDate getParking_date() {
         return parking_date;
     }
 
-    public void setParking_date(Timestamp parking_date) {
+    public void setParking_date(LocalDate parking_date) {
         this.parking_date = parking_date;
     }
 
@@ -137,16 +142,15 @@ public class Parking_reservations extends MyModel {
         try {
             if (!MyModel.conn.isClosed()) {
                 PreparedStatement sql = MyModel.conn.prepareStatement(
-                        "INSERT INTO parking_reservations (id, parkings_id, accounts_id, parking_date, amount, status, claimed_date, updated_at, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                sql.setInt(1, this.id);
-                sql.setInt(2, this.parking_id.getId());
-                sql.setInt(3, this.account_id.getId());
-                sql.setTimestamp(4, this.parking_date);
-                sql.setDouble(5, this.amount);
-                sql.setString(6, this.status);
-                sql.setTimestamp(7, this.claimed_date);
-                sql.setTimestamp(8, this.updated_at);
-                sql.setTimestamp(9, this.created_at);
+                        "INSERT INTO parking_reservations (parkings_id, accounts_id, parking_date, amount, status, updated_at, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                
+                sql.setInt(1, this.parking_id.getId());
+                sql.setInt(2, this.account_id.getId());
+                sql.setDate(3, java.sql.Date.valueOf(LocalDate.now()));
+                sql.setDouble(4, this.amount);
+                sql.setString(5, "not claimed");
+                sql.setTimestamp(6, new java.sql.Timestamp(System.currentTimeMillis()));
+                sql.setTimestamp(7, new java.sql.Timestamp(System.currentTimeMillis()));
                 sql.executeUpdate();
                 sql.close();
             }
@@ -160,10 +164,10 @@ public class Parking_reservations extends MyModel {
         try {
             if (!MyModel.conn.isClosed()) {
                 PreparedStatement sql = MyModel.conn.prepareStatement(
-                        "UPDATE parking_reservations SET status = ?, claimed_date = ?, updated_at = ? WHERE id = ");
-                sql.setString(1, this.status);
-                sql.setTimestamp(2, this.claimed_date);
-                sql.setTimestamp(3, this.updated_at);
+                        "UPDATE parking_reservations SET status = ?, claimed_date = ?, updated_at = ? WHERE id = ?");
+                sql.setString(1, "claimed");
+                sql.setTimestamp(2, new java.sql.Timestamp(System.currentTimeMillis()));
+                sql.setTimestamp(3, new java.sql.Timestamp(System.currentTimeMillis()));
                 sql.setInt(4, this.id);
                 sql.executeUpdate();
                 sql.close();
@@ -199,7 +203,7 @@ public class Parking_reservations extends MyModel {
                 Parking_reservations tempReservation = new Parking_reservations(result.getInt("id"), 
                 result.getInt("accounts_id"),
                 result.getInt("parkings_id"),
-                result.getTimestamp("parking_date"),
+                result.getDate("parking_date").toLocalDate(),
                 result.getDouble("amount"),
                 result.getString("status"),
                 result.getTimestamp("claimed_date"),

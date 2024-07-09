@@ -296,6 +296,19 @@ public class UASServerReservationTaliscocaB implements Runnable{
         return port.slotCheck(idLocation, reservationDate);
     }
 
+    private static void insertDataParkingReservation(int id, int accountsId, int parkingsId, uasserverreservationtaliscocab.Timestamp parkingDate, double amount, java.lang.String status, uasserverreservationtaliscocab.Timestamp claimedDate, uasserverreservationtaliscocab.Timestamp updatedAt, uasserverreservationtaliscocab.Timestamp createdAt) {
+        uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
+        uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
+        port.insertDataParkingReservation(id, accountsId, parkingsId, parkingDate, amount, status, claimedDate, updatedAt, createdAt);
+    }
+
+    private static void updateDataParkingReservation(int accountsId) {
+        uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
+        uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
+        port.updateDataParkingReservation(accountsId);
+    }
+
+
 
    
 

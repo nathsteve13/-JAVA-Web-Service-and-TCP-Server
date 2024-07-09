@@ -118,9 +118,6 @@
 <xs:complexType name="updateDataParkingReservation">
 <xs:sequence>
 <xs:element name="accounts_id" type="xs:int"/>
-<xs:element name="status" type="xs:string" minOccurs="0"/>
-<xs:element name="claimed_date" type="tns:timestamp" minOccurs="0"/>
-<xs:element name="updated_at" type="tns:timestamp" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -159,6 +156,16 @@
 <xs:sequence/>
 </xs:complexType>
 
+<xs:complexType name="viewListDataParkingReservation">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="viewListDataParkingReservationResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="insertDataAccount">
 <xs:sequence>
 <xs:element name="name" type="xs:string" minOccurs="0"/>
@@ -174,16 +181,6 @@
 
 <xs:complexType name="insertDataAccountResponse">
 <xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="viewListDataParkingReservation">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="viewListDataParkingReservationResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="checkEmail">

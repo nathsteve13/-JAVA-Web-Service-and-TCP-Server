@@ -81,7 +81,7 @@ public class reservationServices {
     @WebMethod(operationName = "checkEmail")
     public boolean checkEmail(@WebParam(name = "email") String email, @WebParam(name = "password") String password) {
         a = new Account();
-        a.setEmail(email);
+        a.setEmail(email); 
         a.setPassword(password);
         return a.checkEmail();
     }
@@ -119,28 +119,19 @@ public class reservationServices {
     
     @WebMethod(operationName = "insertDataParkingReservation")
     public void insertDataParkingReservation(
-        @WebParam(name = "id") int id,
         @WebParam(name = "accounts_id") int accounts_id,
         @WebParam(name = "parkings_id") int parkings_id,
-        @WebParam(name = "parking_date") Timestamp parking_date,
-        @WebParam(name = "amount") double amount,
-        @WebParam(name = "status") String status,
-        @WebParam(name = "claimed_date") Timestamp claimed_date,
-        @WebParam(name = "updated_at") Timestamp updated_at,
-        @WebParam(name = "created_at") Timestamp created_at
+        @WebParam(name = "amount") double amount
     ) {
-        pr = new Parking_reservations(id, accounts_id, parkings_id, parking_date, amount, status, claimed_date, updated_at, created_at);
+        pr = new Parking_reservations(accounts_id, parkings_id, amount);
         pr.insertData();
     }
 
     @WebMethod(operationName = "updateDataParkingReservation")
     public void updateDataParkingReservation(
-        @WebParam(name = "accounts_id") int id,
-        @WebParam(name = "status") String status,
-        @WebParam(name = "claimed_date") Timestamp claimed_date,
-        @WebParam(name = "updated_at") Timestamp updated_at
+        @WebParam(name = "accounts_id") int id
     ) {
-        pr = new Parking_reservations(id, status, claimed_date, updated_at);
+        pr = new Parking_reservations(id);
         pr.updateData();
     }
 
