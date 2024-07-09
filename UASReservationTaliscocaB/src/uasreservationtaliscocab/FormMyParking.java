@@ -41,6 +41,9 @@ public class FormMyParking extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableMyParking = new javax.swing.JTable();
         viewBtn = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtClaim = new javax.swing.JTextField();
+        btnClaim = new javax.swing.JButton();
 
         jButtonClaim.setBackground(new java.awt.Color(0, 153, 153));
         jButtonClaim.setForeground(new java.awt.Color(255, 255, 255));
@@ -57,13 +60,13 @@ public class FormMyParking extends javax.swing.JFrame {
 
         jTableMyParking.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "id", "parkings_id", "parking_date", "status", "claimed_date", "updated_date"
+                "id", "parkings_id", "accounts_id", "parking_date", "amount", "status", "claimed_date", "updated_at", "created_at"
             }
         ));
         jScrollPane1.setViewportView(jTableMyParking);
@@ -77,6 +80,10 @@ public class FormMyParking extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("ID Parkir");
+
+        btnClaim.setText("CLAIM");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -84,9 +91,18 @@ public class FormMyParking extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(viewBtn)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 866, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 866, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(19, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(viewBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtClaim, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnClaim)
+                        .addGap(112, 112, 112))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,7 +110,11 @@ public class FormMyParking extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(viewBtn)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(viewBtn)
+                    .addComponent(jLabel2)
+                    .addComponent(txtClaim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnClaim))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
@@ -177,11 +197,14 @@ public class FormMyParking extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClaim;
     private javax.swing.JButton jButtonClaim;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableMyParking;
+    private javax.swing.JTextField txtClaim;
     private javax.swing.JButton viewBtn;
     // End of variables declaration//GEN-END:variables
 }
