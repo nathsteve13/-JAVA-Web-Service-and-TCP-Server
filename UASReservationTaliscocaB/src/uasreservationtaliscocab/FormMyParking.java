@@ -44,6 +44,7 @@ public class FormMyParking extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtClaim = new javax.swing.JTextField();
         btnClaim = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         jButtonClaim.setBackground(new java.awt.Color(0, 153, 153));
@@ -68,7 +69,7 @@ public class FormMyParking extends javax.swing.JFrame {
             }
         });
         getContentPane().add(viewBtn);
-        viewBtn.setBounds(790, 450, 90, 30);
+        viewBtn.setBounds(570, 450, 90, 30);
 
         jTableMyParking.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -104,6 +105,18 @@ public class FormMyParking extends javax.swing.JFrame {
         });
         getContentPane().add(btnClaim);
         btnClaim.setBounds(670, 450, 100, 30);
+
+        jButton1.setBackground(new java.awt.Color(0, 102, 102));
+        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("BACK");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(780, 450, 90, 30);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/parking.png"))); // NOI18N
         getContentPane().add(jLabel3);
@@ -165,6 +178,13 @@ public class FormMyParking extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnClaimActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        FormMenu home = new FormMenu();
+        home.show();
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -202,6 +222,7 @@ public class FormMyParking extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClaim;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonClaim;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -48,6 +48,7 @@ public class FormEvent extends javax.swing.JFrame {
         qtyTxt = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         idEventTxt = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -106,6 +107,18 @@ public class FormEvent extends javax.swing.JFrame {
         jLabel2.setBounds(675, 360, 70, 30);
         getContentPane().add(idEventTxt);
         idEventTxt.setBounds(751, 360, 110, 29);
+
+        jButton1.setBackground(new java.awt.Color(0, 102, 102));
+        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("BACK");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(780, 450, 90, 30);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/event.png"))); // NOI18N
         getContentPane().add(jLabel4);
@@ -240,6 +253,13 @@ public class FormEvent extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonReservationEventActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        FormMenu home = new FormMenu();
+        home.show();
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -277,6 +297,7 @@ public class FormEvent extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField idEventTxt;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonReservationEvent;
     private javax.swing.JButton jButtonViewEvent;
     private javax.swing.JLabel jLabel1;

@@ -53,6 +53,7 @@ public class FormParking extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableParking = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
@@ -136,6 +137,18 @@ public class FormParking extends javax.swing.JFrame {
         jLabel6.setText("jLabel6");
         getContentPane().add(jLabel6);
         jLabel6.setBounds(720, 610, 48, 21);
+
+        jButton1.setBackground(new java.awt.Color(0, 102, 102));
+        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("BACK");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(220, 20, 90, 30);
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/parkings.png"))); // NOI18N
         getContentPane().add(jLabel7);
@@ -249,6 +262,13 @@ public class FormParking extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnReserveActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        FormMenu home = new FormMenu();
+        home.show();
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -289,6 +309,7 @@ public class FormParking extends javax.swing.JFrame {
     private javax.swing.JButton btnReserve;
     private javax.swing.JTextField idLocTxt;
     private javax.swing.JTextField idParkTxt;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

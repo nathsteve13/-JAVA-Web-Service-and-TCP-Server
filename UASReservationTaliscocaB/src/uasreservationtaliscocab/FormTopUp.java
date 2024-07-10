@@ -38,8 +38,9 @@ public class FormTopUp extends javax.swing.JFrame {
     private void initComponents() {
 
         jFrame1 = new javax.swing.JFrame();
-        topUpBtn = new javax.swing.JButton();
+        TopUpBtn = new javax.swing.JButton();
         jumlahTxt = new javax.swing.JTextField();
+        BackBtn = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -59,17 +60,17 @@ public class FormTopUp extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(900, 450));
         getContentPane().setLayout(null);
 
-        topUpBtn.setBackground(new java.awt.Color(0, 102, 102));
-        topUpBtn.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        topUpBtn.setForeground(new java.awt.Color(255, 255, 255));
-        topUpBtn.setText("Pay");
-        topUpBtn.addActionListener(new java.awt.event.ActionListener() {
+        TopUpBtn.setBackground(new java.awt.Color(0, 102, 102));
+        TopUpBtn.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        TopUpBtn.setForeground(new java.awt.Color(255, 255, 255));
+        TopUpBtn.setText("Pay");
+        TopUpBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                topUpBtnActionPerformed(evt);
+                TopUpBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(topUpBtn);
-        topUpBtn.setBounds(570, 200, 90, 30);
+        getContentPane().add(TopUpBtn);
+        TopUpBtn.setBounds(560, 190, 80, 30);
 
         jumlahTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,6 +80,18 @@ public class FormTopUp extends javax.swing.JFrame {
         getContentPane().add(jumlahTxt);
         jumlahTxt.setBounds(380, 80, 394, 33);
 
+        BackBtn.setBackground(new java.awt.Color(0, 102, 102));
+        BackBtn.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        BackBtn.setForeground(new java.awt.Color(255, 255, 255));
+        BackBtn.setText("Back");
+        BackBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BackBtn);
+        BackBtn.setBounds(660, 190, 90, 30);
+
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel3.setText("Top Up");
         getContentPane().add(jLabel3);
@@ -86,6 +99,7 @@ public class FormTopUp extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(422, 182, 0, 0);
 
+        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/topup.png"))); // NOI18N
         getContentPane().add(jLabel4);
         jLabel4.setBounds(0, 0, 900, 250);
@@ -93,7 +107,7 @@ public class FormTopUp extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void topUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_topUpBtnActionPerformed
+    private void TopUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TopUpBtnActionPerformed
         try {
             String hasil;
 
@@ -122,11 +136,18 @@ public class FormTopUp extends javax.swing.JFrame {
         } catch(IOException ex) {
             Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE,null,ex);
         }
-    }//GEN-LAST:event_topUpBtnActionPerformed
+    }//GEN-LAST:event_TopUpBtnActionPerformed
 
     private void jumlahTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jumlahTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jumlahTxtActionPerformed
+
+    private void BackBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackBtnActionPerformed
+        // TODO add your handling code here:
+        FormMenu home = new FormMenu();
+        home.show();
+        dispose();
+    }//GEN-LAST:event_BackBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,11 +185,12 @@ public class FormTopUp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BackBtn;
+    private javax.swing.JButton TopUpBtn;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField jumlahTxt;
-    private javax.swing.JButton topUpBtn;
     // End of variables declaration//GEN-END:variables
 }

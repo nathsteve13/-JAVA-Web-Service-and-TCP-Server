@@ -50,6 +50,7 @@ public class FormMyEvent extends javax.swing.JFrame {
         idMyEventTxt = new javax.swing.JTextField();
         jButtonClaim = new javax.swing.JButton();
         viewBtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 153));
@@ -152,6 +153,18 @@ public class FormMyEvent extends javax.swing.JFrame {
         });
         getContentPane().add(viewBtn);
         viewBtn.setBounds(670, 450, 90, 30);
+
+        jButton1.setBackground(new java.awt.Color(0, 102, 102));
+        jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("BACK");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(560, 450, 90, 30);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/event.png"))); // NOI18N
         getContentPane().add(jLabel2);
@@ -271,6 +284,13 @@ public class FormMyEvent extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonClaimActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        FormMenu home = new FormMenu();
+        home.show();
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -308,6 +328,7 @@ public class FormMyEvent extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField idMyEventTxt;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonClaim;
     private javax.swing.JButton jButtonReservationParking;
     private javax.swing.JButton jButtonViewParking;
