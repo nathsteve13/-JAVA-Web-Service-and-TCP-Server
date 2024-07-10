@@ -269,7 +269,7 @@ public class FormMyEvent extends javax.swing.JFrame {
                 + account_id + "~" 
                 + event_id + "~" 
                 + quantity + "~" 
-                + amount + "~"  // Mengirim amount sebagai double
+                + amount + "~"  
                 + status + "~" 
                 + claim_date + "~" 
                 + claimed_date + "~" 

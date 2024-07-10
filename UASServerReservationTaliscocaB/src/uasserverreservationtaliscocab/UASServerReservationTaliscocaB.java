@@ -203,7 +203,8 @@ public class UASServerReservationTaliscocaB implements Runnable{
                 }
                 
                 else if (commands[0].equals("MYPARKINGCLAIM")) {
-                    
+                    updateDataParkingReservation(Integer.parseInt(commands[1]));
+                    msgToClient.writeBytes("TRUE~" + "\n");
                 }
                 
                 else if (commands[0].equals("REFRESH")) {
@@ -297,12 +298,6 @@ public class UASServerReservationTaliscocaB implements Runnable{
         return port.slotCheck(idLocation, reservationDate);
     }
 
-    private static void updateDataParkingReservation(int accountsId) {
-        uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
-        uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
-        port.updateDataParkingReservation(accountsId);
-    }
-
     private static void insertDataParkingReservation(int accountsId, int parkingsId, double amount) {
         uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
         uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
@@ -313,6 +308,12 @@ public class UASServerReservationTaliscocaB implements Runnable{
         uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
         uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
         return port.viewListDataParkingReservation(accountId);
+    }
+
+    private static void updateDataParkingReservation(int accountsId) {
+        uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
+        uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
+        port.updateDataParkingReservation(accountsId);
     }
 
 

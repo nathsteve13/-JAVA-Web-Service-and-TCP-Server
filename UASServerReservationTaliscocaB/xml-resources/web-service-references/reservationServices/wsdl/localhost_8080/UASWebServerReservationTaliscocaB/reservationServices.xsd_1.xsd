@@ -211,6 +211,16 @@
 <xs:sequence/>
 </xs:complexType>
 
+<xs:complexType name="viewListDataEvent">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="viewListDataEventResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="updateDataAccount">
 <xs:sequence>
 <xs:element name="id" type="xs:int"/>
@@ -220,16 +230,6 @@
 
 <xs:complexType name="updateDataAccountResponse">
 <xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="viewListDataEvent">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="viewListDataEventResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="deleteDataEventReservation">

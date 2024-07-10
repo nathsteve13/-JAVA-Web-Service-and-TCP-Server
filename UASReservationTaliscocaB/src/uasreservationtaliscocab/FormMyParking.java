@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -167,7 +168,27 @@ public class FormMyParking extends javax.swing.JFrame {
     }//GEN-LAST:event_viewBtnActionPerformed
 
     private void btnClaimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClaimActionPerformed
-        // TODO add your handling code here:
+        try {
+            String hasil;
+            
+            Socket clientSocket = new Socket("localhost",6666);
+            DataOutputStream sendToServer = new DataOutputStream(clientSocket.getOutputStream());
+            int id_parking = Integer.parseInt(txtClaim.getText());
+            sendToServer.writeBytes("MYPARKINGCLAIM~" + id_parking + "\n");
+            
+            BufferedReader chatFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            hasil = chatFromServer.readLine();
+            System.out.println(hasil);
+            
+            String[] hasils = hasil.split("~");
+            
+            if(hasils[0].equals("TRUE")) {
+                JOptionPane.showMessageDialog(this, "Claim successful!");
+            }
+            
+        } catch(IOException ex) {
+            Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE,null,ex);
+        }
     }//GEN-LAST:event_btnClaimActionPerformed
 
     /**
