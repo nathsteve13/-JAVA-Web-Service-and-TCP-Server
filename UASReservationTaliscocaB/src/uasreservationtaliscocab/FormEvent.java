@@ -80,7 +80,7 @@ public class FormEvent extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButtonViewEvent);
-        jButtonViewEvent.setBounds(770, 290, 90, 29);
+        jButtonViewEvent.setBounds(770, 290, 72, 23);
 
         jButtonReservationEvent.setBackground(new java.awt.Color(0, 102, 102));
         jButtonReservationEvent.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -92,21 +92,21 @@ public class FormEvent extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButtonReservationEvent);
-        jButtonReservationEvent.setBounds(580, 450, 110, 30);
+        jButtonReservationEvent.setBounds(580, 450, 110, 28);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 15)); // NOI18N
         jLabel1.setText("Quantity");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(370, 360, 56, 30);
+        jLabel1.setBounds(370, 360, 57, 30);
         getContentPane().add(qtyTxt);
-        qtyTxt.setBounds(440, 360, 110, 29);
+        qtyTxt.setBounds(440, 360, 110, 22);
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 15)); // NOI18N
         jLabel2.setText("ID Event");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(675, 360, 70, 30);
         getContentPane().add(idEventTxt);
-        idEventTxt.setBounds(751, 360, 110, 29);
+        idEventTxt.setBounds(751, 360, 110, 22);
 
         jButton1.setBackground(new java.awt.Color(0, 102, 102));
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -118,7 +118,7 @@ public class FormEvent extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(780, 450, 90, 30);
+        jButton1.setBounds(780, 450, 84, 28);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/event.png"))); // NOI18N
         getContentPane().add(jLabel4);
