@@ -147,8 +147,9 @@ public class reservationServices {
     }
 
     @WebMethod(operationName = "viewListDataParkingReservation")
-    public ArrayList<String> viewListDataParkingReservation() {
+    public ArrayList<String> viewListDataParkingReservation(@WebParam(name = "account_id") int account_id) {
         pr = new Parking_reservations();
+        pr.setAccount_id(account_id);
         return pr.viewListData();
     }
     

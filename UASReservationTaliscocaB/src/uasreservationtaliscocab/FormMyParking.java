@@ -83,6 +83,11 @@ public class FormMyParking extends javax.swing.JFrame {
         jLabel2.setText("ID Parkir");
 
         btnClaim.setText("CLAIM");
+        btnClaim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClaimActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -150,9 +155,9 @@ public class FormMyParking extends javax.swing.JFrame {
             tableModel.setRowCount(0);  
             String[] hasils = hasil.split("~");
             
-            for (int i = 0; i < hasils.length; i += 5) {
-                String[] row = new String[5];
-                System.arraycopy(hasils, i, row, 0, 5);
+            for (int i = 0; i < hasils.length; i += 9) {
+                String[] row = new String[9];
+                System.arraycopy(hasils, i, row, 0, 9);
                 tableModel.addRow(row);
             }
             
@@ -160,6 +165,10 @@ public class FormMyParking extends javax.swing.JFrame {
             Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE,null,ex);
         }
     }//GEN-LAST:event_viewBtnActionPerformed
+
+    private void btnClaimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClaimActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnClaimActionPerformed
 
     /**
      * @param args the command line arguments

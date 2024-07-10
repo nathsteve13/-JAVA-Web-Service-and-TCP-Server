@@ -47,6 +47,7 @@ public class Parking_reservations extends MyModel {
     
     public Parking_reservations(int id, int accounts_id, int parkings_id, LocalDate parking_date, double amount, 
             String status, Timestamp claimed_date, Timestamp updated_at, Timestamp created_at) {
+        this.id = id;
         this.account_id = new Account();
         this.account_id.setId(accounts_id);
         this.parking_id = new Parkings();
@@ -196,24 +197,37 @@ public class Parking_reservations extends MyModel {
     public ArrayList<String> viewListData() {
         ArrayList<String> collections = new ArrayList<>();
         try {
-            statement = MyModel.conn.createStatement();
-            result = statement.executeQuery("SELECT * FROM parking_reservations");
+            if (!MyModel.conn.isClosed()) {
+                PreparedStatement sql = MyModel.conn.prepareStatement(
+                        "SELECT * FROM parking_reservations where accounts_id = ?");
+                sql.setInt(1, this.account_id.getId());
+                ResultSet result = sql.executeQuery();
+                
+                while (result.next()) {
+                    Parking_reservations tempReservation = new Parking_reservations(
+                            result.getInt("id"),    
+                            result.getInt("accounts_id"),
+                            result.getInt("parkings_id"),
+                            result.getDate("parking_date").toLocalDate(),
+                            result.getDouble("amount"),
+                            result.getString("status"),
+                            result.getTimestamp("claimed_date"),
+                            result.getTimestamp("updated_at"),
+                            result.getTimestamp("created_at"));
 
-            while (result.next()) {
-                Parking_reservations tempReservation = new Parking_reservations(result.getInt("id"), 
-                result.getInt("accounts_id"),
-                result.getInt("parkings_id"),
-                result.getDate("parking_date").toLocalDate(),
-                result.getDouble("amount"),
-                result.getString("status"),
-                result.getTimestamp("claimed_date"),
-                result.getTimestamp("updated_at"),
-                result.getTimestamp("created_at"));
-
-                collections.add(tempReservation.id + "~" + tempReservation.getAccount_id() + "~" + tempReservation.getParking_id() + "~" + 
-                        tempReservation.parking_date + "~" + tempReservation.amount + "~" + tempReservation.status + "~" +
-                        tempReservation.claimed_date + "~" + tempReservation.updated_at + "~" + tempReservation.created_at);
+                    collections.add(tempReservation.id + "~" 
+                            + tempReservation.getAccount_id() + "~" 
+                            + tempReservation.getParking_id() + "~" 
+                            + tempReservation.parking_date + "~" 
+                            + tempReservation.amount + "~" 
+                            + tempReservation.status + "~" 
+                            + tempReservation.claimed_date + "~" 
+                            + tempReservation.updated_at + "~" 
+                            + tempReservation.created_at);
+                }
             }
+
+            
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         } 
