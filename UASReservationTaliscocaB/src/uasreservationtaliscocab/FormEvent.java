@@ -48,10 +48,13 @@ public class FormEvent extends javax.swing.JFrame {
         qtyTxt = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         idEventTxt = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 153, 153));
         setPreferredSize(new java.awt.Dimension(900, 450));
         setSize(new java.awt.Dimension(900, 450));
+        getContentPane().setLayout(null);
 
         jTableEvent.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -66,71 +69,47 @@ public class FormEvent extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableEvent);
 
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(30, 30, 840, 250);
+
         jButtonViewEvent.setText("View");
         jButtonViewEvent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonViewEventActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonViewEvent);
+        jButtonViewEvent.setBounds(770, 290, 90, 29);
 
+        jButtonReservationEvent.setBackground(new java.awt.Color(0, 102, 102));
+        jButtonReservationEvent.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jButtonReservationEvent.setForeground(new java.awt.Color(255, 255, 255));
         jButtonReservationEvent.setText("Reserve");
         jButtonReservationEvent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonReservationEventActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonReservationEvent);
+        jButtonReservationEvent.setBounds(580, 450, 110, 30);
 
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 15)); // NOI18N
         jLabel1.setText("Quantity");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(370, 360, 56, 30);
+        getContentPane().add(qtyTxt);
+        qtyTxt.setBounds(440, 360, 110, 29);
 
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 15)); // NOI18N
         jLabel2.setText("ID Event");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(675, 360, 70, 30);
+        getContentPane().add(idEventTxt);
+        idEventTxt.setBounds(751, 360, 110, 29);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(309, 309, 309)
-                        .addComponent(jButtonReservationEvent)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(32, 32, 32)
-                        .addComponent(idEventTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(32, 32, 32)
-                        .addComponent(qtyTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonViewEvent)
-                .addGap(192, 192, 192))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButtonViewEvent)
-                    .addComponent(qtyTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(idEventTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(jButtonReservationEvent)
-                .addGap(57, 57, 57))
-        );
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/event.png"))); // NOI18N
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(0, 0, 900, 500);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -302,6 +281,7 @@ public class FormEvent extends javax.swing.JFrame {
     private javax.swing.JButton jButtonViewEvent;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableEvent;
     private javax.swing.JTextField qtyTxt;

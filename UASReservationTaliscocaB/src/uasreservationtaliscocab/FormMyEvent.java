@@ -44,13 +44,13 @@ public class FormMyEvent extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         jButtonViewParking = new javax.swing.JButton();
         jButtonReservationParking = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableMyEvent = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        idMyEventTxt = new javax.swing.JTextField();
         jButtonClaim = new javax.swing.JButton();
         viewBtn = new javax.swing.JButton();
-        idMyEventTxt = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 153));
 
@@ -104,8 +104,7 @@ public class FormMyEvent extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(900, 450));
-
-        jPanel3.setBackground(new java.awt.Color(0, 153, 153));
+        getContentPane().setLayout(null);
 
         jTableMyEvent.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -120,11 +119,18 @@ public class FormMyEvent extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableMyEvent);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Light", 1, 20)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("ID to claim : ");
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(30, 40, 840, 270);
 
-        jButtonClaim.setBackground(new java.awt.Color(0, 153, 153));
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
+        jLabel1.setText("ID to claim : ");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(350, 350, 109, 24);
+        getContentPane().add(idMyEventTxt);
+        idMyEventTxt.setBounds(490, 360, 71, 29);
+
+        jButtonClaim.setBackground(new java.awt.Color(0, 102, 102));
+        jButtonClaim.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButtonClaim.setForeground(new java.awt.Color(255, 255, 255));
         jButtonClaim.setText("Claim");
         jButtonClaim.addActionListener(new java.awt.event.ActionListener() {
@@ -132,8 +138,11 @@ public class FormMyEvent extends javax.swing.JFrame {
                 jButtonClaimActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonClaim);
+        jButtonClaim.setBounds(790, 450, 90, 30);
 
-        viewBtn.setBackground(new java.awt.Color(0, 153, 153));
+        viewBtn.setBackground(new java.awt.Color(0, 102, 102));
+        viewBtn.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         viewBtn.setForeground(new java.awt.Color(255, 255, 255));
         viewBtn.setText("VIEW");
         viewBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -141,53 +150,12 @@ public class FormMyEvent extends javax.swing.JFrame {
                 viewBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(viewBtn);
+        viewBtn.setBounds(670, 450, 90, 30);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(idMyEventTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonClaim)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(viewBtn))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 866, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(viewBtn)
-                    .addComponent(idMyEventTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonClaim, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/event.png"))); // NOI18N
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, 0, 900, 500);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -344,8 +312,8 @@ public class FormMyEvent extends javax.swing.JFrame {
     private javax.swing.JButton jButtonReservationParking;
     private javax.swing.JButton jButtonViewParking;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable2;

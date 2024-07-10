@@ -39,140 +39,29 @@ public class FormMenu extends javax.swing.JFrame {
 
         saldoTxt = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        refreshBtn = new javax.swing.JButton();
         formEventBtn = new javax.swing.JButton();
-        nameTxt = new javax.swing.JTextField();
         formMyEventBtn = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        nameTxt = new javax.swing.JTextField();
         formParkingBtn = new javax.swing.JButton();
         formMyParkingBtn = new javax.swing.JButton();
         formTopUpBtn = new javax.swing.JButton();
         logoutBtn = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        refreshBtn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(900, 500));
         setSize(new java.awt.Dimension(900, 450));
+        getContentPane().setLayout(null);
+        getContentPane().add(saldoTxt);
+        saldoTxt.setBounds(180, 70, 200, 29);
 
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 15)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 153, 153));
         jLabel3.setText("Saldo");
-
-        jPanel3.setBackground(new java.awt.Color(0, 153, 153));
-
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Welcome,");
-
-        formEventBtn.setBackground(new java.awt.Color(0, 153, 153));
-        formEventBtn.setForeground(new java.awt.Color(255, 255, 255));
-        formEventBtn.setText("EVENT");
-        formEventBtn.setBorder(null);
-        formEventBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                formEventBtnActionPerformed(evt);
-            }
-        });
-
-        formMyEventBtn.setBackground(new java.awt.Color(0, 153, 153));
-        formMyEventBtn.setForeground(new java.awt.Color(255, 255, 255));
-        formMyEventBtn.setText("MY EVENT");
-        formMyEventBtn.setBorder(null);
-        formMyEventBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                formMyEventBtnActionPerformed(evt);
-            }
-        });
-
-        formParkingBtn.setBackground(new java.awt.Color(0, 153, 153));
-        formParkingBtn.setForeground(new java.awt.Color(255, 255, 255));
-        formParkingBtn.setText("PARKING");
-        formParkingBtn.setBorder(null);
-        formParkingBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                formParkingBtnActionPerformed(evt);
-            }
-        });
-
-        formMyParkingBtn.setBackground(new java.awt.Color(0, 153, 153));
-        formMyParkingBtn.setForeground(new java.awt.Color(255, 255, 255));
-        formMyParkingBtn.setText("MY PARKING");
-        formMyParkingBtn.setBorder(null);
-        formMyParkingBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                formMyParkingBtnActionPerformed(evt);
-            }
-        });
-
-        formTopUpBtn.setBackground(new java.awt.Color(0, 153, 153));
-        formTopUpBtn.setForeground(new java.awt.Color(255, 255, 255));
-        formTopUpBtn.setText("TOP UP");
-        formTopUpBtn.setBorder(null);
-        formTopUpBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                formTopUpBtnActionPerformed(evt);
-            }
-        });
-
-        logoutBtn.setBackground(new java.awt.Color(0, 153, 153));
-        logoutBtn.setForeground(new java.awt.Color(255, 255, 255));
-        logoutBtn.setText("LOG OUT");
-        logoutBtn.setBorder(null);
-        logoutBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutBtnActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("TICKETGO");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(formEventBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(formMyEventBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(formParkingBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(formMyParkingBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(formTopUpBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(logoutBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nameTxt)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(19, 19, 19))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(jLabel4)
-                .addGap(30, 30, 30)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(formEventBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(formMyEventBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(formParkingBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(formMyParkingBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(formTopUpBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(177, 38, 35, 18);
 
         refreshBtn.setBackground(new java.awt.Color(0, 153, 153));
         refreshBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -183,32 +72,92 @@ public class FormMenu extends javax.swing.JFrame {
                 refreshBtnActionPerformed(evt);
             }
         });
+        getContentPane().add(refreshBtn);
+        refreshBtn.setBounds(10, 360, 160, 28);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(saldoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(refreshBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(38, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(saldoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(338, 338, 338)
-                .addComponent(refreshBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        formEventBtn.setBackground(new java.awt.Color(0, 153, 153));
+        formEventBtn.setForeground(new java.awt.Color(255, 255, 255));
+        formEventBtn.setText("EVENT");
+        formEventBtn.setBorder(null);
+        formEventBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formEventBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(formEventBtn);
+        formEventBtn.setBounds(10, 160, 160, 29);
+
+        formMyEventBtn.setBackground(new java.awt.Color(0, 153, 153));
+        formMyEventBtn.setForeground(new java.awt.Color(255, 255, 255));
+        formMyEventBtn.setText("MY EVENT");
+        formMyEventBtn.setBorder(null);
+        formMyEventBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formMyEventBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(formMyEventBtn);
+        formMyEventBtn.setBounds(10, 200, 160, 28);
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 15)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Welcome,");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(20, 70, 65, 18);
+        getContentPane().add(nameTxt);
+        nameTxt.setBounds(10, 100, 153, 29);
+
+        formParkingBtn.setBackground(new java.awt.Color(0, 153, 153));
+        formParkingBtn.setForeground(new java.awt.Color(255, 255, 255));
+        formParkingBtn.setText("PARKING");
+        formParkingBtn.setBorder(null);
+        formParkingBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formParkingBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(formParkingBtn);
+        formParkingBtn.setBounds(10, 280, 160, 28);
+
+        formMyParkingBtn.setBackground(new java.awt.Color(0, 153, 153));
+        formMyParkingBtn.setForeground(new java.awt.Color(255, 255, 255));
+        formMyParkingBtn.setText("MY PARKING");
+        formMyParkingBtn.setBorder(null);
+        formMyParkingBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formMyParkingBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(formMyParkingBtn);
+        formMyParkingBtn.setBounds(10, 320, 160, 28);
+
+        formTopUpBtn.setBackground(new java.awt.Color(0, 153, 153));
+        formTopUpBtn.setForeground(new java.awt.Color(255, 255, 255));
+        formTopUpBtn.setText("TOP UP");
+        formTopUpBtn.setBorder(null);
+        formTopUpBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formTopUpBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(formTopUpBtn);
+        formTopUpBtn.setBounds(10, 240, 160, 28);
+
+        logoutBtn.setBackground(new java.awt.Color(0, 153, 153));
+        logoutBtn.setForeground(new java.awt.Color(255, 255, 255));
+        logoutBtn.setText("LOG OUT");
+        logoutBtn.setBorder(null);
+        logoutBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(logoutBtn);
+        logoutBtn.setBounds(0, 430, 170, 28);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/menu.png"))); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 395, 466);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -322,10 +271,9 @@ public class FormMenu extends javax.swing.JFrame {
     private javax.swing.JButton formMyParkingBtn;
     private javax.swing.JButton formParkingBtn;
     private javax.swing.JButton formTopUpBtn;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JTextField nameTxt;
     private javax.swing.JButton refreshBtn;

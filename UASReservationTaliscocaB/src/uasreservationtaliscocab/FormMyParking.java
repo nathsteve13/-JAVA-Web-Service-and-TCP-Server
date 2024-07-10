@@ -38,13 +38,13 @@ public class FormMyParking extends javax.swing.JFrame {
 
         jButtonClaim = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        viewBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableMyParking = new javax.swing.JTable();
-        viewBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtClaim = new javax.swing.JTextField();
         btnClaim = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         jButtonClaim.setBackground(new java.awt.Color(0, 153, 153));
         jButtonClaim.setForeground(new java.awt.Color(255, 255, 255));
@@ -56,8 +56,19 @@ public class FormMyParking extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(900, 450));
+        getContentPane().setLayout(null);
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        viewBtn.setBackground(new java.awt.Color(0, 102, 102));
+        viewBtn.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        viewBtn.setForeground(new java.awt.Color(255, 255, 255));
+        viewBtn.setText("VIEW");
+        viewBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(viewBtn);
+        viewBtn.setBounds(790, 450, 90, 30);
 
         jTableMyParking.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -72,68 +83,31 @@ public class FormMyParking extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTableMyParking);
 
-        viewBtn.setBackground(new java.awt.Color(0, 153, 153));
-        viewBtn.setForeground(new java.awt.Color(255, 255, 255));
-        viewBtn.setText("VIEW");
-        viewBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewBtnActionPerformed(evt);
-            }
-        });
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(30, 40, 840, 280);
 
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 15)); // NOI18N
         jLabel2.setText("ID Parkir");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(330, 350, 68, 21);
+        getContentPane().add(txtClaim);
+        txtClaim.setBounds(400, 350, 71, 29);
 
+        btnClaim.setBackground(new java.awt.Color(0, 102, 102));
+        btnClaim.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btnClaim.setForeground(new java.awt.Color(255, 255, 255));
         btnClaim.setText("CLAIM");
         btnClaim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClaimActionPerformed(evt);
             }
         });
+        getContentPane().add(btnClaim);
+        btnClaim.setBounds(670, 450, 100, 30);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 866, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(19, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(viewBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtClaim, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(btnClaim)
-                        .addGap(112, 112, 112))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(viewBtn)
-                    .addComponent(jLabel2)
-                    .addComponent(txtClaim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnClaim))
-                .addContainerGap(33, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/parking.png"))); // NOI18N
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(0, 0, 900, 500);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -231,7 +205,7 @@ public class FormMyParking extends javax.swing.JFrame {
     private javax.swing.JButton jButtonClaim;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableMyParking;
     private javax.swing.JTextField txtClaim;
