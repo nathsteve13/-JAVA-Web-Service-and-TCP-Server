@@ -124,15 +124,11 @@ public class FormTopUp extends javax.swing.JFrame {
 
             String[] hasils = hasil.split("~");
 
-            if(hasils[0] == "TRUE") {
-                FormMenu form = new FormMenu();
-                form.balance = Double.parseDouble(hasils[1]);
-                System.out.println(form.balance);
-                JOptionPane.showMessageDialog(this, "Top Up berhasil!");
+            FormMenu form = new FormMenu();
+            form.balance = Double.parseDouble(hasils[1]);
+            System.out.println(form.balance);
+            JOptionPane.showMessageDialog(this, "Top Up berhasil!");
 
-            } else {
-
-            }
         } catch(IOException ex) {
             Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE,null,ex);
         }

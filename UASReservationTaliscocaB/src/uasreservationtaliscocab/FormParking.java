@@ -221,7 +221,7 @@ public class FormParking extends javax.swing.JFrame {
             }
 
             if (!found) {
-                JOptionPane.showMessageDialog(this, "Event ID not found in table.");
+                JOptionPane.showMessageDialog(this, "Parking ID not found in table.");
                 return;
             }
 

@@ -271,7 +271,7 @@ public class FormMyEvent extends javax.swing.JFrame {
                 form.balance = Double.parseDouble(hasils[1]);
                 System.out.println(form.balance);
             } else {
-                JOptionPane.showMessageDialog(this, "Claim failed, coba lagi!");
+                JOptionPane.showMessageDialog(this, "Claim failed, masih belum bisa claim, perhatikan tanggal claimnya!");
                 FormMenu form = new FormMenu();
                 form.balance = Double.parseDouble(hasils[1]);
                 System.out.println(form.balance);

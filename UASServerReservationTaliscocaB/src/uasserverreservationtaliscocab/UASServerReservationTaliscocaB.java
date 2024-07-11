@@ -195,9 +195,9 @@ public class UASServerReservationTaliscocaB implements Runnable{
                 }
                 
                 else if (commands[0].equals("PARKINGRESERVATION")) {
-                    balance -= Double.parseDouble(commands[4]);
+                    balance -= Double.parseDouble(commands[5]);
                     insertDataParkingReservation(Integer.parseInt(commands[1]), Integer.parseInt(commands[2]), 
-                            Double.parseDouble(commands[4]));
+                            Double.parseDouble(commands[5]));
                     updateDataAccount(Integer.parseInt(commands[1]), balance);
                     msgToClient.writeBytes("TRUE~" + balance + "\n");
                 }
@@ -286,11 +286,6 @@ public class UASServerReservationTaliscocaB implements Runnable{
         port.updateDataEventReservation(idEventReservation, status);
     }
 
-    private static java.util.List<java.lang.String> viewListDataParking() {
-        uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();
-        uasserverreservationtaliscocab.ReservationServices port = service.getReservationServicesPort();
-        return port.viewListDataParking();
-    }
 
     private static java.util.List<java.lang.String> slotCheck(int idLocation, java.lang.String reservationDate) {
         uasserverreservationtaliscocab.ReservationServices_Service service = new uasserverreservationtaliscocab.ReservationServices_Service();

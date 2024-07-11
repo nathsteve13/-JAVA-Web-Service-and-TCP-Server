@@ -55,13 +55,13 @@ public class FormMenu extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(900, 450));
         getContentPane().setLayout(null);
         getContentPane().add(saldoTxt);
-        saldoTxt.setBounds(180, 70, 200, 29);
+        saldoTxt.setBounds(180, 70, 200, 22);
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 15)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 153, 153));
         jLabel3.setText("Saldo");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(177, 38, 35, 18);
+        jLabel3.setBounds(177, 38, 37, 18);
 
         refreshBtn.setBackground(new java.awt.Color(0, 153, 153));
         refreshBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -105,7 +105,7 @@ public class FormMenu extends javax.swing.JFrame {
         getContentPane().add(jLabel5);
         jLabel5.setBounds(20, 70, 65, 18);
         getContentPane().add(nameTxt);
-        nameTxt.setBounds(10, 100, 153, 29);
+        nameTxt.setBounds(10, 100, 153, 22);
 
         formParkingBtn.setBackground(new java.awt.Color(0, 153, 153));
         formParkingBtn.setForeground(new java.awt.Color(255, 255, 255));
