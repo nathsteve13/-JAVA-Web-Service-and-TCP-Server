@@ -72,12 +72,12 @@ public class FormRegister extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButtonSignup);
-        jButtonSignup.setBounds(740, 550, 110, 30);
+        jButtonSignup.setBounds(740, 550, 110, 28);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel2.setText("Date Of Birth");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(480, 220, 99, 25);
+        jLabel2.setBounds(480, 220, 102, 25);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel6.setText("Name");
@@ -87,38 +87,38 @@ public class FormRegister extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel3.setText("Email");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(540, 290, 41, 30);
+        jLabel3.setBounds(540, 290, 42, 30);
         getContentPane().add(nameTxt);
-        nameTxt.setBounds(610, 160, 504, 29);
+        nameTxt.setBounds(610, 160, 504, 22);
         getContentPane().add(emailTxt);
-        emailTxt.setBounds(610, 290, 510, 29);
+        emailTxt.setBounds(610, 290, 510, 22);
 
         jButtonLogin.setBackground(new java.awt.Color(0, 153, 153));
         jButtonLogin.setForeground(new java.awt.Color(255, 255, 255));
         jButtonLogin.setText("Login");
         getContentPane().add(jButtonLogin);
-        jButtonLogin.setBounds(800, 660, 90, 29);
+        jButtonLogin.setBounds(800, 660, 72, 23);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel5.setText("Username");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(500, 350, 77, 25);
+        jLabel5.setBounds(500, 350, 78, 25);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel7.setText("Password");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(510, 410, 71, 25);
+        jLabel7.setBounds(510, 410, 74, 25);
         getContentPane().add(passTxt);
-        passTxt.setBounds(610, 410, 511, 29);
+        passTxt.setBounds(610, 410, 511, 22);
         getContentPane().add(usernameTxt);
-        usernameTxt.setBounds(610, 350, 512, 29);
+        usernameTxt.setBounds(610, 350, 512, 22);
         getContentPane().add(repeatPassTxt);
-        repeatPassTxt.setBounds(610, 470, 511, 29);
+        repeatPassTxt.setBounds(610, 470, 511, 22);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel8.setText("Repeat Password");
         getContentPane().add(jLabel8);
-        jLabel8.setBounds(450, 470, 128, 25);
+        jLabel8.setBounds(450, 470, 133, 25);
 
         dobDate.setDateFormatString("yyyy-MM-dd");
         getContentPane().add(dobDate);

@@ -138,6 +138,7 @@ public class UASServerReservationTaliscocaB implements Runnable{
                             } else {
                                 updateDataEvent(Integer.parseInt(commands[2]), "not available", 
                                         (participant_slot - Integer.parseInt(commands[3])), Integer.parseInt(commands[3]));
+                                
                             }
                             
                             balance -= amount;
@@ -146,7 +147,9 @@ public class UASServerReservationTaliscocaB implements Runnable{
                             msgToClient.writeBytes("TRUE~" + balance + "\n");
                         } else {
                             msgToClient.writeBytes("FALSE~" + balance + "\n");
-                        }
+                        } 
+                    } else {
+                        msgToClient.writeBytes("FALSE~" + "\n");
                     }
                     
                 }

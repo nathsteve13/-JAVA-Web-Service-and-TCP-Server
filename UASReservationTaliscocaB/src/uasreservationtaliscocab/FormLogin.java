@@ -53,6 +53,11 @@ public class FormLogin extends javax.swing.JFrame {
         jButtonSignUp.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jButtonSignUp.setForeground(new java.awt.Color(255, 255, 255));
         jButtonSignUp.setText("Sign Up");
+        jButtonSignUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSignUpActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         jLabel2.setText("Email");
@@ -163,6 +168,12 @@ public class FormLogin extends javax.swing.JFrame {
             Logger.getLogger(FormLogin.class.getName()).log(Level.SEVERE,null,ex);
         }
     }//GEN-LAST:event_jButtonLoginActionPerformed
+
+    private void jButtonSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSignUpActionPerformed
+        FormRegister form = new FormRegister();
+        form.show();
+        dispose();
+    }//GEN-LAST:event_jButtonSignUpActionPerformed
 
     /**
      * @param args the command line arguments

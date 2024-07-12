@@ -243,7 +243,7 @@ public class FormEvent extends javax.swing.JFrame {
                 form.balance = Double.parseDouble(hasils[1]);
                 System.out.println(form.balance);
             } else {
-                JOptionPane.showMessageDialog(this, "Reservation failed, balance insufficient");
+                JOptionPane.showMessageDialog(this, "Reservation failed");
                 FormMenu form = new FormMenu();
                 form.balance = Double.parseDouble(hasils[1]);
                 System.out.println(form.balance);
